@@ -65,6 +65,9 @@
                         <viewLayoutGuide key="safeArea" id="B2W-7t-FfN"/>
                     </view>
                     <navigationItem key="navigationItem" id="0So-wS-dIk"/>
+                    <connections>
+                        <outlet property="collectionView" destination="c7m-hs-zb9" id="Y1P-fj-w1G"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qB8-5k-zMC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -476,7 +479,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="V7d-ao-jfd" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3439" y="1043"/>
+            <point key="canvasLocation" x="-2361" y="1264"/>
         </scene>
         <!--Sports-->
         <scene sceneID="3Tq-ug-MG4">

@@ -7,17 +7,39 @@
 //
 
 import UIKit
+import SDWebImage
 
 class SportsViewController: UIViewController , UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
-    var sportsArr :[String] = []
+    var sportsArr = [Sport]()
     let arrData :[String] = ["Egypt","Cairo","Damitta","Menna","Alex"]
+    @IBOutlet weak var collectionView: UICollectionView!
     let arrImg :[String] = ["arsenal","arsenal","arsenal","arsenal","arsenal"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         // Do any additional setup after loading the view.
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        
+        let webServiceObj = WebService()
+        
+        webServiceObj.callSportsAPI(compilation: { (arrayOfSports) in
+            if arrayOfSports.count == 0{
+                print("show alert")
+            }else{
+                
+            }
+            self.sportsArr = arrayOfSports
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+            
+        })
+            
+           
     }
     //---------------------------------------
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -28,13 +50,15 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
-        return arrData.count
+        return sportsArr.count
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? SportCollectionViewCell
-        cell?.sportLabel.text = arrData[indexPath.row]
-        cell?.sportImge.image = UIImage.init(named: arrImg[indexPath.row])
+        cell?.sportLabel.text = sportsArr[indexPath.row].strSport
+        let url = URL(string: sportsArr[indexPath.row].strSportThumb)
+        cell?.sportImge.sd_setImage(with: url, completed: nil)
+            //.image = UIImage.init(named: arrImg[indexPath.row])
         cell?.layer.cornerRadius = 20
         // Configure the cell
     
