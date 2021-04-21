@@ -7,7 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2726DA0C263077330086A0F1 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2726DA0B263077330086A0F1 /* Events.swift */; };
+		2726DA1226307E670086A0F1 /* URLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2726DA1126307E670086A0F1 /* URLs.swift */; };
 		275705C6262FB5350012BC7B /* TeamCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 275705C5262FB5350012BC7B /* TeamCell.swift */; };
+		2770AA372630A3B50015ED83 /* AllSports.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2770AA362630A3B50015ED83 /* AllSports.swift */; };
 		27B99679262F9DCA00A13628 /* LatestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B99674262F9DCA00A13628 /* LatestCell.swift */; };
 		27B9967A262F9DCA00A13628 /* WebService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B99675262F9DCA00A13628 /* WebService.swift */; };
 		27B9967B262F9DCA00A13628 /* UpcomingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B99676262F9DCA00A13628 /* UpcomingCell.swift */; };
@@ -42,7 +45,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2726DA0B263077330086A0F1 /* Events.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		2726DA1126307E670086A0F1 /* URLs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = URLs.swift; sourceTree = "<group>"; };
 		275705C5262FB5350012BC7B /* TeamCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamCell.swift; sourceTree = "<group>"; };
+		2770AA362630A3B50015ED83 /* AllSports.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AllSports.swift; sourceTree = "<group>"; };
 		27B99674262F9DCA00A13628 /* LatestCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LatestCell.swift; sourceTree = "<group>"; };
 		27B99675262F9DCA00A13628 /* WebService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebService.swift; sourceTree = "<group>"; };
 		27B99676262F9DCA00A13628 /* UpcomingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpcomingCell.swift; sourceTree = "<group>"; };
@@ -93,6 +99,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2726DA0A263071E90086A0F1 /* DataClass */ = {
+			isa = PBXGroup;
+			children = (
+				2726DA0B263077330086A0F1 /* Events.swift */,
+				2770AA362630A3B50015ED83 /* AllSports.swift */,
+			);
+			name = DataClass;
+			sourceTree = "<group>";
+		};
+		2726DA1026307E590086A0F1 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				2726DA1126307E670086A0F1 /* URLs.swift */,
+			);
+			name = Constant;
+			sourceTree = "<group>";
+		};
 		2796CE82262F9CEF00F42438 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
@@ -114,6 +137,7 @@
 		2796CE84262F9CF800F42438 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2726DA0A263071E90086A0F1 /* DataClass */,
 				27B99681262F9DEC00A13628 /* Repo */,
 			);
 			name = Model;
@@ -190,6 +214,7 @@
 		ADBF0B3A262F89BA007E7EBF /* SportsApp */ = {
 			isa = PBXGroup;
 			children = (
+				2726DA1026307E590086A0F1 /* Constant */,
 				2796CE85262F9CFB00F42438 /* Supporting */,
 				2796CE84262F9CF800F42438 /* Model */,
 				2796CE83262F9CF600F42438 /* View */,
@@ -237,7 +262,7 @@
 				ADBF0B34262F89BA007E7EBF /* Sources */,
 				ADBF0B35262F89BA007E7EBF /* Frameworks */,
 				ADBF0B36262F89BA007E7EBF /* Resources */,
-				82862B4B4DC1F0A9698933E8 /* [CP] Embed Pods Frameworks */,
+				46CBFC62C7744AE6C35D0284 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -291,7 +316,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1140;
-				LastUpgradeCheck = 1140;
+				LastUpgradeCheck = 1220;
 				ORGANIZATIONNAME = "Menna Elhelaly";
 				TargetAttributes = {
 					ADBF0B37262F89BA007E7EBF = {
@@ -377,7 +402,7 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		82862B4B4DC1F0A9698933E8 /* [CP] Embed Pods Frameworks */ = {
+		46CBFC62C7744AE6C35D0284 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -404,7 +429,10 @@
 				27B9967D262F9DCA00A13628 /* tes.swift in Sources */,
 				27B99679262F9DCA00A13628 /* LatestCell.swift in Sources */,
 				27B9967B262F9DCA00A13628 /* UpcomingCell.swift in Sources */,
+				2726DA1226307E670086A0F1 /* URLs.swift in Sources */,
 				27B9967C262F9DCA00A13628 /* LeaguesDetailsVC.swift in Sources */,
+				2726DA0C263077330086A0F1 /* Events.swift in Sources */,
+				2770AA372630A3B50015ED83 /* AllSports.swift in Sources */,
 				ADBF0B3C262F89BA007E7EBF /* AppDelegate.swift in Sources */,
 				ADBF0B46262F89BA007E7EBF /* SportsApp.xcdatamodeld in Sources */,
 				27B9967A262F9DCA00A13628 /* WebService.swift in Sources */,
@@ -490,6 +518,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -550,6 +579,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
