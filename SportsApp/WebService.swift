@@ -38,7 +38,7 @@ class WebService {
                     // alert
             case .success(let value):
                 let json = JSON(value)
-                print(json["events"])
+                print(json)
                 compilation(json)
             }
         }
