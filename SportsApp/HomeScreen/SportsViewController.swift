@@ -60,13 +60,14 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         cell?.sportImge.sd_setImage(with: url, completed: nil)
             //.image = UIImage.init(named: arrImg[indexPath.row])
         cell?.layer.cornerRadius = 20
+        cell?.sportImge.layer.cornerRadius = 20
         // Configure the cell
     
         return cell!
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        let cellSize = CGSize(width: 169, height: 152)
+        let cellSize = CGSize(width: 169, height: 163)
         return cellSize
     }
 
