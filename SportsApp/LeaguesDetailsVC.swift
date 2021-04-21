@@ -79,8 +79,8 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcommingCell", for: indexPath) as! UpcomingCell
         cell.layer.cornerRadius = 20
 
-        cell.uiTeamOneImage.sd_setImage(with: URL(string: teamOne[indexPath.row]["strTeamBadge"] as! String), placeholderImage: UIImage(named: "placeholder"))
-        cell.uiTeamTwoImage.sd_setImage(with: URL(string: teamTwo[indexPath.row]["strTeamBadge"] as! String), placeholderImage: UIImage(named: "placeholder"))
+      //  cell.uiTeamOneImage.sd_setImage(with: URL(string: teamOne[indexPath.row]["strTeamBadge"] as! String), placeholderImage: UIImage(named: "placeholder"))
+//        cell.uiTeamTwoImage.sd_setImage(with: URL(string: teamTwo[indexPath.row]["strTeamBadge"] as! String), placeholderImage: UIImage(named: "placeholder"))
         cell.uiTeamOneName.text = upcomingArray[indexPath.row]["strHomeTeam"].string
         cell.uiTeamTwoName.text = upcomingArray[indexPath.row]["strAwayTeam"].string
         cell.uiEventDate.text = upcomingArray[indexPath.row]["dateEvent"].string
