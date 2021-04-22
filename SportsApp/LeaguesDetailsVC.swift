@@ -16,11 +16,17 @@ class LeaguesDetailsVC: UIViewController {
     @IBOutlet weak var uiTableView: UITableView!
     @IBOutlet weak var uiTeamCollectionView: UICollectionView!
     
-    var upcomingArray = [Event]();
+    
+    var leagueId:String! = "4328"
+    var strSeason:String! = "2020-2021"
     
     
-    var teamOne = [[String:Any]]()
-    var teamTwo = [[String:Any]]()
+    var lastArray = [Event]()
+    var allTeams = [Team]()
+
+    
+    var homeImages = [String]()
+    var awayImages = [String]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -29,46 +35,70 @@ class LeaguesDetailsVC: UIViewController {
         
         let webServiceObj = WebService()
         
-        
-        // leage id from ayman page
-        webServiceObj.getEventInLeagueById(leagueId: "4328") { (arrayOfEvents) in
-
-            if arrayOfEvents.count == 0{
+        webServiceObj.get
+        webServiceObj.getAllTeamsInLeagueByLeagueId(id: leagueId) { (arrayOfTeams) in
+            if arrayOfTeams.count == 0{
                 print("show alert")
             }else{
+                self.allTeams = arrayOfTeams
+                DispatchQueue.main.async {
+                    self.uiTeamCollectionView.reloadData()
+                }
                 
+                
+                webServiceObj.getEventInLeagueById(id: self.leagueId) { (arrayOfEvents) in
+
+                    if arrayOfEvents.count == 0{
+                        print("show alert")
+                    }else{
+                        self.lastArray = arrayOfEvents
+                        
+                        DispatchQueue.main.async {
+                            self.uiTableView.reloadData()
+                        }
+                        
+                        for item in arrayOfEvents{
+                            let home = item.idHomeTeam
+                            let away = item.idAwayTeam
+                            
+                            for item2 in arrayOfTeams{
+                                if home == item2.idTeam{
+                                    self.homeImages.append(item2.strTeamBadge)
+                                }else if away == item2.idTeam{
+                                    self.awayImages.append(item2.strTeamBadge)
+                                }
+                            }
+                            DispatchQueue.main.async {
+                                self.uiTableView.reloadData()
+                            }
+                        }
+                    }
+                }
             }
-            self.upcomingArray = arrayOfEvents
-            self.uiTableView.reloadData()
-            
-//            for item in arrayOfEvents {
-//                let teamOneId = item.idHomeTeam
-//                let teamTwoId = item.idAwayTeam
-//
-//            }
         }
-        //        webServiceObj.getEventInLeagueById(leagueId: "4328") { (json) in
+
+        //                webServiceObj.getEventInLeagueById(leagueId: "4328") { (json) in
         //
-        //            if let array = json["events"].array {
-        //                for item in array { // loop througout all events
+        //                    if let array = json["events"].array {
+        //                        for item in array { // loop througout all events
         //
-//                            webServiceObj.getTeamDetailsById(teamId: teamOneId) { (json) in
-//                                let team = json["teams"][0].dictionaryObject!
-//                                self.teamOne.append(team)
-//                                DispatchQueue.main.async {
-//                                    self.uiTableView.reloadData()
-//                                }
-//                            }
-        //                    webServiceObj.getTeamDetailsById(teamId: teamTwoId) { (json) in
-        //                        let team = json["teams"][0].dictionaryObject!
-        //                        self.teamTwo.append(team)
-        //                        DispatchQueue.main.async {
-        //                            self.uiTableView.reloadData()
+        //                            webServiceObj.getTeamDetailsById(teamId: teamOneId) { (json) in
+        //                                let team = json["teams"][0].dictionaryObject!
+        //                                self.teamOne.append(team)
+        //                                DispatchQueue.main.async {
+        //                                    self.uiTableView.reloadData()
+        //                                }
+        //                            }
+        //                            webServiceObj.getTeamDetailsById(teamId: teamTwoId) { (json) in
+        //                                let team = json["teams"][0].dictionaryObject!
+        //                                self.teamTwo.append(team)
+        //                                DispatchQueue.main.async {
+        //                                    self.uiTableView.reloadData()
+        //                                }
+        //                            }
         //                        }
         //                    }
         //                }
-        //            }
-        //        }
     }
     
     func setNavigationItem() {
@@ -92,26 +122,26 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
         if collectionView == uiUpcomingCollectionView{
             return 5
         }else{
-            return 3
+            return allTeams.count
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         if collectionView == uiUpcomingCollectionView{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcommingCell", for: indexPath) as! UpcomingCell
             cell.layer.cornerRadius = 20
             
-            cell.uiTeamOneImage.image = #imageLiteral(resourceName: "arsenal")
             cell.uiTeamTwoImage.image = #imageLiteral(resourceName: "manu")
+            cell.uiTeamOneImage.image = #imageLiteral(resourceName: "arsenal")
             
-            cell.uiTeamOneName.text = "Arsenal"
-            cell.uiTeamTwoName.text = "Man Red"
-            cell.uiEventDate.text = "2020/12/12"
+            cell.uiTeamOneName.text = "arsenal"
+            cell.uiTeamTwoName.text = "man red"
+            
             
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! TeamCell
-            cell.uiTeamImage.image = #imageLiteral(resourceName: "manu")
+            cell.uiTeamImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            cell.uiTeamImage.sd_setImage(with: URL(string: allTeams[indexPath.row].strTeamBadge), completed: nil)
             return cell
         }
         
@@ -134,7 +164,7 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
 extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return upcomingArray.count
+        return lastArray.count
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 30
@@ -147,15 +177,25 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
         let cell = tableView.dequeueReusableCell(withIdentifier: "latestCell") as! LatestCell
         cell.layer.cornerRadius = 20
         
-        if(indexPath.section < teamOne.count && indexPath.section < teamTwo.count){
-            cell.uiTeamOneImage.sd_setImage(with: URL(string: teamOne[indexPath.section]["strTeamBadge"] as! String), placeholderImage: UIImage(named: "placeholder"))
-            cell.uiTeamTwoImage.sd_setImage(with: URL(string: teamTwo[indexPath.section]["strTeamBadge"] as! String), placeholderImage: UIImage(named: "placeholder"))
+        
+        
+        cell.uiTeamOneImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        cell.uiTeamOneImage.sd_imageIndicator =  SDWebImageActivityIndicator.gray
+
+        if(homeImages.count > 0 && awayImages.count > 0){
+            
+            
+            cell.uiTeamOneImage.sd_setImage(with: URL(string: homeImages[indexPath.section]), completed: nil)
+            
+            cell.uiTeamTwoImage.sd_setImage(with: URL(string: awayImages[indexPath.section]), completed: nil)
+            
         }
         
         
-        cell.uiTeamOneName.text = upcomingArray[indexPath.section].strHomeTeam
-        cell.uiTeamTwoName.text = upcomingArray[indexPath.section].strHomeTeam
-        cell.uiEventDate.text = upcomingArray[indexPath.section].dateEvent
+        cell.uiTeamOneName.text = lastArray[indexPath.section].strHomeTeam
+        cell.uiTeamTwoName.text = lastArray[indexPath.section].strAwayTeam
+        cell.uiEventDate.text = lastArray[indexPath.section].dateEvent
+        
         return cell
         
     }
@@ -165,5 +205,4 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     }
     
 }
-
 
