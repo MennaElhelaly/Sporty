@@ -13,25 +13,25 @@ import SwiftyJSON
 
 class WebService {
     
-    
-    public func getUpcoming(bySeason:String,id:String,compilation: @escaping ([Team])->Void){
-        let url = "\(URLs.upcomingEvents)\(id)&s=\(bySeason)"
-        AF.request(url)
-        .validate()
-        .responseDecodable(of: AllTeams.self) { (response) in
-            switch response.result {
-            
-            case .success( _):
-                print("sucess")
-                guard let arrayOfTeams = response.value?.teams else { return }
-                compilation(arrayOfTeams)
-                
-            case .failure(let error):
-                print(error.localizedDescription)
-                compilation([])
-            }
-        }
-    }
+//    
+//    public func getUpcoming(bySeason:String,id:String,compilation: @escaping ([NewEvent])->Void){
+//        let url = "\(URLs.upcomingEvents)\(id)&s=\(bySeason)"
+//        AF.request(url)
+//        .validate()
+//        .responseDecodable(of: Upcoming.self) { (response) in
+//            switch response.result {
+//            
+//            case .success( _):
+//                print("sucess")
+//                guard let arrayOfTeams = response.value?.events else { return }
+//                compilation(arrayOfTeams)
+//                
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                compilation([])
+//            }
+//        }
+//    }
     
     public func getAllTeamsInLeagueByLeagueId(id:String,compilation: @escaping ([Team])->Void){
         let url = "\(URLs.allTeamsInLeague)\(id)"

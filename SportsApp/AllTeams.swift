@@ -15,16 +15,16 @@ import Foundation
 import Foundation
 
 // MARK: - Welcome
-class AllTeams: Codable {
+struct AllTeams: Codable {
     let teams: [Team]
 
-    init(teams: [Team]) {
-        self.teams = teams
-    }
+//    init(teams: [Team]) {
+//        self.teams = teams
+//    }
 }
 
 // MARK: - Team
-class Team: Codable {
+struct Team: Codable {
     let idTeam, strTeam, strTeamShort, strAlternate: String
     let intFormedYear, strSport, strLeague, idLeague: String
     let strStadium, strKeywords: String
@@ -37,35 +37,35 @@ class Team: Codable {
     let strTeamBanner: String
     let strYoutube: String
 
-    init(idTeam: String, strTeam: String, strTeamShort: String, strAlternate: String, intFormedYear: String, strSport: String, strLeague: String, idLeague: String, strStadium: String, strKeywords: String, strRSS: String, strStadiumThumb: String, strStadiumLocation: String, intStadiumCapacity: String, strWebsite: String, strFacebook: String, strTwitter: String, strInstagram: String, strDescriptionEN: String, strCountry: String, strTeamBadge: String, strTeamJersey: String, strTeamLogo: String, strTeamFanart1: String, strTeamFanart2: String, strTeamFanart3: String, strTeamFanart4: String, strTeamBanner: String, strYoutube: String) {
-        self.idTeam = idTeam
-        self.strTeam = strTeam
-        self.strTeamShort = strTeamShort
-        self.strAlternate = strAlternate
-        self.intFormedYear = intFormedYear
-        self.strSport = strSport
-        self.strLeague = strLeague
-        self.idLeague = idLeague
-        self.strStadium = strStadium
-        self.strKeywords = strKeywords
-        self.strRSS = strRSS
-        self.strStadiumThumb = strStadiumThumb
-        self.strStadiumLocation = strStadiumLocation
-        self.intStadiumCapacity = intStadiumCapacity
-        self.strWebsite = strWebsite
-        self.strFacebook = strFacebook
-        self.strTwitter = strTwitter
-        self.strInstagram = strInstagram
-        self.strDescriptionEN = strDescriptionEN
-        self.strCountry = strCountry
-        self.strTeamBadge = strTeamBadge
-        self.strTeamJersey = strTeamJersey
-        self.strTeamLogo = strTeamLogo
-        self.strTeamFanart1 = strTeamFanart1
-        self.strTeamFanart2 = strTeamFanart2
-        self.strTeamFanart3 = strTeamFanart3
-        self.strTeamFanart4 = strTeamFanart4
-        self.strTeamBanner = strTeamBanner
-        self.strYoutube = strYoutube
-    }
+//    init(idTeam: String, strTeam: String, strTeamShort: String, strAlternate: String, intFormedYear: String, strSport: String, strLeague: String, idLeague: String, strStadium: String, strKeywords: String, strRSS: String, strStadiumThumb: String, strStadiumLocation: String, intStadiumCapacity: String, strWebsite: String, strFacebook: String, strTwitter: String, strInstagram: String, strDescriptionEN: String, strCountry: String, strTeamBadge: String, strTeamJersey: String, strTeamLogo: String, strTeamFanart1: String, strTeamFanart2: String, strTeamFanart3: String, strTeamFanart4: String, strTeamBanner: String, strYoutube: String) {
+//        self.idTeam = idTeam
+//        self.strTeam = strTeam
+//        self.strTeamShort = strTeamShort
+//        self.strAlternate = strAlternate
+//        self.intFormedYear = intFormedYear
+//        self.strSport = strSport
+//        self.strLeague = strLeague
+//        self.idLeague = idLeague
+//        self.strStadium = strStadium
+//        self.strKeywords = strKeywords
+//        self.strRSS = strRSS
+//        self.strStadiumThumb = strStadiumThumb
+//        self.strStadiumLocation = strStadiumLocation
+//        self.intStadiumCapacity = intStadiumCapacity
+//        self.strWebsite = strWebsite
+//        self.strFacebook = strFacebook
+//        self.strTwitter = strTwitter
+//        self.strInstagram = strInstagram
+//        self.strDescriptionEN = strDescriptionEN
+//        self.strCountry = strCountry
+//        self.strTeamBadge = strTeamBadge
+//        self.strTeamJersey = strTeamJersey
+//        self.strTeamLogo = strTeamLogo
+//        self.strTeamFanart1 = strTeamFanart1
+//        self.strTeamFanart2 = strTeamFanart2
+//        self.strTeamFanart3 = strTeamFanart3
+//        self.strTeamFanart4 = strTeamFanart4
+//        self.strTeamBanner = strTeamBanner
+//        self.strYoutube = strYoutube
+//    }
 }

@@ -16,8 +16,8 @@ struct URLs {
     static let leagueDetailsById = "https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id=" // to get image -> strCurrentSeason
 
     static let allTeamsInLeague =  "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id="
-    static let eventUrl = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id="
-    static let upcomingEvents = "https://www.thesportsdb.com/api/v1/json/1/eventsseason.php?id=" // leagueID & strCurrentSeason
+    static let eventUrl       = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id="
+//    static let upcomingEvents = "https://www.thesportsdb.com/api/v1/json/1/eventsseason.php?id=" // leagueID & strCurrentSeason
     
     
 }
