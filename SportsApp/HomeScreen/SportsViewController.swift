@@ -12,9 +12,8 @@ import SDWebImage
 class SportsViewController: UIViewController , UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     
     var sportsArr = [Sport]()
-    let arrData :[String] = ["Egypt","Cairo","Damitta","Menna","Alex"]
     @IBOutlet weak var collectionView: UICollectionView!
-    let arrImg :[String] = ["arsenal","arsenal","arsenal","arsenal","arsenal"]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,13 +59,22 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         cell?.sportImge.sd_setImage(with: url, completed: nil)
             //.image = UIImage.init(named: arrImg[indexPath.row])
         cell?.layer.cornerRadius = 20
+        cell?.sportImge.layer.cornerRadius = 20
         // Configure the cell
     
         return cell!
     }
+    
+    //MARK: UICollectionViewDelegate
+    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // When user selects the cell
+       /* var second :EditViewController = (self.storyboard?.instantiateViewController(withIdentifier: "EditViewController")) as! EditViewController
+        second.detail = sportsArr[indexPath.row].strSport
+        self.navigationController?.pushViewController(second, animated: true)*/
+    }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        let cellSize = CGSize(width: 169, height: 152)
+        let cellSize = CGSize(width: 169, height: 163)
         return cellSize
     }
 
@@ -80,15 +88,5 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         return sectionInset
     }
 }
-    //----------
-    
-   /* func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (view.window?.layer.frame.width)! - 5 , height: (view.window?.layer.frame.height)! / 4)
-    }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
-    {
-        let sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        return sectionInset
-    }*/
-    
+
 
