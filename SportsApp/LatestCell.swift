@@ -17,6 +17,8 @@ class LatestCell: UITableViewCell {
     @IBOutlet weak var uiTeamTwoName: UILabel!
     @IBOutlet weak var uiEventDate: UILabel!
     
+    @IBOutlet weak var uiTeamTwoScore: UILabel!
+    @IBOutlet weak var uiTeamOneScore: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
