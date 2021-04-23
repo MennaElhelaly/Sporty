@@ -13,40 +13,82 @@ import SwiftyJSON
 
 class WebService {
     
-    private let eventUrl = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id="
-    private let teamsUrl = "https://www.thesportsdb.com/api/v1/json/1/lookupteam.php?id="
     private let allLeaguesurl = "https://www.thesportsdb.com/api/v1/json/1/all_leagues.php"
     private let leagueDetailsById = "https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id="
     
     
+//
+//    public func getUpcoming(bySeason:String,id:String,compilation: @escaping ([NewEvent])->Void){
+//        let url = "\(URLs.upcomingEvents)\(id)&s=\(bySeason)"
+//        AF.request(url)
+//        .validate()
+//        .responseDecodable(of: Upcoming.self) { (response) in
+//            switch response.result {
+//            
+//            case .success( _):
+//                print("sucess")
+//                guard let arrayOfTeams = response.value?.events else { return }
+//                compilation(arrayOfTeams)
+//                
+//            case .failure(let error):
+//                print(error.localizedDescription)
+//                compilation([])
+//            }
+//        }
+//    }
     
-    
-    func getEventInLeagueById(leagueId:String,compilation: @escaping (JSON)->Void) {
-        apiCall(id: leagueId, url: eventUrl,compilation: compilation)
-    }
-    
-    func getTeamDetailsById(teamId:String,compilation: @escaping (JSON) -> Void) {
-        apiCall(id: teamId, url: teamsUrl, compilation: compilation)
-    }
-    
-    
-
-    private func apiCall(id:String,url:String,compilation: @escaping (JSON)->Void) {
-        let url = "\(url)\(id)"
-        print(url)
-        AF.request(url).responseJSON { (response) in
-            switch response.result{
-
+    public func getAllTeamsInLeagueByLeagueId(id:String,compilation: @escaping ([Team]?)->Void){
+        let url = "\(URLs.allTeamsInLeague)\(id)"
+        AF.request(url)
+        .validate()
+        .responseDecodable(of: AllTeams.self) { (response) in
+            switch response.result {
+            
+            case .success( _):
+                print("sucess")
+                guard let arrayOfTeams = response.value?.teams else { return }
+                compilation(arrayOfTeams)
+                
             case .failure(let error):
-                    print(error)
-                    // alert
-            case .success(let value):
-                let json = JSON(value)
-                print(json["events"])
-                compilation(json)
+                print(error.localizedDescription)
+                compilation(nil)
             }
         }
-        
+    }
+    public func getLatestInLeagueById(id:String,compilation: @escaping ([Event]?)->Void) {
+        let url = "\(URLs.eventUrl)\(id)"
+        AF.request(url)
+        .validate()
+        .responseDecodable(of: Response.self) { (response) in
+            switch response.result {
+            
+            case .success( _):
+                print("sucess")
+                guard let arrayOfEvents = response.value?.events else { return }
+                compilation(arrayOfEvents)
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                compilation(nil)
+            }
+        }
+    }
+    public func callSportsAPI(compilation: @escaping ([Sport]?)->Void) {
+        AF.request(URLs.allSports)
+        .validate()
+        .responseDecodable(of: AllSports.self) { (response) in
+            switch response.result {
+            
+            case .success( _):
+                print("sucess")
+                guard let arrayOfSports = response.value?.sports else { return }
+                compilation(arrayOfSports)
+                
+            case .failure(let error):
+                print(error.localizedDescription)
+                compilation(nil)
+            }
+        }
     }
     
     
@@ -90,3 +132,5 @@ class WebService {
                 }
         }
 }
+
+
