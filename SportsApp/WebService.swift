@@ -15,6 +15,10 @@ class WebService {
     
     private let eventUrl = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id="
     private let teamsUrl = "https://www.thesportsdb.com/api/v1/json/1/lookupteam.php?id="
+    private let allLeaguesurl = "https://www.thesportsdb.com/api/v1/json/1/all_leagues.php"
+    private let leagueDetailsById = "https://www.thesportsdb.com/api/v1/json/1/lookupleague.php?id="
+    
+    
     
     
     func getEventInLeagueById(leagueId:String,compilation: @escaping (JSON)->Void) {
@@ -44,4 +48,45 @@ class WebService {
         }
         
     }
+    
+    
+    
+    public func allLeaguesAPI(compilation: @escaping ([LeaguesDataClass])->Void) {
+            AF.request(allLeaguesurl)
+                .validate()
+                .responseDecodable(of: apiCallData.self) { (response) in
+                    switch response.result {
+                    
+                    case .success( _):
+                        print("sucess")
+                        guard let arrayOfSports = response.value?.leagues else { return }
+                        compilation(arrayOfSports)
+                        
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        compilation([])
+                    }
+                }
+        }
+    
+    
+    public func lookUpLeagueById(id:String,compilation: @escaping ([LeagueById])->Void) {
+            
+        let url = "\(leagueDetailsById)\(id)"
+        AF.request(url)
+                .validate()
+                .responseDecodable(of: LookUpLeague.self) { (response) in
+                    switch response.result {
+                    
+                    case .success( _):
+                        print("sucess")
+                        guard let arrayOfSports = response.value?.leagues else { return }
+                        compilation(arrayOfSports)
+                        
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                        compilation([])
+                    }
+                }
+        }
 }

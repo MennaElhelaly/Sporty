@@ -10,15 +10,18 @@ import UIKit
 
 class LeaguesTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var YoutubeOutlet: UIImageView!
+    @IBOutlet weak var leageNameOutlet: UILabel!
+    @IBOutlet weak var leagueTitleImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
-        // Configure the view for the selected state
+ 
     }
 
 }
