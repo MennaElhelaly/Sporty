@@ -56,23 +56,23 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         let url = URL(string: sportsArr[indexPath.row].strSportThumb)
         cell?.sportImge.sd_setImage(with: url, completed: nil)
             //.image = UIImage.init(named: arrImg[indexPath.row])
-        cell?.layer.cornerRadius = 20
-        cell?.sportImge.layer.cornerRadius = 20
+        cell?.layer.cornerRadius = 35
+        cell?.sportImge.layer.cornerRadius = 35
         // Configure the cell
     
         return cell!
     }
-    
-    //MARK: UICollectionViewDelegate
-    func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         // When user selects the cell
        /* var second :EditViewController = (self.storyboard?.instantiateViewController(withIdentifier: "EditViewController")) as! EditViewController
         second.detail = sportsArr[indexPath.row].strSport
         self.navigationController?.pushViewController(second, animated: true)*/
+        print(sportsArr[indexPath.row].strSport)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        let cellSize = CGSize(width: 169, height: 163)
+        let cellSize = CGSize(width: ((view.window?.layer.frame.width)!/2) - 40, height: 163)
         return cellSize
     }
 
