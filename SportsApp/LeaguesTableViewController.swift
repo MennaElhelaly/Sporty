@@ -102,9 +102,9 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
                     cell.leagueTitleImage.sd_setImage(with: URL(string: item.strBadge!), completed: {(image,error,cach,url)in
                         cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
                     })
-                    cell.youtubeBtn.accessibilityValue = arrayLeagues[indexPath.row].strYoutube
+                    cell.youtubeBtn.accessibilityValue = item.strYoutube
                     
-                    if arrayLeagues[indexPath.row].strYoutube == ""{
+                    if item.strYoutube == ""{
                         cell.youtubeBtn.isEnabled = false
                     }else{
                         cell.youtubeBtn.isEnabled = true
@@ -127,7 +127,6 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
                 break
             }
         }
-        
         present(detailsVc, animated: true, completion: nil)
     }
     

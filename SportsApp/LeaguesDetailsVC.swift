@@ -140,7 +140,7 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
         return lastArray.count
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 30
+        return 10
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -206,7 +206,7 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (view.window?.frame.height)! / 2.5
+        return (view.window?.frame.height)! / 2.7
     }
     
 }
