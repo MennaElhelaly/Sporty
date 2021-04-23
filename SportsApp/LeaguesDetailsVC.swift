@@ -17,6 +17,8 @@ class LeaguesDetailsVC: UIViewController {
     
     var leagueId:String! = "4328"
     var strSeason:String! = "2020-2021" // not used for now
+    
+    public var leagueData:LeagueById!
      
     var upcomingArray = [NewEvent]()
     var lastArray = [Event]()
@@ -32,7 +34,7 @@ class LeaguesDetailsVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         
-        webServiceObj.getAllTeamsInLeagueByLeagueId(id: leagueId) { (arrayOfTeams) in // load all teams in league
+        webServiceObj.getAllTeamsInLeagueByLeagueId(id: leagueData.idLeague) { (arrayOfTeams) in // load all teams in league
             
             guard let validArrayOfTeamse = arrayOfTeams else {
                 self.present(connectionIssue(), animated: true, completion: nil)
@@ -44,7 +46,7 @@ class LeaguesDetailsVC: UIViewController {
                 self.uiTeamCollectionView.reloadData()
             }
             
-            self.webServiceObj.getLatestInLeagueById(id:self.leagueId) { (arrayOfEvents) in // load previous events (tableview)
+            self.webServiceObj.getLatestInLeagueById(id:self.leagueData.idLeague) { (arrayOfEvents) in // load previous events (tableview)
                 guard let validArrayOfEvents = arrayOfEvents else {
                     self.present(connectionIssue(), animated: true, completion: nil)
                     return

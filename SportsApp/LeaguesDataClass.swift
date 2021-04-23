@@ -37,7 +37,7 @@ struct LeaguesDataClass: Codable {
     
     let idLeague, strLeague: String
     let strSport: StrSport
-    let strLeagueAlternate: String?
+//    let strLeagueAlternate: String?
 }
 
 enum StrSport: String, Codable {

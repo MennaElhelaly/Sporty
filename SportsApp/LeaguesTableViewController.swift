@@ -30,23 +30,19 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
         searchController.searchResultsUpdater = self
         searchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
-        
-        
         leaguesTableOutlet.tableHeaderView = searchController.searchBar
-        
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         
         
         
-        webService.allLeaguesAPI(compilation: { (apiCallData) in
-            if apiCallData.count == 0{
+        webService.allLeaguesAPI(compilation: { (allLeagues) in
+            if allLeagues.count == 0{
                 print("show alert")
             }else{
                                 
-                for iteam in apiCallData{
+                for iteam in allLeagues{
                     if iteam.strSport.rawValue == self.strSport {
                         self.array.append(iteam)
                     }
@@ -54,14 +50,16 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
                 DispatchQueue.main.async {
                     self.leaguesTableOutlet.reloadData()
                 }
-                
+                var x = 0
                 for i in self.array{
+                    
                     self.webService.lookUpLeagueById(id: i.idLeague) { (LeagueById) in
                         if LeagueById.count == 0{
                             print("show alert")
                         }
                         else{
-                            
+                            x = x + 1
+                            print(x)
                             self.arrayLeagues.append(LeagueById[0])
                             DispatchQueue.main.async {
                                 self.leaguesTableOutlet.reloadData()
@@ -95,34 +93,42 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
        
         cell.leagueTitleImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.leagueTitleImage.sd_imageIndicator?.startAnimatingIndicator()
-        
-//        if arrayLeagues.count != 0{
-//            cell.leagueTitleImage.sd_setImage(with: URL(string: arrayLeagues[indexPath.row].strBadge), completed: {(image,error,cach,url)in
-//                cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
-//
-//            })
-//
-//        }
         cell.leageNameOutlet.text = array[indexPath.row].strLeague
         
-        
-        if indexPath.row <= arrayLeagues.count-1 {
-            cell.leagueTitleImage.sd_setImage(with: URL(string: arrayLeagues[indexPath.row].strBadge), completed: {(image,error,cach,url)in
-                cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
-            })
+        if arrayLeagues.count == array.count {
             
-            cell.youtubeBtn.accessibilityValue = arrayLeagues[indexPath.row].strYoutube
-            
-            if arrayLeagues[indexPath.row].strYoutube == ""{
-                cell.youtubeBtn.isEnabled = false
-            }else{
-                cell.youtubeBtn.isEnabled = true
+            for item in arrayLeagues {
+                if item.idLeague == array[indexPath.row].idLeague{
+                    cell.leagueTitleImage.sd_setImage(with: URL(string: item.strBadge!), completed: {(image,error,cach,url)in
+                        cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
+                    })
+                    cell.youtubeBtn.accessibilityValue = arrayLeagues[indexPath.row].strYoutube
+                    
+                    if arrayLeagues[indexPath.row].strYoutube == ""{
+                        cell.youtubeBtn.isEnabled = false
+                    }else{
+                        cell.youtubeBtn.isEnabled = true
+                    }
+                    cell.youtubeBtn.isHidden = false
+                    cell.youtubeBtn.addTarget(self, action: #selector(self.youtubeTapped), for: .touchUpInside)
+                    break
+                }
             }
-            cell.youtubeBtn.isHidden = false
-            cell.youtubeBtn.addTarget(self, action: #selector(self.youtubeTapped), for: .touchUpInside)
         }
         
         return cell
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let detailsVc = self.storyboard?.instantiateViewController(identifier: "LeaguesDetailsVC") as! LeaguesDetailsVC
+        
+        for i in arrayLeagues{
+            if i.idLeague == array[indexPath.row].idLeague{
+                detailsVc.leagueData = i
+                break
+            }
+        }
+        
+        present(detailsVc, animated: true, completion: nil)
     }
     
     @objc func youtubeTapped(sender:UIButton){

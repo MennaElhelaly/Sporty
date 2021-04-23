@@ -11,6 +11,9 @@ struct LookUpLeague: Codable {
     let leagues: [LeagueById]
 }
 struct LeagueById: Codable {
-    let idLeague, strSport, strLeague, strYoutube: String
-    let strBadge: String
+    let idLeague:String
+    let strSport:String
+    let strLeague:String
+    let strYoutube:String
+    let strBadge: String?
 }
