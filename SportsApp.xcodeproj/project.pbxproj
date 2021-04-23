@@ -228,6 +228,14 @@
 			name = LocalData;
 			sourceTree = "<group>";
 		};
+		AD6B664926335626007A0D26 /* CustomCell */ = {
+			isa = PBXGroup;
+			children = (
+				ADBF0B71262FB2D8007E7EBF /* SportCollectionViewCell.swift */,
+			);
+			path = CustomCell;
+			sourceTree = "<group>";
+		};
 		ADBF0B2F262F89BA007E7EBF = {
 			isa = PBXGroup;
 			children = (
@@ -285,7 +293,7 @@
 			isa = PBXGroup;
 			children = (
 				ADBF0B6E262FB25F007E7EBF /* SportsViewController.swift */,
-				ADBF0B71262FB2D8007E7EBF /* SportCollectionViewCell.swift */,
+				AD6B664926335626007A0D26 /* CustomCell */,
 			);
 			path = HomeScreen;
 			sourceTree = "<group>";
