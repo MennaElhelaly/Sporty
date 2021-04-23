@@ -33,7 +33,7 @@ class WebService {
 //        }
 //    }
     
-    public func getAllTeamsInLeagueByLeagueId(id:String,compilation: @escaping ([Team])->Void){
+    public func getAllTeamsInLeagueByLeagueId(id:String,compilation: @escaping ([Team]?)->Void){
         let url = "\(URLs.allTeamsInLeague)\(id)"
         AF.request(url)
         .validate()
@@ -47,11 +47,11 @@ class WebService {
                 
             case .failure(let error):
                 print(error.localizedDescription)
-                compilation([])
+                compilation(nil)
             }
         }
     }
-    public func getLatestInLeagueById(id:String,compilation: @escaping ([Event])->Void) {
+    public func getLatestInLeagueById(id:String,compilation: @escaping ([Event]?)->Void) {
         let url = "\(URLs.eventUrl)\(id)"
         AF.request(url)
         .validate()
@@ -65,11 +65,11 @@ class WebService {
                 
             case .failure(let error):
                 print(error.localizedDescription)
-                compilation([])
+                compilation(nil)
             }
         }
     }
-    public func callSportsAPI(compilation: @escaping ([Sport])->Void) {
+    public func callSportsAPI(compilation: @escaping ([Sport]?)->Void) {
         AF.request(URLs.allSports)
         .validate()
         .responseDecodable(of: AllSports.self) { (response) in
@@ -82,7 +82,7 @@ class WebService {
                 
             case .failure(let error):
                 print(error.localizedDescription)
-                compilation([])
+                compilation(nil)
             }
         }
     }

@@ -21,13 +21,4 @@ class NewEvent: Codable {
     let strEvent, strHomeTeam, strAwayTeam, dateEvent: String
     let dateEventLocal, strVenue, strCountry: String
     let idAwayTeam , idHomeTeam :String
-//    init(strEvent: String, strHomeTeam: String, strAwayTeam: String, dateEvent: String, dateEventLocal: String, strVenue: String, strCountry: String) {
-//        self.strEvent = strEvent
-//        self.strHomeTeam = strHomeTeam
-//        self.strAwayTeam = strAwayTeam
-//        self.dateEvent = dateEvent
-//        self.dateEventLocal = dateEventLocal
-//        self.strVenue = strVenue
-//        self.strCountry = strCountry
-//    }
 }

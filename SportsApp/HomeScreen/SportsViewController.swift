@@ -26,13 +26,11 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         let webServiceObj = WebService()
         
         webServiceObj.callSportsAPI(compilation: { (arrayOfSports) in
-            if arrayOfSports.count == 0{
-                print("show alert")
-            }else{
-                
+            guard let validArrayOfSports = arrayOfSports else{
+                self.present(connectionIssue(), animated: true, completion: nil)
+                return
             }
-            self.sportsArr = arrayOfSports
-            
+            self.sportsArr = validArrayOfSports
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
