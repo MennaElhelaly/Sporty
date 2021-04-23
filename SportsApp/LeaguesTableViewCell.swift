@@ -10,7 +10,7 @@ import UIKit
 
 class LeaguesTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var YoutubeOutlet: UIImageView!
+    @IBOutlet weak var youtubeBtn: UIButton!
     @IBOutlet weak var leageNameOutlet: UILabel!
     @IBOutlet weak var leagueTitleImage: UIImageView!
     override func awakeFromNib() {

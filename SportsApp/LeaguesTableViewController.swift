@@ -45,12 +45,14 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
             if apiCallData.count == 0{
                 print("show alert")
             }else{
-                self.array = apiCallData
-                
+                                
                 for iteam in apiCallData{
                     if iteam.strSport.rawValue == self.strSport {
                         self.array.append(iteam)
                     }
+                }
+                DispatchQueue.main.async {
+                    self.leaguesTableOutlet.reloadData()
                 }
                 
                 for i in self.array{
@@ -61,18 +63,16 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
                         else{
                             
                             self.arrayLeagues.append(LeagueById[0])
+                            DispatchQueue.main.async {
+                                self.leaguesTableOutlet.reloadData()
+                            }
                         }
                         
                     }
                 }
                 
-                DispatchQueue.main.async {
-                    self.leaguesTableOutlet.reloadData()
-                }
 
             }
-            
-            
         })
     }
     
@@ -82,11 +82,10 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
         return array.count
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 130.0;
+        return 100;
     }
     
     
@@ -96,19 +95,52 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
        
         cell.leagueTitleImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.leagueTitleImage.sd_imageIndicator?.startAnimatingIndicator()
-        if arrayLeagues.count != 0{
+        
+//        if arrayLeagues.count != 0{
+//            cell.leagueTitleImage.sd_setImage(with: URL(string: arrayLeagues[indexPath.row].strBadge), completed: {(image,error,cach,url)in
+//                cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
+//
+//            })
+//
+//        }
+        cell.leageNameOutlet.text = array[indexPath.row].strLeague
+        
+        
+        if indexPath.row <= arrayLeagues.count-1 {
             cell.leagueTitleImage.sd_setImage(with: URL(string: arrayLeagues[indexPath.row].strBadge), completed: {(image,error,cach,url)in
                 cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
-                
             })
             
+            cell.youtubeBtn.accessibilityValue = arrayLeagues[indexPath.row].strYoutube
+            
+            if arrayLeagues[indexPath.row].strYoutube == ""{
+                cell.youtubeBtn.isEnabled = false
+            }else{
+                cell.youtubeBtn.isEnabled = true
+            }
+            cell.youtubeBtn.isHidden = false
+            cell.youtubeBtn.addTarget(self, action: #selector(self.youtubeTapped), for: .touchUpInside)
         }
-        
-        cell.leageNameOutlet.text = array[indexPath.row].strLeague
-        cell.YoutubeOutlet.image  =  UIImage(named:"YouTube")
         
         return cell
     }
+    
+    @objc func youtubeTapped(sender:UIButton){
+        print(sender.accessibilityValue!)
+        let application = UIApplication.shared
+        let url = sender.accessibilityValue!
+        
+        if application.canOpenURL(URL(string: url)!) {
+             application.open(URL(string: url)!)
+         }else {
+             // if Youtube app is not installed, open URL inside Safari
+            application.open(URL(string: "https://\(url)")!)
+         }
+    }
+    
+    
+    
+    
     
     func updateSearchResults(for searchController: UISearchController) {
         
