@@ -19,39 +19,55 @@
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c7m-hs-zb9">
                                 <rect key="frame" x="20" y="95" width="374" height="718"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="kBl-KF-LdO">
-                                    <size key="itemSize" width="176" height="170"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rIx-cb-YU5">
+                                    <size key="itemSize" width="169" height="163"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="SportCollectionViewCell" reuseIdentifier="cell" id="uYO-Yc-VZc" customClass="SportCollectionViewCell" customModule="SportsApp" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="0.0" width="176" height="170"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="169" height="163"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="MGw-Hb-hn7">
-                                            <rect key="frame" x="0.0" y="0.0" width="176" height="170"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Cxp-tL-LGU">
+                                            <rect key="frame" x="0.0" y="0.0" width="169" height="163"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gy1-Mo-zcB">
-                                                    <rect key="frame" x="1" y="144" width="174" height="21"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gy1-Mo-zcB">
+                                                    <rect key="frame" x="1" y="137" width="167" height="21"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9aj-ux-S1z">
-                                                    <rect key="frame" x="8" y="8" width="160" height="125"/>
-                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9aj-ux-S1z">
+                                                    <rect key="frame" x="5" y="5" width="159" height="131"/>
                                                 </imageView>
                                             </subviews>
+                                            <constraints>
+                                                <constraint firstItem="gy1-Mo-zcB" firstAttribute="leading" secondItem="Cxp-tL-LGU" secondAttribute="leading" constant="1" id="2t5-Ct-o5h"/>
+                                                <constraint firstItem="9aj-ux-S1z" firstAttribute="leading" secondItem="Cxp-tL-LGU" secondAttribute="leading" constant="5" id="BKc-tO-bvo"/>
+                                                <constraint firstAttribute="trailing" secondItem="gy1-Mo-zcB" secondAttribute="trailing" constant="1" id="Qym-H4-heg"/>
+                                                <constraint firstAttribute="trailing" secondItem="9aj-ux-S1z" secondAttribute="trailing" constant="5" id="UYg-VA-iI9"/>
+                                                <constraint firstItem="gy1-Mo-zcB" firstAttribute="centerX" secondItem="Cxp-tL-LGU" secondAttribute="centerX" id="bfY-x2-2V9"/>
+                                                <constraint firstItem="gy1-Mo-zcB" firstAttribute="top" secondItem="9aj-ux-S1z" secondAttribute="bottom" constant="1" id="bxQ-Ag-gI0"/>
+                                                <constraint firstAttribute="bottom" secondItem="gy1-Mo-zcB" secondAttribute="bottom" constant="5" id="rof-DF-BL0"/>
+                                                <constraint firstItem="9aj-ux-S1z" firstAttribute="top" secondItem="Cxp-tL-LGU" secondAttribute="top" constant="5" id="vFR-MI-1cE"/>
+                                            </constraints>
                                         </collectionViewCellContentView>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <size key="customSize" width="176" height="170"/>
+                                        <size key="customSize" width="169" height="163"/>
                                         <connections>
                                             <outlet property="sportImge" destination="9aj-ux-S1z" id="uLW-Qp-h02"/>
                                             <outlet property="sportLabel" destination="gy1-Mo-zcB" id="tEJ-uV-qjW"/>
                                         </connections>
+                                    </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="b3u-G9-8Wr">
+                                        <rect key="frame" x="205" y="0.0" width="169" height="163"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="a1U-dG-gKd">
+                                            <rect key="frame" x="0.0" y="0.0" width="169" height="163"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </collectionViewCellContentView>
                                     </collectionViewCell>
                                 </cells>
                                 <connections>
@@ -76,7 +92,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qB8-5k-zMC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="280" y="406"/>
+            <point key="canvasLocation" x="279.71014492753625" y="405.80357142857139"/>
         </scene>
         <!--Leagues View Controller-->
         <scene sceneID="tES-H0-Tfh">

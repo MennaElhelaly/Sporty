@@ -11,49 +11,35 @@ import CoreData
 
 class FavouriteTableViewController: UITableViewController {
     var favourieArr : [NSManagedObject]!
-    var context : NSManagedObjectContext!
     var indecator : UIActivityIndicatorView?
+    let coreData = CoreData.getInstance()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let appDelegate = UIApplication.shared.delegate as! AppDelegate
-        context = appDelegate.persistentContainer.viewContext
-        
+
         indecator = UIActivityIndicatorView(style:.gray)
         indecator?.center = view.center
         indecator?.startAnimating()
         view.addSubview(indecator!)
         tableView.reloadData()
-        
-        var title = "Menna"
-        let entity = NSEntityDescription.entity(forEntityName: "LeaguesCoreData", in: context)
-        let myFavouriteLeague = NSManagedObject(entity: entity!, insertInto: self.context)
-        myFavouriteLeague.setValue(title , forKey: "leagueID")
-        myFavouriteLeague.setValue(title , forKey: "leagueName")
-        myFavouriteLeague.setValue(title , forKey: "leagueImage")
-        myFavouriteLeague.setValue(title , forKey: "sportName")
-        myFavouriteLeague.setValue(title , forKey: "youtubeLink")
-        myFavouriteLeague.setValue(true , forKey: "isFavourite")
 
-        
-         try?self.context.save()
-        print("save done ...")
+  
+        //save
+        // let coreData = CoreData.getInstance()
+        coreData.save(fav: FacouriteData(leagueID: "me", leagueName: "oo", leagueImage: "mm", youtubeLink: "nn"))
 
-        let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "LeaguesCoreData")
-        self.favourieArr = try? self.context.fetch(fetchReq)
-        self.tableView.reloadData()
-        self.indecator?.stopAnimating()
-    
-    
-    
-    
     }
     override func viewWillAppear(_ animated: Bool) {
-          let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "LeaguesCoreData")
-           favourieArr = try? context.fetch(fetchReq)
-           tableView.reloadData()
-
-       }
+        //get
+        if let arr = coreData.fetchData() {
+            favourieArr = arr
+        }else{
+            favourieArr = nil
+        }
+        self.tableView.reloadData()
+        self.indecator?.stopAnimating()
+        tableView.reloadData()
+    }
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -70,10 +56,35 @@ class FavouriteTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
-         cell.textLabel!.text = favourieArr[indexPath.row].value(forKey: "leagueName") as! String
-        // Configure the cell...
-
+        if favourieArr != nil
+        {
+            cell.textLabel!.text = (favourieArr[indexPath.row].value(forKey: "leagueName") as! String)
+        }
+        else {
+            // empty
+        }
         return cell
+    }
+    // Override to support editing the table view.
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            // Delete the row from the data source
+            coreData.deleteItem(id: indexPath.row)
+           favourieArr?.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        } else if editingStyle == .insert {
+            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+        }
+    }
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return "Favourite Leagues "
+    }
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print((favourieArr[indexPath.row].value(forKey: "leagueName") as! String))
+       
     }
 
     /*
