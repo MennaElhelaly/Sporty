@@ -70,7 +70,7 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {
-        let cellSize = CGSize(width: ((view.window?.layer.frame.width)!/2) - 40, height: 163)
+        let cellSize = CGSize(width: ((view.window?.layer.frame.width)!/2) - 40, height: 150)
         return cellSize
     }
 

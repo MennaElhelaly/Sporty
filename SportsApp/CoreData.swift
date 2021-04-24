@@ -13,7 +13,7 @@ class CoreData {
     let appDelegate = UIApplication.shared.delegate as! AppDelegate
     let context : NSManagedObjectContext!
     let entity : NSEntityDescription!
-    let myFavouriteLeague : NSManagedObject!
+//    let myFavouriteLeague : NSManagedObject!
 
     
     private static var dataBaseInstance : CoreData?
@@ -28,13 +28,16 @@ class CoreData {
     private init (){
         context = appDelegate.persistentContainer.viewContext
         entity = NSEntityDescription.entity(forEntityName: "LeaguesCoreData", in: context)
-        myFavouriteLeague = NSManagedObject(entity: entity!, insertInto: self.context)
+//        myFavouriteLeague = NSManagedObject(entity: entity!, insertInto: self.context)
+
     }
     func save (fav : FavouriteData){
-        myFavouriteLeague.setValue(fav.leagueID , forKey: "leagueID")
-        myFavouriteLeague.setValue(fav.leagueName , forKey: "leagueName")
-        myFavouriteLeague.setValue(fav.leagueImage , forKey: "leagueImage")
-        myFavouriteLeague.setValue(fav.youtubeLink , forKey: "youtubeLink")
+        let newUser = NSEntityDescription.insertNewObject(forEntityName: "LeaguesCoreData", into: context)
+        
+        newUser.setValue(fav.leagueID , forKey: "leagueID")
+        newUser.setValue(fav.leagueName , forKey: "leagueName")
+        newUser.setValue(fav.leagueImage , forKey: "leagueImage")
+        newUser.setValue(fav.youtubeLink , forKey: "youtubeLink")
         try?self.context.save()
         print("save done ...")
 
@@ -42,10 +45,10 @@ class CoreData {
     func fetchData() -> [NSManagedObject]?{
         let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "LeaguesCoreData")
         if let arr = try? context.fetch(fetchReq) {
-            if arr[0].value(forKey: "leagueID") == nil{
-                return nil
+            if arr.count > 0 {
+                return arr
             }
-           return arr
+           return nil
         }else{
             return nil
         }

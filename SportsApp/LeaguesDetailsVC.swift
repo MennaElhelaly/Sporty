@@ -86,6 +86,8 @@ class LeaguesDetailsVC: UIViewController {
     @objc func addTapped() {
         if favouriteState { // league is assigned to be favourite, then we will delete it
             database.deleteItem(leagueId: leagueData.idLeague)
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+            favouriteState = false
         }else{  // league is not favourite, then we will save it as favourite
             var image:String
             if let validImage = leagueData.strBadge {
@@ -94,9 +96,10 @@ class LeaguesDetailsVC: UIViewController {
                 image = "anonymousLogo"
             }
             database.save(fav: FavouriteData(leagueID: leagueData.idLeague, leagueName: leagueData.strLeague, leagueImage: image, youtubeLink: leagueData.strYoutube))
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+            favouriteState = true
         }
         
-        //MARK:: adding current to core data
     }
     
 }
