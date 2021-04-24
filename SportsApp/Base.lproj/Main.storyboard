@@ -253,7 +253,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6t-wi-jf5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1288"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1100.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UPCOMING EVENTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skS-pf-D8N">
                                                 <rect key="frame" x="16" y="8" width="382" height="20"/>
@@ -361,7 +361,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="VaF-Dg-Fut">
-                                                <rect key="frame" x="16" y="312" width="382" height="644"/>
+                                                <rect key="frame" x="16" y="312" width="382" height="550"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="latestCell" rowHeight="265" id="q2Q-jI-MZE" customClass="LatestCell" customModule="SportsApp" customModuleProvider="target">
@@ -493,14 +493,14 @@
                                                 </connections>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHK-CO-Ray">
-                                                <rect key="frame" x="16" y="976" width="382" height="20.5"/>
+                                                <rect key="frame" x="16" y="882" width="382" height="20.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AuH-bM-F8M">
-                                                <rect key="frame" x="16" y="1017" width="382" height="184"/>
+                                                <rect key="frame" x="16" y="923" width="382" height="157.5"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                 <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sm3-Mq-qvd">
                                                     <size key="itemSize" width="146" height="130"/>
@@ -510,7 +510,7 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="teamCell" id="M2F-Vz-6dM" customClass="TeamCell" customModule="SportsApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="27" width="146" height="130"/>
+                                                        <rect key="frame" x="0.0" y="14" width="146" height="130"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KOG-J3-nVQ">
                                                             <rect key="frame" x="0.0" y="0.0" width="146" height="130"/>
@@ -533,20 +533,12 @@
                                                     <outlet property="delegate" destination="hEL-ck-qO9" id="SKu-Vf-ZDN"/>
                                                 </connections>
                                             </collectionView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uQ-UV-Ume">
-                                                <rect key="frame" x="16" y="1238" width="382" height="0.0"/>
-                                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="17"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="nlC-Ad-GTN" firstAttribute="leading" secondItem="TNj-bY-KOe" secondAttribute="leading" id="0qt-Sh-SAE"/>
                                             <constraint firstItem="nlC-Ad-GTN" firstAttribute="top" secondItem="TNj-bY-KOe" secondAttribute="bottom" constant="20" id="3pA-mR-VRC"/>
                                             <constraint firstItem="skS-pf-D8N" firstAttribute="leading" secondItem="X6t-wi-jf5" secondAttribute="leading" constant="16" id="5mT-MZ-bNR"/>
-                                            <constraint firstAttribute="bottom" secondItem="4uQ-UV-Ume" secondAttribute="bottom" constant="50" id="85n-cD-3DG"/>
                                             <constraint firstItem="TNj-bY-KOe" firstAttribute="trailing" secondItem="skS-pf-D8N" secondAttribute="trailing" id="B2g-VI-H0t"/>
                                             <constraint firstItem="zHK-CO-Ray" firstAttribute="trailing" secondItem="VaF-Dg-Fut" secondAttribute="trailing" id="C8w-gT-OON"/>
                                             <constraint firstItem="AuH-bM-F8M" firstAttribute="top" secondItem="zHK-CO-Ray" secondAttribute="bottom" constant="20.5" id="Dc8-6N-yXe"/>
@@ -555,12 +547,10 @@
                                             <constraint firstAttribute="trailing" secondItem="skS-pf-D8N" secondAttribute="trailing" constant="16" id="F5g-ss-21W"/>
                                             <constraint firstItem="VaF-Dg-Fut" firstAttribute="trailing" secondItem="nlC-Ad-GTN" secondAttribute="trailing" id="Fg4-Nq-wfi"/>
                                             <constraint firstItem="zHK-CO-Ray" firstAttribute="leading" secondItem="VaF-Dg-Fut" secondAttribute="leading" id="KuV-e7-iET"/>
-                                            <constraint firstItem="4uQ-UV-Ume" firstAttribute="trailing" secondItem="zHK-CO-Ray" secondAttribute="trailing" id="LIe-lU-DmS"/>
+                                            <constraint firstAttribute="bottom" secondItem="AuH-bM-F8M" secondAttribute="bottom" constant="20" id="Moj-1Y-Xfw"/>
                                             <constraint firstItem="AuH-bM-F8M" firstAttribute="leading" secondItem="zHK-CO-Ray" secondAttribute="leading" id="RtN-eJ-xFf"/>
                                             <constraint firstItem="VaF-Dg-Fut" firstAttribute="height" secondItem="X6t-wi-jf5" secondAttribute="height" multiplier="1:2" id="SgJ-aH-D1x"/>
                                             <constraint firstItem="skS-pf-D8N" firstAttribute="top" secondItem="X6t-wi-jf5" secondAttribute="top" constant="8" id="WEI-f3-gZu"/>
-                                            <constraint firstItem="4uQ-UV-Ume" firstAttribute="leading" secondItem="zHK-CO-Ray" secondAttribute="leading" id="XQK-PH-MYt"/>
-                                            <constraint firstItem="4uQ-UV-Ume" firstAttribute="top" secondItem="AuH-bM-F8M" secondAttribute="bottom" constant="37" id="XYt-Wk-fqT"/>
                                             <constraint firstItem="nlC-Ad-GTN" firstAttribute="trailing" secondItem="TNj-bY-KOe" secondAttribute="trailing" id="Xd1-f5-PMS"/>
                                             <constraint firstItem="AuH-bM-F8M" firstAttribute="height" secondItem="X6t-wi-jf5" secondAttribute="height" multiplier="1:7" id="cVo-Mr-CeB"/>
                                             <constraint firstItem="zHK-CO-Ray" firstAttribute="top" secondItem="VaF-Dg-Fut" secondAttribute="bottom" constant="20" id="fHg-Ba-Xhj"/>

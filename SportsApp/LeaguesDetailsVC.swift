@@ -198,13 +198,7 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
         }
         return CGSize(width: (view.window?.layer.frame.width)! / 2, height: (view.window?.layer.frame.height)! / 2)
     }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets
-//    {
-//        let sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-//        return sectionInset
-//    }
-    
+        
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == uiTeamCollectionView{
