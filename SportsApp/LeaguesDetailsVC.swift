@@ -15,8 +15,9 @@ class LeaguesDetailsVC: UIViewController {
     @IBOutlet weak var uiTableView: UITableView!
     @IBOutlet weak var uiTeamCollectionView: UICollectionView!
     
-    var leagueId:String! = "4328"
     var strSeason:String! = "2020-2021" // not used for now
+    var database:CoreData!
+    var favouriteState:Bool!
     
     public var leagueData:LeagueById!
      
@@ -29,15 +30,16 @@ class LeaguesDetailsVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setNavigationItem()
+        database = CoreData.getInstance()
+        self.checkFavouriteState()
         webServiceObj = WebService()
+        self.apiCalling()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
+    func apiCalling() {
         webServiceObj.getAllTeamsInLeagueByLeagueId(id: leagueData.idLeague) { (arrayOfTeams) in // load all teams in league
             
             guard let validArrayOfTeamse = arrayOfTeams else {
-                self.present(connectionIssue(), animated: true, completion: nil)
                 return
             }
             
@@ -62,10 +64,38 @@ class LeaguesDetailsVC: UIViewController {
     
     func setNavigationItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "heart"), style: .plain, target: self, action: #selector(addTapped))
-        navigationItem.title = "Leagues Details"
+        navigationItem.title = leagueData.strLeague
+    }
+    
+    func checkFavouriteState(){
+        if let validState = database.fetchData() {
+            for item in validState{
+                if item.value(forKey: "leagueID") as! String == leagueData.idLeague {
+                    favouriteState = true
+                    navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+                    return
+                }
+            }
+            favouriteState = false
+            navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+        }else{
+            print("else in checkFavouriteState")
+            favouriteState = false
+        }
     }
     @objc func addTapped() {
-        navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
+        if favouriteState { // league is assigned to be favourite, then we will delete it
+            database.deleteItem(leagueId: leagueData.idLeague)
+        }else{  // league is not favourite, then we will save it as favourite
+            var image:String
+            if let validImage = leagueData.strBadge {
+                image = validImage
+            }else{
+                image = "anonymousLogo"
+            }
+            database.save(fav: FavouriteData(leagueID: leagueData.idLeague, leagueName: leagueData.strLeague, leagueImage: image, youtubeLink: leagueData.strYoutube))
+        }
+        
         //MARK:: adding current to core data
     }
     
@@ -90,8 +120,8 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "upcommingCell", for: indexPath) as! UpcomingCell
             cell.layer.cornerRadius = 20
             
-            cell.uiTeamTwoImage.image = #imageLiteral(resourceName: "manu")
-            cell.uiTeamOneImage.image = #imageLiteral(resourceName: "arsenal")
+            cell.uiTeamTwoImage.image = #imageLiteral(resourceName: "anonymousLogo")
+            cell.uiTeamOneImage.image = #imageLiteral(resourceName: "anonymousLogo")
             cell.uiTeamOneName.text = "arsenal"
             cell.uiTeamTwoName.text = "man red"
             
@@ -129,7 +159,11 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(allTeams[indexPath.row])
+//        print(allTeams[indexPath.row])
+        
+        let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamVC") as! TeamVC
+        self.navigationController?.pushViewController(teamVc, animated: true)
+        
     }
 }
 

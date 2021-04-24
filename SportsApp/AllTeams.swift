@@ -18,9 +18,6 @@ import Foundation
 struct AllTeams: Codable {
     let teams: [Team]
 
-//    init(teams: [Team]) {
-//        self.teams = teams
-//    }
 }
 
 // MARK: - Team

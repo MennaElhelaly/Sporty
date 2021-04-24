@@ -17,11 +17,6 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // Do any additional setup after loading the view.
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        
         let webServiceObj = WebService()
         
         webServiceObj.callSportsAPI(compilation: { (arrayOfSports) in
@@ -35,7 +30,8 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
             }
             
         })
-            
+    }
+    override func viewWillAppear(_ animated: Bool) {
            
     }
     //---------------------------------------
@@ -51,24 +47,26 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     }
 
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as? SportCollectionViewCell
-        cell?.sportLabel.text = sportsArr[indexPath.row].strSport
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SportCollectionViewCell
+        cell.sportLabel.text = sportsArr[indexPath.row].strSport
+        
+        cell.sportImge.sd_imageIndicator = SDWebImageActivityIndicator.gray
+        cell.sportImge.sd_imageIndicator?.startAnimatingIndicator()
+        
         let url = URL(string: sportsArr[indexPath.row].strSportThumb)
-        cell?.sportImge.sd_setImage(with: url, completed: nil)
-            //.image = UIImage.init(named: arrImg[indexPath.row])
-        cell?.layer.cornerRadius = 35
-        cell?.sportImge.layer.cornerRadius = 35
-        // Configure the cell
+        cell.sportImge.sd_setImage(with: url) { (image, error, cache, url) in
+            cell.sportImge.sd_imageIndicator?.stopAnimatingIndicator()
+        }
+        cell.layer.cornerRadius = 35
+        cell.sportImge.layer.cornerRadius = 35
     
-        return cell!
+        return cell
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        // When user selects the cell
-       /* var second :EditViewController = (self.storyboard?.instantiateViewController(withIdentifier: "EditViewController")) as! EditViewController
-        second.detail = sportsArr[indexPath.row].strSport
-        self.navigationController?.pushViewController(second, animated: true)*/
-        print(sportsArr[indexPath.row].strSport)
+        let second :LeaguesTableViewController = (self.storyboard?.instantiateViewController(withIdentifier: "LeaguesTableViewController")) as! LeaguesTableViewController
+        second.strSport = sportsArr[indexPath.row].strSport
+        self.navigationController?.pushViewController(second, animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize
     {

@@ -23,11 +23,6 @@ class FavouriteTableViewController: UITableViewController {
         view.addSubview(indecator!)
         tableView.reloadData()
 
-  
-        //save
-        // let coreData = CoreData.getInstance()
-        coreData.save(fav: FacouriteData(leagueID: "me", leagueName: "oo", leagueImage: "mm", youtubeLink: "nn"))
-
     }
     override func viewWillAppear(_ animated: Bool) {
         //get

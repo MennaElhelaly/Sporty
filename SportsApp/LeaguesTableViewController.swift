@@ -15,7 +15,7 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
     let webService = WebService();
     var array:[LeaguesDataClass] = [LeaguesDataClass]();
     var arrayLeagues:[LeagueById] = [LeagueById]()
-    var strSport = "Soccer" ;
+    var strSport:String!;
     var leageArrar:[LeaguesDataClass] = [LeaguesDataClass]();
     
     @IBOutlet var leaguesTableOutlet: UITableView!
@@ -31,12 +31,10 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
         searchController.dimsBackgroundDuringPresentation = true
         definesPresentationContext = true
         leaguesTableOutlet.tableHeaderView = searchController.searchBar
+        self.apiCalling()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        
-        
-        
+    func apiCalling() {
         webService.allLeaguesAPI(compilation: { (allLeagues) in
             if allLeagues.count == 0{
                 print("show alert")
@@ -73,6 +71,9 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
             }
         })
     }
+    override func viewWillAppear(_ animated: Bool) {
+        
+    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -99,9 +100,15 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
             
             for item in arrayLeagues {
                 if item.idLeague == array[indexPath.row].idLeague{
-                    cell.leagueTitleImage.sd_setImage(with: URL(string: item.strBadge!), completed: {(image,error,cach,url)in
-                        cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
-                    })
+                    
+                    if let validImage = item.strBadge{
+                        cell.leagueTitleImage.sd_setImage(with: URL(string: validImage), completed: {(image,error,cach,url)in
+                            cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
+                        })
+                    }else{
+                        cell.leagueTitleImage.image = #imageLiteral(resourceName: "anonymousLogo")
+                    }
+                    
                     cell.youtubeBtn.accessibilityValue = item.strYoutube
                     
                     if item.strYoutube == ""{
@@ -127,7 +134,7 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
                 break
             }
         }
-        present(detailsVc, animated: true, completion: nil)
+        self.navigationController?.pushViewController(detailsVc, animated: true)
     }
     
     @objc func youtubeTapped(sender:UIButton){

@@ -30,7 +30,7 @@ class CoreData {
         entity = NSEntityDescription.entity(forEntityName: "LeaguesCoreData", in: context)
         myFavouriteLeague = NSManagedObject(entity: entity!, insertInto: self.context)
     }
-    func save (fav : FacouriteData){
+    func save (fav : FavouriteData){
         myFavouriteLeague.setValue(fav.leagueID , forKey: "leagueID")
         myFavouriteLeague.setValue(fav.leagueName , forKey: "leagueName")
         myFavouriteLeague.setValue(fav.leagueImage , forKey: "leagueImage")
@@ -42,6 +42,9 @@ class CoreData {
     func fetchData() -> [NSManagedObject]?{
         let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "LeaguesCoreData")
         if let arr = try? context.fetch(fetchReq) {
+            if arr[0].value(forKey: "leagueID") == nil{
+                return nil
+            }
            return arr
         }else{
             return nil
@@ -55,6 +58,17 @@ class CoreData {
             print("delete done ...")
         }else{
             print("not deleted ...")
+        }
+    }
+    func deleteItem(leagueId:String) {
+        if let array = fetchData(){
+            for item in array {
+                if item.value(forKey: "leagueID") as! String == leagueId{
+                    context.delete(item)
+                    try?context.save()
+                    print("deleted")
+                }
+            }
         }
     }
     
