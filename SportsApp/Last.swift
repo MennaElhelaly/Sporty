@@ -23,4 +23,6 @@ struct Event: Codable {
     let intAwayScore:String?
     let dateEvent: String
     let idHomeTeam, idAwayTeam: String
+    let strSeason:String
+    let intRound:String
 }

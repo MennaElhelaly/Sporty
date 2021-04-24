@@ -15,7 +15,28 @@ class WebService {
     
     
     
-    public func getAllTeamsInLeagueByLeagueId(id:String,compilation: @escaping ([Team]?)->Void){
+    public func getUpcomingEvents(id:String,strSeason:String,round:String,completion: @escaping ([Event]?)->Void){
+//        4328&r=34&s=2020-2021
+        let url = "\(URLs.upcomingUrl)\(id)&r=\(round)&s=\(strSeason)"
+        print("+++++++++++++++++++++++++++++++++++++\(url)")
+        AF.request(url)
+            .validate()
+            .responseDecodable(of: Response.self) { (response) in
+                switch response.result {
+                
+                case .success( _):
+                    print("sucess")
+                    guard let arrayOfUpcomings = response.value?.events else { return }
+                    completion(arrayOfUpcomings)
+                    
+                case .failure(let error):
+                    print(error.localizedDescription)
+                    completion(nil)
+                }
+            }
+    }
+    
+    public func getAllTeamsInLeagueByLeagueId(id:String,completion: @escaping ([Team]?)->Void){
         let url = "\(URLs.allTeamsInLeague)\(id)"
         AF.request(url)
             .validate()
@@ -25,11 +46,11 @@ class WebService {
                 case .success( _):
                     print("sucess")
                     guard let arrayOfTeams = response.value?.teams else { return }
-                    compilation(arrayOfTeams)
+                    completion(arrayOfTeams)
                     
                 case .failure(let error):
                     print(error.localizedDescription)
-                    compilation(nil)
+                    completion(nil)
                 }
             }
     }

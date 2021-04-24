@@ -17,6 +17,7 @@ struct URLs {
     
     static let allTeamsInLeague =  "https://www.thesportsdb.com/api/v1/json/1/lookup_all_teams.php?id="
     static let eventUrl       = "https://www.thesportsdb.com/api/v1/json/1/eventspastleague.php?id="
+    static let upcomingUrl = "https://www.thesportsdb.com/api/v1/json/1/eventsround.php?id="
     
     
 
