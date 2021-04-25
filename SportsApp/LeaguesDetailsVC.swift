@@ -7,12 +7,13 @@
 
 import UIKit
 import SDWebImage
-
+import MarqueeLabel
 class LeaguesDetailsVC: UIViewController {
     
     @IBOutlet weak var uiUpcomingCollectionView: UICollectionView!
     @IBOutlet weak var uiTableView: UITableView!
     @IBOutlet weak var uiTeamCollectionView: UICollectionView!
+    @IBOutlet weak var loadingLbl: MarqueeLabel!
     
     
     public var leagueData:FavouriteData!
@@ -39,6 +40,10 @@ class LeaguesDetailsVC: UIViewController {
         self.checkFavouriteState()
         webServiceObj = WebService()
         self.getAllTeams()
+        
+        loadingLbl.type = .continuous
+        loadingLbl.animationCurve = .easeInOut
+
     }
     
     func getAllTeams() {
@@ -78,7 +83,16 @@ class LeaguesDetailsVC: UIViewController {
         print("upcoming")
         webServiceObj.getUpcomingEvents(id: leagueData.idLeague, strSeason: strSeason, round: round) { (arrayOfUpcomings) in
             guard let upcoming = arrayOfUpcomings else{
-                self.present(connectionIssue(), animated: true, completion: nil)
+//                self.present(connectionIssue(), animated: true, completion: nil)
+                if Network.shared.isConnected{
+                    self.loadingLbl.isHidden = false
+                    self.loadingLbl.type = .continuous
+                    self.loadingLbl.animationCurve = .easeInOut
+                    
+                }else{
+                    
+                }
+                
                 return
             }
             
@@ -143,7 +157,7 @@ class LeaguesDetailsVC: UIViewController {
 
 
 
-//MARK:-Upcoming
+//MARK:-Upcoming & last events
 extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -180,7 +194,6 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
             cell.uiTeamOneName.text = upcomingArray[indexPath.row].strHomeTeam
             cell.uiTeamTwoName.text = upcomingArray[indexPath.row].strAwayTeam
             cell.uiEventDate.text = upcomingArray[indexPath.row].dateEvent
-            
             
             return cell
         }else{

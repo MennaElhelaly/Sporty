@@ -1,26 +1,30 @@
 PODS:
-  - Alamofire (5.4.2)
+  - Alamofire (5.4.3)
+  - MarqueeLabel (4.0.5)
   - ProgressHUD (2.70)
-  - SDWebImage (5.11.0):
-    - SDWebImage/Core (= 5.11.0)
-  - SDWebImage/Core (5.11.0)
+  - SDWebImage (5.11.1):
+    - SDWebImage/Core (= 5.11.1)
+  - SDWebImage/Core (5.11.1)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - MarqueeLabel
   - ProgressHUD
   - SDWebImage (~> 5.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - MarqueeLabel
     - ProgressHUD
     - SDWebImage
 
 SPEC CHECKSUMS:
-  Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   ProgressHUD: e603e8b8622c47d8818b9fb38b3cfe9d3e7ca421
-  SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
+  SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
 
-PODFILE CHECKSUM: 3dfb1da04b0047ffe3452726fb9efdf97723ef18
+PODFILE CHECKSUM: 7c961e9847b7b7412f99aa4153046f27e832a3d3
 
 COCOAPODS: 1.10.1
