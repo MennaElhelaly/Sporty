@@ -83,14 +83,14 @@ class LeaguesDetailsVC: UIViewController {
         print("upcoming")
         webServiceObj.getUpcomingEvents(id: leagueData.idLeague, strSeason: strSeason, round: round) { (arrayOfUpcomings) in
             guard let upcoming = arrayOfUpcomings else{
-//                self.present(connectionIssue(), animated: true, completion: nil)
+                self.present(connectionIssue(), animated: true, completion: nil)
                 if Network.shared.isConnected{
                     self.loadingLbl.isHidden = false
                     self.loadingLbl.type = .continuous
                     self.loadingLbl.animationCurve = .easeInOut
                     
                 }else{
-                    
+                    self.present(connectionIssue(), animated: true, completion: nil)
                 }
                 
                 return
@@ -300,4 +300,3 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     }
     
 }
-
