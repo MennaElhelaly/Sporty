@@ -9,5 +9,6 @@
 import Foundation
 
 struct FavouriteData {
-    var leagueID, leagueName, leagueImage, youtubeLink :String
+    var idLeague, strLeague,  strYoutube :String
+    var strBadge : String?
 }

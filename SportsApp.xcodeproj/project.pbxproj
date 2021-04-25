@@ -21,6 +21,7 @@
 		27B9967D262F9DCA00A13628 /* tes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27B99678262F9DCA00A13628 /* tes.swift */; };
 		27DCA182263138E300DCCB2E /* Upcoming.swift in Sources */ = {isa = PBXBuildFile; fileRef = 27DCA181263138E300DCCB2E /* Upcoming.swift */; };
 		7B755CA0F35D5639993AE94D /* Pods_SportsApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6AEC4E7DC0D22007EE39919A /* Pods_SportsApp.framework */; };
+		AD4E5EB62634650A0089F95A /* Network.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD4E5EB52634650A0089F95A /* Network.swift */; };
 		AD638DE12632457500BF0F5C /* FavouriteTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD638DE02632457500BF0F5C /* FavouriteTableViewController.swift */; };
 		AD6B664626332146007A0D26 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B664526332146007A0D26 /* CoreData.swift */; };
 		AD6B664826332696007A0D26 /* FavouriteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B664726332696007A0D26 /* FavouriteData.swift */; };
@@ -72,6 +73,7 @@
 		27B99678262F9DCA00A13628 /* tes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tes.swift; sourceTree = "<group>"; };
 		27DCA181263138E300DCCB2E /* Upcoming.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Upcoming.swift; sourceTree = "<group>"; };
 		6AEC4E7DC0D22007EE39919A /* Pods_SportsApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SportsApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		AD4E5EB52634650A0089F95A /* Network.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Network.swift; sourceTree = "<group>"; };
 		AD638DE02632457500BF0F5C /* FavouriteTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteTableViewController.swift; sourceTree = "<group>"; };
 		AD6B664526332146007A0D26 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		AD6B664726332696007A0D26 /* FavouriteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteData.swift; sourceTree = "<group>"; };
@@ -262,6 +264,7 @@
 			isa = PBXGroup;
 			children = (
 				AD638DE02632457500BF0F5C /* FavouriteTableViewController.swift */,
+				AD4E5EB52634650A0089F95A /* Network.swift */,
 			);
 			path = FavouriteScreen;
 			sourceTree = "<group>";
@@ -537,6 +540,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD4E5EB62634650A0089F95A /* Network.swift in Sources */,
 				27B9967D262F9DCA00A13628 /* tes.swift in Sources */,
 				27B99679262F9DCA00A13628 /* LatestCell.swift in Sources */,
 				27B9967B262F9DCA00A13628 /* UpcomingCell.swift in Sources */,

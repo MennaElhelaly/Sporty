@@ -17,6 +17,29 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.title = "ALL SPORTS"
+        self.getDataFromAPI()
+
+//        if Network.shared.isConnected{
+//            print("Online")
+//            DispatchQueue.main.async {
+//                    self.getDataFromAPI()
+//            }
+//        }
+//        else{
+//            print("Offline")
+//            collectionView.isHidden = true
+//        }
+    }
+    override func viewWillAppear(_ animated: Bool) {
+           
+    }
+    //---------------------------------------
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // #warning Incomplete implementation, return the number of sections
+        return 1
+    }
+    func getDataFromAPI() {
         let webServiceObj = WebService()
         
         webServiceObj.callSportsAPI(compilation: { (arrayOfSports) in
@@ -30,14 +53,6 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
             }
             
         })
-    }
-    override func viewWillAppear(_ animated: Bool) {
-           
-    }
-    //---------------------------------------
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
     }
 
 

@@ -34,10 +34,10 @@ class CoreData {
     func save (fav : FavouriteData){
         let newUser = NSEntityDescription.insertNewObject(forEntityName: "LeaguesCoreData", into: context)
         
-        newUser.setValue(fav.leagueID , forKey: "leagueID")
-        newUser.setValue(fav.leagueName , forKey: "leagueName")
-        newUser.setValue(fav.leagueImage , forKey: "leagueImage")
-        newUser.setValue(fav.youtubeLink , forKey: "youtubeLink")
+        newUser.setValue(fav.idLeague, forKey: "leagueID")
+        newUser.setValue(fav.strLeague , forKey: "leagueName")
+        newUser.setValue(fav.strBadge , forKey: "leagueImage")
+        newUser.setValue(fav.strYoutube , forKey: "youtubeLink")
         try?self.context.save()
         print("save done ...")
 

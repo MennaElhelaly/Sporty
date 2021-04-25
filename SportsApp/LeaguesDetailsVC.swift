@@ -16,7 +16,7 @@ class LeaguesDetailsVC: UIViewController {
     @IBOutlet weak var uiTeamCollectionView: UICollectionView!
     
     
-    public var leagueData:LeagueById!
+    public var leagueData:FavouriteData!
     
     
     private var strSeason:String!
@@ -131,7 +131,8 @@ class LeaguesDetailsVC: UIViewController {
             }else{
                 image = "anonymousLogo"
             }
-            database.save(fav: FavouriteData(leagueID: leagueData.idLeague, leagueName: leagueData.strLeague, leagueImage: image, youtubeLink: leagueData.strYoutube))
+            database.save(fav: FavouriteData(idLeague: leagueData.idLeague, strLeague: leagueData.strLeague, strYoutube: leagueData.strYoutube, strBadge: image))
+            
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
             favouriteState = true
         }

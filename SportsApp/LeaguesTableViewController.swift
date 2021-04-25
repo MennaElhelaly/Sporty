@@ -130,7 +130,16 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
         
         for i in arrayLeagues{
             if i.idLeague == array[indexPath.row].idLeague{
-                detailsVc.leagueData = i
+              //  detailsVc.leagueData = i
+//                var leagueImage : String
+//                if let image = i.strBadge {
+//                    leagueImage = image
+//                }
+//                else{
+//                    leagueImage = "anonymousLogo"
+//                }
+                let sendData = FavouriteData(idLeague: i.idLeague, strLeague: i.strLeague, strYoutube: i.strYoutube, strBadge: i.strBadge)
+                detailsVc.leagueData = sendData
                 break
             }
         }
