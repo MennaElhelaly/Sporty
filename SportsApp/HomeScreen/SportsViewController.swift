@@ -18,21 +18,28 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "ALL SPORTS"
-        self.getDataFromAPI()
+      //  self.getDataFromAPI()
 
-//        if Network.shared.isConnected{
-//            print("Online")
-//            DispatchQueue.main.async {
-//                    self.getDataFromAPI()
-//            }
-//        }
-//        else{
-//            print("Offline")
-//            collectionView.isHidden = true
-//        }
+        if Network.shared.isConnected{
+            print("Online")
+            DispatchQueue.main.async {
+                    self.getDataFromAPI()
+            }
+        }
+        else{
+            print("Offline")
+            collectionView.isHidden = true
+        }
     }
     override func viewWillAppear(_ animated: Bool) {
-           
+
+           if Network.shared.isConnected{
+               print("Online")
+           }
+           else{
+               print("Offline")
+               collectionView.isHidden = true
+           }
     }
     //---------------------------------------
     func numberOfSections(in collectionView: UICollectionView) -> Int {
