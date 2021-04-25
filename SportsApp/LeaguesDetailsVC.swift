@@ -203,7 +203,9 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == uiTeamCollectionView{
-            let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamVC") as! TeamVC
+//            let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamVC") as! TeamVC
+            let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamTableViewController") as! TeamTableViewController
+            teamVc.teamDeatails = allTeams[indexPath.row]
             self.navigationController?.pushViewController(teamVc, animated: true)
         }
     }
