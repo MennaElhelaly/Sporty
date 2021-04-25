@@ -1,26 +1,26 @@
 PODS:
   - Alamofire (5.4.2)
+  - ProgressHUD (2.70)
   - SDWebImage (5.11.0):
     - SDWebImage/Core (= 5.11.0)
   - SDWebImage/Core (5.11.0)
-  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - ProgressHUD
   - SDWebImage (~> 5.0)
-  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
     - Alamofire
+    - ProgressHUD
     - SDWebImage
-    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: bfbc4c2fe5909b1d94fb4ef2277c6b3727ef5dae
+  ProgressHUD: e603e8b8622c47d8818b9fb38b3cfe9d3e7ca421
   SDWebImage: 7acbb57630ac7db4a495547fb73916ff3e432f6b
-  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: be267213f06291e524884be37ae3f16d6fd6a6aa
+PODFILE CHECKSUM: 3dfb1da04b0047ffe3452726fb9efdf97723ef18
 
 COCOAPODS: 1.10.1

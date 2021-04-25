@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import SDWebImage
-
+import ProgressHUD
 class FavouriteTableViewController: UITableViewController {
     var favourieArr : [NSManagedObject]!
     var indecator : UIActivityIndicatorView?
@@ -17,7 +17,6 @@ class FavouriteTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         indecator = UIActivityIndicatorView(style:.gray)
         indecator?.center = view.center
         indecator?.startAnimating()
@@ -113,27 +112,34 @@ class FavouriteTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print((favourieArr[indexPath.row].value(forKey: "leagueName") as! String))
         
-        let detailsVc = self.storyboard?.instantiateViewController(identifier: "LeaguesDetailsVC") as! LeaguesDetailsVC
-        
-        let idLeague = (favourieArr[indexPath.row].value(forKey: "LeagueID") as! String)
-        let strBadge = (favourieArr[indexPath.row].value(forKey: "LeagueImage") as! String)
-        let strLeague = (favourieArr[indexPath.row].value(forKey: "LeagueName") as! String)
-        let strYoutube = (favourieArr[indexPath.row].value(forKey: "YoutubeLink") as! String)
-        
-        var image : String?
-        if strBadge == "anonymousLogo" {
-            image = nil
-        }else{
-            image = strBadge
+        if Network.shared.isConnected{
+            print("Online")
+            let detailsVc = self.storyboard?.instantiateViewController(identifier: "LeaguesDetailsVC") as! LeaguesDetailsVC
+            
+            let idLeague = (favourieArr[indexPath.row].value(forKey: "LeagueID") as! String)
+            let strBadge = (favourieArr[indexPath.row].value(forKey: "LeagueImage") as! String)
+            let strLeague = (favourieArr[indexPath.row].value(forKey: "LeagueName") as! String)
+            let strYoutube = (favourieArr[indexPath.row].value(forKey: "YoutubeLink") as! String)
+            
+            var image : String?
+            if strBadge == "anonymousLogo" {
+                image = nil
+            }else{
+                image = strBadge
+            }
+          
+            let sendData = FavouriteData(idLeague: idLeague, strLeague:strLeague , strYoutube: strYoutube, strBadge: image)
+                        
+            detailsVc.leagueData = sendData
+//            self.present(detailsVc, animated: true, completion: nil)
+            ProgressHUD.showError("no internet connection, Try again")
+//            self.navigationController?.pushViewController(detailsVc, animated: true)
         }
-      
-        let sendData = FavouriteData(idLeague: idLeague, strLeague:strLeague , strYoutube: strYoutube, strBadge: image)
+        else{
+            print("Offline")
+            ProgressHUD.showError("no internet connection, Try again")
 
-        
-        detailsVc.leagueData = sendData
-        self.present(detailsVc, animated: true, completion: nil)
-               
-      //  self.navigationController?.pushViewController(detailsVc, animated: true)
+        }
        
     }
     @objc func youtubeTapped(sender:UIButton){

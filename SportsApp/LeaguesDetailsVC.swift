@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftyJSON
 import SDWebImage
 
 class LeaguesDetailsVC: UIViewController {
@@ -196,13 +195,16 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == uiUpcomingCollectionView {
             return CGSize(width: (view.window?.layer.frame.width)! - 5 , height: (view.window?.layer.frame.height)! / 4)
+        }else{
+            return CGSize(width: (view.window?.layer.frame.width)! / 3, height: (view.window?.layer.frame.height)! / 2)
         }
-        return CGSize(width: (view.window?.layer.frame.width)! / 2, height: (view.window?.layer.frame.height)! / 2)
+        
     }
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == uiTeamCollectionView{
+            print(allTeams[indexPath.row].strTeam)
             let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamVC") as! TeamVC
             self.navigationController?.pushViewController(teamVc, animated: true)
         }

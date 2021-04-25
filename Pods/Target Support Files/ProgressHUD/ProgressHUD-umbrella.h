@@ -10,7 +10,8 @@
 #endif
 #endif
 
+#import "ProgressHUD.h"
 
-FOUNDATION_EXPORT double SwiftyJSONVersionNumber;
-FOUNDATION_EXPORT const unsigned char SwiftyJSONVersionString[];
+FOUNDATION_EXPORT double ProgressHUDVersionNumber;
+FOUNDATION_EXPORT const unsigned char ProgressHUDVersionString[];
 
