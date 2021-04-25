@@ -8,7 +8,7 @@
 import UIKit
 import Alamofire
 import SDWebImage
-class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating {
+class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
     
     
     
@@ -16,6 +16,8 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
     var array:[LeaguesDataClass] = [LeaguesDataClass]();
     var arrayLeagues:[LeagueById] = [LeagueById]()
     var strSport:String!;
+    var isSearching = false
+    var searchedArray:[LeaguesDataClass]!
     var leageArrar:[LeaguesDataClass] = [LeaguesDataClass]();
     
     @IBOutlet var leaguesTableOutlet: UITableView!
@@ -27,10 +29,7 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
         
         
         //search bar attributes
-        searchController.searchResultsUpdater = self
-        searchController.dimsBackgroundDuringPresentation = true
-        definesPresentationContext = true
-        leaguesTableOutlet.tableHeaderView = searchController.searchBar
+        
         self.apiCalling()
     }
     
@@ -81,7 +80,13 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isSearching {
+            return searchedArray.count
+            
+        }
+        else{
         return array.count
+        }
     }
     override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100;
@@ -94,12 +99,11 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
        
         cell.leagueTitleImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.leagueTitleImage.sd_imageIndicator?.startAnimatingIndicator()
-        cell.leageNameOutlet.text = array[indexPath.row].strLeague
-        
-        if arrayLeagues.count == array.count {
+        if isSearching{
+            cell.leageNameOutlet.text = searchedArray[indexPath.row].strLeague
             
             for item in arrayLeagues {
-                if item.idLeague == array[indexPath.row].idLeague{
+                if item.idLeague == searchedArray[indexPath.row].idLeague{
                     
                     if let validImage = item.strBadge{
                         cell.leagueTitleImage.sd_setImage(with: URL(string: validImage), completed: {(image,error,cach,url)in
@@ -121,29 +125,70 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
                     break
                 }
             }
+            
+            return cell
+        }
+        else{
+            cell.leageNameOutlet.text = array[indexPath.row].strLeague
+            if arrayLeagues.count == array.count {
+                
+                for item in arrayLeagues {
+                    if item.idLeague == array[indexPath.row].idLeague{
+                        
+                        if let validImage = item.strBadge{
+                            cell.leagueTitleImage.sd_setImage(with: URL(string: validImage), completed: {(image,error,cach,url)in
+                                cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
+                            })
+                        }else{
+                            cell.leagueTitleImage.image = #imageLiteral(resourceName: "anonymousLogo")
+                        }
+                        
+                        cell.youtubeBtn.accessibilityValue = item.strYoutube
+                        
+                        if item.strYoutube == ""{
+                            cell.youtubeBtn.isEnabled = false
+                        }else{
+                            cell.youtubeBtn.isEnabled = true
+                        }
+                        cell.youtubeBtn.isHidden = false
+                        cell.youtubeBtn.addTarget(self, action: #selector(self.youtubeTapped), for: .touchUpInside)
+                        break
+                    }
+                }
+            }
+            return cell
         }
         
-        return cell
+        
+
+        
+        
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailsVc = self.storyboard?.instantiateViewController(identifier: "LeaguesDetailsVC") as! LeaguesDetailsVC
         
+        if isSearching{
+            for i in arrayLeagues{
+                if i.idLeague == searchedArray[indexPath.row].idLeague{
+
+                    let sendData = FavouriteData(idLeague: i.idLeague, strLeague: i.strLeague, strYoutube: i.strYoutube, strBadge: i.strBadge)
+                    detailsVc.leagueData = sendData
+                    break
+                }
+            }
+            self.navigationController?.pushViewController(detailsVc, animated: true)
+        }
+        else{
         for i in arrayLeagues{
             if i.idLeague == array[indexPath.row].idLeague{
-              //  detailsVc.leagueData = i
-//                var leagueImage : String
-//                if let image = i.strBadge {
-//                    leagueImage = image
-//                }
-//                else{
-//                    leagueImage = "anonymousLogo"
-//                }
+
                 let sendData = FavouriteData(idLeague: i.idLeague, strLeague: i.strLeague, strYoutube: i.strYoutube, strBadge: i.strBadge)
                 detailsVc.leagueData = sendData
                 break
             }
         }
         self.navigationController?.pushViewController(detailsVc, animated: true)
+        }
     }
     
     @objc func youtubeTapped(sender:UIButton){
@@ -161,17 +206,32 @@ class LeaguesTableViewController: UITableViewController,UISearchResultsUpdating 
     
     
     
-    
-    
-    func updateSearchResults(for searchController: UISearchController) {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        if searchText.isEmpty{
+            isSearching = false
+            tableView.reloadData()
+        }
+        else{
+        isSearching = true
         
         
-        
+        print(searchText)
+        searchedArray = [LeaguesDataClass]();
+        for iteam in array {
+            if iteam.strLeague.contains(searchText) {
+                
+                searchedArray.append(iteam)
+            }
+            tableView.reloadData()
+        }
+        print(searchedArray.count)
         
     }
-    func filterContentForSearchText(searchText: String, scope: String = "All") {
-        
+    
     }
+
+
     
     
     /*
