@@ -312,7 +312,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="382" height="224"/>
                                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                                    <color key="textColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <color key="textColor" red="0.016804177310000001" green="0.19835099580000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
                                                         <userDefinedRuntimeAttribute type="boolean" keyPath="tapToScroll" value="NO"/>
@@ -551,10 +551,10 @@
                                                     <outlet property="delegate" destination="hEL-ck-qO9" id="r1e-nj-FCo"/>
                                                 </connections>
                                             </tableView>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Teams" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHK-CO-Ray">
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEAMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHK-CO-Ray">
                                                 <rect key="frame" x="16" y="882" width="382" height="20.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                <fontDescription key="fontDescription" style="UICTFontTextStyleBody"/>
+                                                <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
@@ -641,10 +641,14 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="lastLbl" destination="nlC-Ad-GTN" id="YQL-I9-zlo"/>
                         <outlet property="loadingLbl" destination="Sas-ux-Zdn" id="flN-qE-Atm"/>
+                        <outlet property="teamsLbl" destination="zHK-CO-Ray" id="hoe-3j-6BH"/>
+                        <outlet property="uiScrollView" destination="RQx-WB-Uel" id="Z40-D0-M29"/>
                         <outlet property="uiTableView" destination="VaF-Dg-Fut" id="Yci-E7-kiD"/>
                         <outlet property="uiTeamCollectionView" destination="AuH-bM-F8M" id="R0n-RY-PfE"/>
                         <outlet property="uiUpcomingCollectionView" destination="TNj-bY-KOe" id="TPF-Ga-mDS"/>
+                        <outlet property="upcomingLbl" destination="skS-pf-D8N" id="2yH-4E-gPu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ArD-rU-clj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

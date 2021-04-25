@@ -15,6 +15,11 @@ class LeaguesDetailsVC: UIViewController {
     @IBOutlet weak var uiTeamCollectionView: UICollectionView!
     @IBOutlet weak var loadingLbl: MarqueeLabel!
     
+    @IBOutlet weak var uiScrollView: UIScrollView!
+    
+    @IBOutlet weak var upcomingLbl: UILabel!
+    @IBOutlet weak var lastLbl: UILabel!
+    @IBOutlet weak var teamsLbl: UILabel!
     
     public var leagueData:FavouriteData!
     
@@ -40,10 +45,7 @@ class LeaguesDetailsVC: UIViewController {
         self.checkFavouriteState()
         webServiceObj = WebService()
         self.getAllTeams()
-        
-        loadingLbl.type = .continuous
-        loadingLbl.animationCurve = .easeInOut
-
+     
     }
     
     func getAllTeams() {
@@ -51,6 +53,13 @@ class LeaguesDetailsVC: UIViewController {
         webServiceObj.getAllTeamsInLeagueByLeagueId(id: leagueData.idLeague) { (arrayOfTeams) in // load all teams in league
             
             guard let validArrayOfTeamse = arrayOfTeams else {
+                if Network.shared.isConnected{
+                    print("response issue , but not inernet all teams")
+                    self.showMarqueeOnly()
+                    
+                }else{
+                    self.present(connectionIssue(), animated: true, completion: nil)
+                }
                 return
             }
             
@@ -63,10 +72,25 @@ class LeaguesDetailsVC: UIViewController {
         }
     }
     
+    func showMarqueeOnly()  {
+        loadingLbl.isHidden = false
+        loadingLbl.type = .continuous
+        loadingLbl.animationCurve = .easeInOut
+        uiScrollView.isScrollEnabled = false
+        upcomingLbl.isHidden = true
+        lastLbl.isHidden = true
+        teamsLbl.isHidden = true
+    }
     func getLatestEvents(){
         self.webServiceObj.getLatestInLeagueById(id:self.leagueData.idLeague) { (arrayOfEvents) in // load previous events (tableview)
             guard let validArrayOfEvents = arrayOfEvents else {
-                self.present(connectionIssue(), animated: true, completion: nil)
+                if Network.shared.isConnected{
+                    print("response issue , but not inernet latest events")
+                    self.showMarqueeOnly()
+                }else{
+                    self.present(connectionIssue(), animated: true, completion: nil)
+                }
+                
                 return
             }
             self.lastArray = validArrayOfEvents
@@ -83,7 +107,7 @@ class LeaguesDetailsVC: UIViewController {
         print("upcoming")
         webServiceObj.getUpcomingEvents(id: leagueData.idLeague, strSeason: strSeason, round: round) { (arrayOfUpcomings) in
             guard let upcoming = arrayOfUpcomings else{
-                self.present(connectionIssue(), animated: true, completion: nil)
+                print("upcoming response")
                 if Network.shared.isConnected{
                     self.loadingLbl.isHidden = false
                     self.loadingLbl.type = .continuous

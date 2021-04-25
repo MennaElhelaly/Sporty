@@ -131,8 +131,7 @@ class FavouriteTableViewController: UITableViewController {
             let sendData = FavouriteData(idLeague: idLeague, strLeague:strLeague , strYoutube: strYoutube, strBadge: image)
                         
             detailsVc.leagueData = sendData
-//            self.present(detailsVc, animated: true, completion: nil)
-            ProgressHUD.showError("no internet connection, Try again")
+            self.present(detailsVc, animated: true, completion: nil)
 //            self.navigationController?.pushViewController(detailsVc, animated: true)
         }
         else{
