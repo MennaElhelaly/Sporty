@@ -6,9 +6,7 @@
 //
 
 import Foundation
-import Alamofire
-import SwiftyJSON
-
+import Alamofire 
 
 
 class WebService {
@@ -30,6 +28,7 @@ class WebService {
                     completion(arrayOfUpcomings)
                     
                 case .failure(let error):
+                    print("upcoming error")
                     print(error.localizedDescription)
                     completion(nil)
                 }
@@ -49,6 +48,7 @@ class WebService {
                     completion(arrayOfTeams)
                     
                 case .failure(let error):
+                    print("allteams error")
                     print(error.localizedDescription)
                     completion(nil)
                 }
@@ -67,6 +67,7 @@ class WebService {
                     compilation(arrayOfEvents)
                     
                 case .failure(let error):
+                    print("latest error")
                     print(error.localizedDescription)
                     compilation(nil)
                 }
@@ -84,6 +85,7 @@ class WebService {
                     compilation(arrayOfSports)
                     
                 case .failure(let error):
+                    print("allsports error")
                     print(error.localizedDescription)
                     compilation(nil)
                 }
@@ -104,6 +106,7 @@ class WebService {
                     compilation(arrayOfSports)
                     
                 case .failure(let error):
+                    print("allLeagues error")
                     print(error.localizedDescription)
                     compilation([])
                 }

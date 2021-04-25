@@ -15,4 +15,6 @@ class UpcomingCell: UICollectionViewCell {
     @IBOutlet weak var uiTeamOneName: UILabel!
     @IBOutlet weak var uiTeamTwoName: UILabel!
     @IBOutlet weak var uiEventDate: UILabel!
+    @IBOutlet weak var collectionViewCell: UIView!
+    
 }

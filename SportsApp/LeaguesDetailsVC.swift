@@ -6,15 +6,20 @@
 //
 
 import UIKit
-import SwiftyJSON
 import SDWebImage
-
+import MarqueeLabel
 class LeaguesDetailsVC: UIViewController {
     
     @IBOutlet weak var uiUpcomingCollectionView: UICollectionView!
     @IBOutlet weak var uiTableView: UITableView!
     @IBOutlet weak var uiTeamCollectionView: UICollectionView!
+    @IBOutlet weak var loadingLbl: MarqueeLabel!
     
+    @IBOutlet weak var uiScrollView: UIScrollView!
+    
+    @IBOutlet weak var upcomingLbl: UILabel!
+    @IBOutlet weak var lastLbl: UILabel!
+    @IBOutlet weak var teamsLbl: UILabel!
     
     public var leagueData:FavouriteData!
     
@@ -40,6 +45,7 @@ class LeaguesDetailsVC: UIViewController {
         self.checkFavouriteState()
         webServiceObj = WebService()
         self.getAllTeams()
+     
     }
     
     func getAllTeams() {
@@ -47,6 +53,13 @@ class LeaguesDetailsVC: UIViewController {
         webServiceObj.getAllTeamsInLeagueByLeagueId(id: leagueData.idLeague) { (arrayOfTeams) in // load all teams in league
             
             guard let validArrayOfTeamse = arrayOfTeams else {
+                if Network.shared.isConnected{
+                    print("response issue , but not inernet all teams")
+                    self.showMarqueeOnly()
+                    
+                }else{
+                    self.present(connectionIssue(), animated: true, completion: nil)
+                }
                 return
             }
             
@@ -59,10 +72,25 @@ class LeaguesDetailsVC: UIViewController {
         }
     }
     
+    func showMarqueeOnly()  {
+        loadingLbl.isHidden = false
+        loadingLbl.type = .continuous
+        loadingLbl.animationCurve = .easeInOut
+        uiScrollView.isScrollEnabled = false
+        upcomingLbl.isHidden = true
+        lastLbl.isHidden = true
+        teamsLbl.isHidden = true
+    }
     func getLatestEvents(){
         self.webServiceObj.getLatestInLeagueById(id:self.leagueData.idLeague) { (arrayOfEvents) in // load previous events (tableview)
             guard let validArrayOfEvents = arrayOfEvents else {
-                self.present(connectionIssue(), animated: true, completion: nil)
+                if Network.shared.isConnected{
+                    print("response issue , but not inernet latest events")
+                    self.showMarqueeOnly()
+                }else{
+                    self.present(connectionIssue(), animated: true, completion: nil)
+                }
+                
                 return
             }
             self.lastArray = validArrayOfEvents
@@ -79,7 +107,16 @@ class LeaguesDetailsVC: UIViewController {
         print("upcoming")
         webServiceObj.getUpcomingEvents(id: leagueData.idLeague, strSeason: strSeason, round: round) { (arrayOfUpcomings) in
             guard let upcoming = arrayOfUpcomings else{
-                self.present(connectionIssue(), animated: true, completion: nil)
+                print("upcoming response")
+                if Network.shared.isConnected{
+                    self.loadingLbl.isHidden = false
+                    self.loadingLbl.type = .continuous
+                    self.loadingLbl.animationCurve = .easeInOut
+                    
+                }else{
+                    self.present(connectionIssue(), animated: true, completion: nil)
+                }
+                
                 return
             }
             
@@ -144,7 +181,7 @@ class LeaguesDetailsVC: UIViewController {
 
 
 
-//MARK:-Upcoming
+//MARK:-Upcoming & last events
 extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -182,7 +219,6 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
             cell.uiTeamTwoName.text = upcomingArray[indexPath.row].strAwayTeam
             cell.uiEventDate.text = upcomingArray[indexPath.row].dateEvent
             
-            
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! TeamCell
@@ -196,13 +232,16 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == uiUpcomingCollectionView {
             return CGSize(width: (view.window?.layer.frame.width)! - 5 , height: (view.window?.layer.frame.height)! / 4)
+        }else{
+            return CGSize(width: (view.window?.layer.frame.width)! / 3, height: (view.window?.layer.frame.height)! / 2)
         }
-        return CGSize(width: (view.window?.layer.frame.width)! / 2, height: (view.window?.layer.frame.height)! / 2)
+        
     }
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == uiTeamCollectionView{
+            print(allTeams[indexPath.row].strTeam)
             let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamVC") as! TeamVC
             self.navigationController?.pushViewController(teamVc, animated: true)
         }
@@ -285,4 +324,3 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     }
     
 }
-
