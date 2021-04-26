@@ -44,11 +44,10 @@ class LeaguesDetailsVC: UIViewController {
         database = CoreData.getInstance()
         self.checkFavouriteState()
         webServiceObj = WebService()
-        self.getAllTeams()
-        
         let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipe))
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
+        self.getAllTeams()
 
     }
     

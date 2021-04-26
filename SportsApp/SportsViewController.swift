@@ -30,7 +30,7 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         }
         else{
             print("Offline")
-            collectionView.isHidden = true
+//            collectionView.isHidden = true
             collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
             sportsArr = [Sport]()
         }

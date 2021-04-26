@@ -112,19 +112,32 @@ class FavouriteTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print((favourieArr[indexPath.row].value(forKey: "leagueName") as! String))
         
+//        if Network.shared.isConnected{
+//            print("Online")
+//
+            performSegue(withIdentifier: "favourite", sender: self)
+//        }
+//        else{
+//            print("Offline")
+//            ProgressHUD.showError("no internet connection, Try again")
+//
+//        }
+       
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
         if Network.shared.isConnected{
             print("Online")
 
-            performSegue(withIdentifier: "favourite", sender: self)
+//            performSegue(withIdentifier: "favourite", sender: self)
+            return true
         }
         else{
             print("Offline")
             ProgressHUD.showError("no internet connection, Try again")
-
+            return false
         }
-       
     }
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
         if let cell = sender as? UITableViewCell {
