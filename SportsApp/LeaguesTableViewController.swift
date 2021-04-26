@@ -219,7 +219,7 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
         print(searchText)
         searchedArray = [LeaguesDataClass]();
         for iteam in array {
-            if iteam.strLeague.contains(searchText) {
+            if iteam.strLeague.lowercased().contains(searchText.lowercased()) {
                 
                 searchedArray.append(iteam)
             }
