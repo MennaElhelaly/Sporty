@@ -14,6 +14,8 @@ class FavouriteTableViewController: UITableViewController {
     var favourieArr : [NSManagedObject]!
     var indecator : UIActivityIndicatorView?
     let coreData = CoreData.getInstance()
+
+    var sendingDetails:FavouriteData! = nil
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -112,58 +114,37 @@ class FavouriteTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print((favourieArr[indexPath.row].value(forKey: "leagueName") as! String))
         
-//        if Network.shared.isConnected{
-//            print("Online")
-//
+        if Network.shared.isConnected{
+            print("Online")
+        
+            let idLeague = (favourieArr[indexPath.row].value(forKey: "LeagueID") as! String)
+            let strBadge = (favourieArr[indexPath.row].value(forKey: "LeagueImage") as! String)
+            let strLeague = (favourieArr[indexPath.row].value(forKey: "LeagueName") as! String)
+            let strYoutube = (favourieArr[indexPath.row].value(forKey: "YoutubeLink") as! String)
+            
+            var image : String?
+            if strBadge == "anonymousLogo" {
+                image = nil
+            }else{
+                image = strBadge
+            }
+          
+            sendingDetails = FavouriteData(idLeague: idLeague, strLeague:strLeague , strYoutube: strYoutube, strBadge: image)
+            print("didselect")
             performSegue(withIdentifier: "favourite", sender: self)
-//        }
-//        else{
-//            print("Offline")
-//            ProgressHUD.showError("no internet connection, Try again")
-//
-//        }
+            
+        }else{
+            print("Offline")
+            ProgressHUD.showError("no internet connection, Try again")
+        }
        
     }
     
-    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-        if Network.shared.isConnected{
-            print("Online")
-
-//            performSegue(withIdentifier: "favourite", sender: self)
-            return true
-        }
-        else{
-            print("Offline")
-            ProgressHUD.showError("no internet connection, Try again")
-            return false
-        }
-    }
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-
-        if let cell = sender as? UITableViewCell {
-            print("+++++++++++++++++++++++++++++++++++++++++++")
-
-            _ = self.tableView.indexPath(for: cell)!.row
-            if segue.identifier == "favourite" {
-                let vc = segue.destination as! LeaguesDetailsVC
-                let idLeague = (favourieArr[self.tableView.indexPath(for: cell)!.row].value(forKey: "LeagueID") as! String)
-                let strBadge = (favourieArr[self.tableView.indexPath(for: cell)!.row].value(forKey: "LeagueImage") as! String)
-                let strLeague = (favourieArr[self.tableView.indexPath(for: cell)!.row].value(forKey: "LeagueName") as! String)
-                let strYoutube = (favourieArr[self.tableView.indexPath(for: cell)!.row].value(forKey: "YoutubeLink") as! String)
-                
-                var image : String?
-                if strBadge == "anonymousLogo" {
-                    image = nil
-                }else{
-                    image = strBadge
-                }
-              
-                let sendData = FavouriteData(idLeague: idLeague, strLeague:strLeague , strYoutube: strYoutube, strBadge: image)
-                
-                vc.leagueData = sendData
-            }
-        }
+        let destinationVC = segue.destination as! LeaguesDetailsVC
+        destinationVC.leagueData = sendingDetails
     }
+
     @objc func youtubeTapped(sender:UIButton){
         print(sender.accessibilityValue!)
         let application = UIApplication.shared

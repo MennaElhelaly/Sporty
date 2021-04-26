@@ -166,7 +166,6 @@
                                     <outlet property="leageNameOutlet" destination="BLW-lk-aMa" id="Hh2-r2-nbh"/>
                                     <outlet property="leagueTitleImage" destination="W3C-aG-fpb" id="XcJ-P7-NbK"/>
                                     <outlet property="youtubeBtn" destination="jtk-e6-hGb" id="fSB-zp-73Z"/>
-                                    <segue destination="hEL-ck-qO9" kind="show" identifier="favourite" id="gnK-4f-XfJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -176,6 +175,9 @@
                         </connections>
                     </tableView>
                     <tabBarItem key="tabBarItem" title="Favourite" image="star.fill" catalog="system" id="3GW-fW-G5v"/>
+                    <connections>
+                        <segue destination="hEL-ck-qO9" kind="show" identifier="favourite" id="0Iy-kz-Yeu"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H1I-IG-jkQ" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
