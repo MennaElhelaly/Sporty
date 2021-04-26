@@ -19,6 +19,8 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         super.viewDidLoad()
         navigationItem.title = "ALL SPORTS"
       //  self.getDataFromAPI()
+//        collectionView.isHidden = true
+        
 
         if Network.shared.isConnected{
             print("Online")
@@ -29,8 +31,8 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         else{
             print("Offline")
             collectionView.isHidden = true
-            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "stadium")!)
-
+            collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
+            sportsArr = [Sport]()
         }
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -40,7 +42,9 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
            }
            else{
                print("Offline")
-               collectionView.isHidden = true
+               collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
+               sportsArr = [Sport]()
+               collectionView.reloadData()
            }
     }
     //---------------------------------------

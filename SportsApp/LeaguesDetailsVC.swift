@@ -45,7 +45,15 @@ class LeaguesDetailsVC: UIViewController {
         self.checkFavouriteState()
         webServiceObj = WebService()
         self.getAllTeams()
-     
+        
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipe))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
+
+    }
+    
+    @objc func respondToSwipe(){
+        dismiss(animated: true, completion: nil)
     }
     
     func getAllTeams() {
@@ -181,7 +189,7 @@ class LeaguesDetailsVC: UIViewController {
 
 
 
-//MARK:-Upcoming & last events
+//MARK:-Upcoming & Teams
 extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
@@ -245,7 +253,8 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
 //            let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamVC") as! TeamVC
             let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamTableViewController") as! TeamTableViewController
             teamVc.teamDeatails = allTeams[indexPath.row]
-            self.navigationController?.pushViewController(teamVc, animated: true)
+//            self.navigationController?.pushViewController(teamVc, animated: true)
+            present(teamVc, animated: true, completion: nil)
         }
     }
 }

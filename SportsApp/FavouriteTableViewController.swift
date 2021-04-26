@@ -114,25 +114,8 @@ class FavouriteTableViewController: UITableViewController {
         
         if Network.shared.isConnected{
             print("Online")
-            let detailsVc = self.storyboard?.instantiateViewController(identifier: "LeaguesDetailsVC") as! LeaguesDetailsVC
-            
-            let idLeague = (favourieArr[indexPath.row].value(forKey: "LeagueID") as! String)
-            let strBadge = (favourieArr[indexPath.row].value(forKey: "LeagueImage") as! String)
-            let strLeague = (favourieArr[indexPath.row].value(forKey: "LeagueName") as! String)
-            let strYoutube = (favourieArr[indexPath.row].value(forKey: "YoutubeLink") as! String)
-            
-            var image : String?
-            if strBadge == "anonymousLogo" {
-                image = nil
-            }else{
-                image = strBadge
-            }
-          
-            let sendData = FavouriteData(idLeague: idLeague, strLeague:strLeague , strYoutube: strYoutube, strBadge: image)
-                        
-            detailsVc.leagueData = sendData
-            self.present(detailsVc, animated: true, completion: nil)
-//            self.navigationController?.pushViewController(detailsVc, animated: true)
+
+            performSegue(withIdentifier: "favourite", sender: self)
         }
         else{
             print("Offline")
@@ -140,6 +123,33 @@ class FavouriteTableViewController: UITableViewController {
 
         }
        
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+
+        if let cell = sender as? UITableViewCell {
+            print("+++++++++++++++++++++++++++++++++++++++++++")
+
+            _ = self.tableView.indexPath(for: cell)!.row
+            if segue.identifier == "favourite" {
+                let vc = segue.destination as! LeaguesDetailsVC
+                let idLeague = (favourieArr[self.tableView.indexPath(for: cell)!.row].value(forKey: "LeagueID") as! String)
+                let strBadge = (favourieArr[self.tableView.indexPath(for: cell)!.row].value(forKey: "LeagueImage") as! String)
+                let strLeague = (favourieArr[self.tableView.indexPath(for: cell)!.row].value(forKey: "LeagueName") as! String)
+                let strYoutube = (favourieArr[self.tableView.indexPath(for: cell)!.row].value(forKey: "YoutubeLink") as! String)
+                
+                var image : String?
+                if strBadge == "anonymousLogo" {
+                    image = nil
+                }else{
+                    image = strBadge
+                }
+              
+                let sendData = FavouriteData(idLeague: idLeague, strLeague:strLeague , strYoutube: strYoutube, strBadge: image)
+                
+                vc.leagueData = sendData
+            }
+        }
     }
     @objc func youtubeTapped(sender:UIButton){
         print(sender.accessibilityValue!)

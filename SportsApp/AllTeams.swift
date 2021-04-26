@@ -26,7 +26,11 @@ struct Team: Codable {
     let strStadium:String
     let  strStadiumThumb:String?  // nullable
     let strLeague: String
-    let strTwitter, strInstagram, strFacebook, strDescriptionEN, strCountry: String
+    let strTwitter:String
+        let strInstagram:String
+        let strFacebook:String
+        let strDescriptionEN:String?
+        let strCountry: String
     
 //    let strTeamFanart1, strTeamFanart2, strTeamFanart3, strTeamFanart4: String
 //    let intFormedYear, strSport, strLeague, idLeague: String

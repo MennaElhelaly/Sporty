@@ -123,11 +123,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="152" id="auY-PL-r1i" customClass="LeaguesTableViewCell" customModule="SportsApp" customModuleProvider="target">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="cell" rowHeight="152" id="auY-PL-r1i" customClass="LeaguesTableViewCell" customModule="SportsApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="28" width="414" height="152"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="auY-PL-r1i" id="hiL-sU-eOm">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="152"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="383" height="152"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="W3C-aG-fpb">
@@ -138,13 +138,13 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="BLW-lk-aMa">
-                                            <rect key="frame" x="100" y="64" width="254" height="24"/>
+                                            <rect key="frame" x="100" y="64" width="235" height="24"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtk-e6-hGb">
-                                            <rect key="frame" x="359" y="61" width="30" height="30"/>
+                                            <rect key="frame" x="340" y="61" width="30" height="30"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="30" id="Bb4-4B-FJj"/>
                                                 <constraint firstAttribute="width" constant="30" id="Sd9-uP-H5A"/>
@@ -166,6 +166,7 @@
                                     <outlet property="leageNameOutlet" destination="BLW-lk-aMa" id="Hh2-r2-nbh"/>
                                     <outlet property="leagueTitleImage" destination="W3C-aG-fpb" id="XcJ-P7-NbK"/>
                                     <outlet property="youtubeBtn" destination="jtk-e6-hGb" id="fSB-zp-73Z"/>
+                                    <segue destination="hEL-ck-qO9" kind="show" identifier="favourite" id="gnK-4f-XfJ"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -246,7 +247,7 @@
         <!--Leagues DetailsVC-->
         <scene sceneID="Ke8-Qo-XOI">
             <objects>
-                <viewController storyboardIdentifier="LeaguesDetailsVC" id="hEL-ck-qO9" customClass="LeaguesDetailsVC" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LeaguesDetailsVC" modalTransitionStyle="flipHorizontal" modalPresentationStyle="fullScreen" id="hEL-ck-qO9" customClass="LeaguesDetailsVC" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ccT-QH-qfD">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -605,6 +606,7 @@
                             <constraint firstItem="RQx-WB-Uel" firstAttribute="leading" secondItem="Xlb-4s-6Mo" secondAttribute="leading" id="nmX-Cs-LGN"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" id="5A2-ZS-TgF"/>
                     <connections>
                         <outlet property="lastLbl" destination="nlC-Ad-GTN" id="YQL-I9-zlo"/>
                         <outlet property="loadingLbl" destination="Sas-ux-Zdn" id="flN-qE-Atm"/>

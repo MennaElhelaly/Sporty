@@ -9,14 +9,14 @@ import Foundation
 import Alamofire 
 
 
+
 class WebService {
     
     
     
     public func getUpcomingEvents(id:String,strSeason:String,round:String,completion: @escaping ([Event]?)->Void){
-//        4328&r=34&s=2020-2021
         let url = "\(URLs.upcomingUrl)\(id)&r=\(round)&s=\(strSeason)"
-        print("+++++++++++++++++++++++++++++++++++++\(url)")
+        print("upcoming+++++++++++++++++++++++++++++++++++++\(url)")
         AF.request(url)
             .validate()
             .responseDecodable(of: Response.self) { (response) in
@@ -37,6 +37,8 @@ class WebService {
     
     public func getAllTeamsInLeagueByLeagueId(id:String,completion: @escaping ([Team]?)->Void){
         let url = "\(URLs.allTeamsInLeague)\(id)"
+        print("allteams+++++++++++++++++++++++++++++++++++++\(url)")
+        
         AF.request(url)
             .validate()
             .responseDecodable(of: AllTeams.self) { (response) in
@@ -56,6 +58,7 @@ class WebService {
     }
     public func getLatestInLeagueById(id:String,compilation: @escaping ([Event]?)->Void) {
         let url = "\(URLs.eventUrl)\(id)"
+        print("latest+++++++++++++++++++++++++++++++++++++\(url)")
         AF.request(url)
             .validate()
             .responseDecodable(of: Response.self) { (response) in
@@ -74,6 +77,8 @@ class WebService {
             }
     }
     public func callSportsAPI(compilation: @escaping ([Sport]?)->Void) {
+        print("allSports+++++++++++++++++++++++++++++++++++++\(URLs.allSports)")
+        
         AF.request(URLs.allSports)
             .validate()
             .responseDecodable(of: AllSports.self) { (response) in
@@ -95,6 +100,8 @@ class WebService {
     
     
     public func allLeaguesAPI(compilation: @escaping ([LeaguesDataClass])->Void) {
+        print("upcoming+++++++++++++++++++++++++++++++++++++\(URLs.allLeaguesurl)")
+        
         AF.request(URLs.allLeaguesurl)
             .validate()
             .responseDecodable(of: apiCallData.self) { (response) in
@@ -115,8 +122,8 @@ class WebService {
     
     
     public func lookUpLeagueById(id:String,compilation: @escaping ([LeagueById])->Void) {
-        
         let url = "\(URLs.leagueDetailsById)\(id)"
+        print("lockup+++++++++++++++++++++++++++++++++++++\(url)")
         AF.request(url)
             .validate()
             .responseDecodable(of: LookUpLeague.self) { (response) in

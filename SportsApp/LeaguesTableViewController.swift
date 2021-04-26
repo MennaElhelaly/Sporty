@@ -57,7 +57,7 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
                         else{
                             x = x + 1
                             print(x)
-                            self.arrayLeagues.append(LeagueById[0])
+                            self.arrayLeagues.append(LeagueById[0] as! LeagueById)
                             DispatchQueue.main.async {
                                 self.leaguesTableOutlet.reloadData()
                             }
