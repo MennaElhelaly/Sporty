@@ -26,8 +26,6 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        
         //search bar attributes
         
         self.apiCalling()
@@ -71,7 +69,8 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
         })
     }
     override func viewWillAppear(_ animated: Bool) {
-        
+        self.tabBarController?.tabBar.isHidden = true
+
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {

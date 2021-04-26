@@ -225,7 +225,7 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
             cell.uiTeamOneName.text = upcomingArray[indexPath.row].strHomeTeam
             cell.uiTeamTwoName.text = upcomingArray[indexPath.row].strAwayTeam
             cell.uiEventDate.text = upcomingArray[indexPath.row].dateEvent
-            
+            cell.uiTim.text = upcomingArray[indexPath.row].strTimeLocal
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! TeamCell
@@ -238,12 +238,15 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == uiUpcomingCollectionView {
-            return CGSize(width: (view.window?.layer.frame.width)! - 5 , height: (view.window?.layer.frame.height)! / 4)
+//            return CGSize(width: (view.window?.layer.frame.width)! - 5 , height: (view.window?.layer.frame.height)! / 4)
+            return CGSize(width: ((view.window?.layer.frame.width)! * 3/4) , height: (view.window?.layer.frame.height)! / 5)
         }else{
             return CGSize(width: (view.window?.layer.frame.width)! / 3, height: (view.window?.layer.frame.height)! / 2)
         }
         
     }
+    
+
         
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         

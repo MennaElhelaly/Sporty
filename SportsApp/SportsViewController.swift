@@ -36,6 +36,7 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         }
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
 
            if Network.shared.isConnected{
                print("Online")

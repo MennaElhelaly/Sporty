@@ -25,4 +25,5 @@ struct Event: Codable {
     let idHomeTeam, idAwayTeam: String
     let strSeason:String
     let intRound:String
+    let strTimeLocal:String
 }
