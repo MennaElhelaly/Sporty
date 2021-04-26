@@ -241,7 +241,7 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
 //            return CGSize(width: (view.window?.layer.frame.width)! - 5 , height: (view.window?.layer.frame.height)! / 4)
             return CGSize(width: ((view.window?.layer.frame.width)! * 3/4) , height: (view.window?.layer.frame.height)! / 5)
         }else{
-            return CGSize(width: (view.window?.layer.frame.width)! / 3, height: (view.window?.layer.frame.height)! / 2)
+            return CGSize(width: (view.window?.layer.frame.width)! * 1/10, height: (view.window?.layer.frame.height)! * 1/3.5)
         }
         
     }
@@ -251,11 +251,8 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == uiTeamCollectionView{
-
-//            let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamVC") as! TeamVC
             let teamVc = self.storyboard?.instantiateViewController(identifier: "TeamTableViewController") as! TeamTableViewController
             teamVc.teamDeatails = allTeams[indexPath.row]
-//            self.navigationController?.pushViewController(teamVc, animated: true)
             present(teamVc, animated: true, completion: nil)
         }
     }
@@ -277,8 +274,6 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "latestCell") as! LatestCell
         cell.layer.cornerRadius = 20
-        
-        
         
         cell.uiTeamOneImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.uiTeamOneImage.sd_imageIndicator?.startAnimatingIndicator()
@@ -333,7 +328,7 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (view.window?.frame.height)! / 2.7
+        return (view.window?.frame.height)! * 1/3.5
     }
     
 }
