@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IVT-Dt-9SS">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
@@ -337,7 +336,6 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="2020/2/1" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="250-JM-Ipw">
-
                                                                     <rect key="frame" x="129" y="135.5" width="71" height="21.5"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                                                     <nil key="textColor"/>
@@ -638,7 +636,6 @@
                                 <outlet property="delegate" destination="15F-4p-WiS" id="pkz-n5-KMe"/>
                             </connections>
                         </searchBar>
-
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="cell" rowHeight="152" id="wgX-nx-FMF" customClass="LeaguesTableViewCell" customModule="SportsApp" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="72" width="414" height="152"/>
@@ -737,13 +734,13 @@
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="League" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2tI-8d-lnc">
-                                                    <rect key="frame" x="30.5" y="326" width="75.5" height="27"/>
+                                                    <rect key="frame" x="29" y="326" width="75.5" height="27"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Stadium" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jAd-D6-nnB">
-                                                    <rect key="frame" x="30.5" y="376" width="86" height="27"/>
+                                                    <rect key="frame" x="29" y="376" width="87.5" height="27"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="22"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -793,7 +790,7 @@
                                                     <state key="normal" image="insta"/>
                                                 </button>
                                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="oCc-Gm-RZT">
-                                                    <rect key="frame" x="25" y="515" width="358" height="235"/>
+                                                    <rect key="frame" x="29" y="515" width="354" height="235"/>
                                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                                     <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
                                                     <color key="textColor" systemColor="labelColor"/>
@@ -832,6 +829,7 @@
                                                 <constraint firstItem="EtU-wv-wMG" firstAttribute="trailing" secondItem="iRe-RB-6M9" secondAttribute="trailing" id="PkY-tv-nKy"/>
                                                 <constraint firstItem="fec-fP-2mD" firstAttribute="top" secondItem="aWT-XK-C9h" secondAttribute="bottom" constant="44" id="RZ0-FQ-Iao"/>
                                                 <constraint firstItem="Qes-jQ-ZMD" firstAttribute="leading" secondItem="fec-fP-2mD" secondAttribute="leading" id="SBi-Ys-w68"/>
+                                                <constraint firstItem="nnR-dI-uBc" firstAttribute="leading" secondItem="jAd-D6-nnB" secondAttribute="leading" id="Tfr-Z0-Z95"/>
                                                 <constraint firstItem="aKr-6b-GBd" firstAttribute="leading" secondItem="fec-fP-2mD" secondAttribute="trailing" constant="8" symbolic="YES" id="Udw-0t-SPe"/>
                                                 <constraint firstItem="Qes-jQ-ZMD" firstAttribute="leading" secondItem="EtU-wv-wMG" secondAttribute="trailing" constant="5" id="VHV-M2-HOO"/>
                                                 <constraint firstItem="aKr-6b-GBd" firstAttribute="top" secondItem="akD-vW-Eiv" secondAttribute="top" id="VRT-Xp-AYF"/>
@@ -843,10 +841,10 @@
                                                 <constraint firstAttribute="bottomMargin" secondItem="oCc-Gm-RZT" secondAttribute="bottom" constant="29" id="kAq-uc-oPT"/>
                                                 <constraint firstItem="EtU-wv-wMG" firstAttribute="bottom" secondItem="fec-fP-2mD" secondAttribute="bottom" id="lnM-JW-thz"/>
                                                 <constraint firstItem="aWT-XK-C9h" firstAttribute="top" secondItem="ws3-19-dR6" secondAttribute="topMargin" constant="-15" id="mZz-L4-FxL"/>
-                                                <constraint firstItem="oCc-Gm-RZT" firstAttribute="leading" secondItem="ws3-19-dR6" secondAttribute="leadingMargin" constant="5" id="nKo-pF-O7x"/>
                                                 <constraint firstItem="hNk-4B-urn" firstAttribute="leading" secondItem="nnR-dI-uBc" secondAttribute="trailing" constant="36" id="nPP-d7-FZI"/>
                                                 <constraint firstItem="nnR-dI-uBc" firstAttribute="centerY" secondItem="hNk-4B-urn" secondAttribute="centerY" id="nkc-sK-88m"/>
                                                 <constraint firstItem="oCc-Gm-RZT" firstAttribute="top" secondItem="iRe-RB-6M9" secondAttribute="bottom" constant="12" id="nsO-Yw-Bzh"/>
+                                                <constraint firstItem="oCc-Gm-RZT" firstAttribute="leading" secondItem="iRe-RB-6M9" secondAttribute="leading" id="oLx-Xt-60p"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
