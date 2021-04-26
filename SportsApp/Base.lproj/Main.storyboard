@@ -725,10 +725,11 @@
                                                     <rect key="frame" x="19" y="165" width="125" height="130"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="130" id="i7x-bd-eSe"/>
+                                                        <constraint firstAttribute="width" constant="125" id="sXw-zZ-H5X"/>
                                                     </constraints>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qes-jQ-ZMD">
-                                                    <rect key="frame" x="149" y="237" width="64" height="30"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="18" translatesAutoresizingMaskIntoConstraints="NO" id="Qes-jQ-ZMD" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                                    <rect key="frame" x="149" y="237" width="240" height="30"/>
                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -807,6 +808,7 @@
                                                 </button>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="Qes-jQ-ZMD" secondAttribute="trailing" constant="5" id="0NF-il-Nc2"/>
                                                 <constraint firstItem="fec-fP-2mD" firstAttribute="top" secondItem="aKr-6b-GBd" secondAttribute="top" id="29E-o6-Zsq"/>
                                                 <constraint firstItem="fec-fP-2mD" firstAttribute="bottom" secondItem="aKr-6b-GBd" secondAttribute="bottom" id="3QM-r1-eLJ"/>
                                                 <constraint firstItem="nnR-dI-uBc" firstAttribute="leading" secondItem="iRe-RB-6M9" secondAttribute="leading" id="3ar-fV-Erj"/>
@@ -875,6 +877,9 @@
         </scene>
     </scenes>
     <designables>
+        <designable name="Qes-jQ-ZMD">
+            <size key="intrinsicContentSize" width="64" height="30"/>
+        </designable>
         <designable name="Sas-ux-Zdn">
             <size key="intrinsicContentSize" width="522" height="30"/>
         </designable>

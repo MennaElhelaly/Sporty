@@ -23,12 +23,14 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         if Network.shared.isConnected{
             print("Online")
             DispatchQueue.main.async {
-                    self.getDataFromAPI()
+                self.getDataFromAPI()
             }
         }
         else{
             print("Offline")
             collectionView.isHidden = true
+            self.view.backgroundColor = UIColor(patternImage: UIImage(named: "stadium")!)
+
         }
     }
     override func viewWillAppear(_ animated: Bool) {

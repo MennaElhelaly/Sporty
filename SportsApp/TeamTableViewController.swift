@@ -41,7 +41,13 @@ class TeamTableViewController: UITableViewController {
        func updateUI(){
            
            firstImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-           firstImage.sd_setImage(with: URL(string: teamDeatails.strStadiumThumb), completed: nil)
+        
+            if let image = teamDeatails.strStadiumThumb {
+                firstImage.sd_setImage(with: URL(string: image), completed: nil)
+            }else{
+                firstImage.image = #imageLiteral(resourceName: "stadium")
+            }
+           
            secondImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
            secondImage.sd_setImage(with: URL(string: teamDeatails.strTeamBadge), completed: nil)
            
@@ -51,7 +57,7 @@ class TeamTableViewController: UITableViewController {
            strLeague.text = teamDeatails.strLeague
            strCountry.text = teamDeatails.strCountry
            strDiscription.text = teamDeatails.strDescriptionEN
-           
+
            let facebook = teamDeatails.strFacebook
            let instgram = teamDeatails.strInstagram
            let twitter = teamDeatails.strTwitter
@@ -59,7 +65,7 @@ class TeamTableViewController: UITableViewController {
            facebookLink.accessibilityValue = facebook
            instgramLink.accessibilityValue = instgram
            twitterLink.accessibilityValue = twitter
-           
+
            
            facebookLink.addTarget(self, action: #selector(self.anotherScreen), for: .touchUpInside)
            instgramLink.addTarget(self, action: #selector(self.anotherScreen), for: .touchUpInside)
