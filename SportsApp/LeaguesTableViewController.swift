@@ -122,6 +122,8 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
                     }
                     cell.youtubeBtn.isHidden = false
                     cell.youtubeBtn.addTarget(self, action: #selector(self.youtubeTapped), for: .touchUpInside)
+                    cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
+
                     break
                 }
             }
@@ -152,6 +154,8 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
                         }
                         cell.youtubeBtn.isHidden = false
                         cell.youtubeBtn.addTarget(self, action: #selector(self.youtubeTapped), for: .touchUpInside)
+                        cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
+
                         break
                     }
                 }
