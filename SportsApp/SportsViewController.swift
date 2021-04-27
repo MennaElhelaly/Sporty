@@ -10,71 +10,79 @@ import UIKit
 import SDWebImage
 
 class SportsViewController: UIViewController , UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    @IBOutlet weak var collectionView: UICollectionView!
     
     var sportsArr = [Sport]()
-    @IBOutlet weak var collectionView: UICollectionView!
-
+    var viewModel:SportsViewModel = SportsViewModel()
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "ALL SPORTS"
-      //  self.getDataFromAPI()
-//        collectionView.isHidden = true
         
-
         if Network.shared.isConnected{
-            print("Online")
-            DispatchQueue.main.async {
+            print("connected")
+            viewModel.bindSportsData = {
                 self.getDataFromAPI()
+            }
+            
+            viewModel.bindingConnectionError = {
+                self.handleConnectionError()
+                print(self.viewModel.connectionError!)
+            }
+            
+            viewModel.bindingDataError = {
+                self.handleDataError()
             }
         }
         else{
-            print("Offline")
-//            collectionView.isHidden = true
+            print("not connected")
             collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
             sportsArr = [Sport]()
         }
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = false
-
-           if Network.shared.isConnected{
-               print("Online")
-           }
-           else{
-               print("Offline")
-               collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
-               sportsArr = [Sport]()
-               collectionView.reloadData()
-           }
+        if Network.shared.isConnected{
+            print("connected")
+        }
+        else{
+            print("not connected")
+            collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
+            sportsArr = [Sport]()
+            collectionView.reloadData()
+            
+        }
+        
     }
-    //---------------------------------------
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
-        return 1
+    func handleDataError() {
+        print("returned data is null")
+    }
+    func handleConnectionError() {
+        if Network.shared.isConnected{
+            print("url is not correct")
+            print(viewModel.bindingConnectionError)
+        }else{
+            self.present(connectionIssue(), animated: true, completion: nil)
+        }
     }
     func getDataFromAPI() {
-        let webServiceObj = WebService()
-        
-        webServiceObj.callSportsAPI(compilation: { (arrayOfSports) in
-            guard let validArrayOfSports = arrayOfSports else{
-                self.present(connectionIssue(), animated: true, completion: nil)
-                return
-            }
-            self.sportsArr = validArrayOfSports
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-            
-        })
+        sportsArr = viewModel.SportsData
+        self.collectionView.reloadData()
     }
-
-
+    
+    
+// MARK:-  collection view
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of items
         return sportsArr.count
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! SportCollectionViewCell
         cell.sportLabel.text = sportsArr[indexPath.row].strSport
@@ -88,10 +96,10 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         }
         cell.layer.cornerRadius = 35
         cell.sportImge.layer.cornerRadius = 35
-    
+        
         return cell
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let second :LeaguesTableViewController = (self.storyboard?.instantiateViewController(withIdentifier: "LeaguesTableViewController")) as! LeaguesTableViewController
         second.strSport = sportsArr[indexPath.row].strSport
@@ -102,7 +110,7 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         let cellSize = CGSize(width: ((view.window?.layer.frame.width)!/2) - 40, height: 150)
         return cellSize
     }
-
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat
     {
         return 10
