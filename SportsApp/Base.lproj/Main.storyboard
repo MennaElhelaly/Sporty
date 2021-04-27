@@ -174,7 +174,7 @@
                             <outlet property="delegate" destination="nzK-YM-HCc" id="h7e-6Y-get"/>
                         </connections>
                     </tableView>
-                    <tabBarItem key="tabBarItem" title="Favourite" image="star.fill" catalog="system" id="3GW-fW-G5v"/>
+                    <tabBarItem key="tabBarItem" title="Favourite" image="heart" id="3GW-fW-G5v"/>
                     <connections>
                         <segue destination="hEL-ck-qO9" kind="show" identifier="favourite" id="0Iy-kz-Yeu"/>
                     </connections>
@@ -675,7 +675,7 @@
         <scene sceneID="evz-js-0Cg">
             <objects>
                 <tableViewController storyboardIdentifier="LeaguesTableViewController" id="15F-4p-WiS" customClass="LeaguesTableViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="X8p-pj-Q9F">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="X8p-pj-Q9F">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -955,9 +955,9 @@
     </designables>
     <resources>
         <image name="facebook" width="75" height="75"/>
+        <image name="heart" width="24" height="24"/>
         <image name="house.fill" catalog="system" width="128" height="106"/>
         <image name="insta" width="75" height="75"/>
-        <image name="star.fill" catalog="system" width="128" height="116"/>
         <image name="twitter" width="75" height="75"/>
         <image name="youtube-1" width="24" height="24"/>
         <systemColor name="groupTableViewBackgroundColor">
