@@ -7,8 +7,10 @@
 //
 
 import UIKit
-
+import MarqueeLabel
 class TeamCell: UICollectionViewCell {
     
     @IBOutlet weak var uiTeamImage: UIImageView!
+    @IBOutlet weak var uiTeamName: UILabel!
+    
 }

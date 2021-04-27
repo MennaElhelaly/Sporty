@@ -115,7 +115,7 @@ class FavouriteTableViewController: UITableViewController {
         print((favourieArr[indexPath.row].value(forKey: "leagueName") as! String))
         
         if Network.shared.isConnected{
-            print("Online")
+            print("network onlin")
         
             let idLeague = (favourieArr[indexPath.row].value(forKey: "LeagueID") as! String)
             let strBadge = (favourieArr[indexPath.row].value(forKey: "LeagueImage") as! String)
@@ -134,7 +134,7 @@ class FavouriteTableViewController: UITableViewController {
             performSegue(withIdentifier: "favourite", sender: self)
             
         }else{
-            print("Offline")
+            print("network Offline")
             ProgressHUD.showError("no internet connection, Try again")
         }
        

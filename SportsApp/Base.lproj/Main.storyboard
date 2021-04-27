@@ -214,7 +214,7 @@
                                 <rect key="frame" x="0.0" y="44" width="414" height="818"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="X6t-wi-jf5">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="975"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="1044.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="UPCOMING EVENTS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="skS-pf-D8N">
                                                 <rect key="frame" x="16" y="8" width="382" height="20"/>
@@ -348,7 +348,7 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="insetGrouped" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="VaF-Dg-Fut">
-                                                <rect key="frame" x="16" y="267" width="382" height="487.5"/>
+                                                <rect key="frame" x="16" y="267" width="382" height="522.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <prototypes>
                                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="latestCell" rowHeight="265" id="q2Q-jI-MZE" customClass="LatestCell" customModule="SportsApp" customModuleProvider="target">
@@ -477,16 +477,16 @@
                                                 </connections>
                                             </tableView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="TEAMS" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zHK-CO-Ray">
-                                                <rect key="frame" x="16" y="774.5" width="382" height="20.5"/>
+                                                <rect key="frame" x="16" y="809.5" width="382" height="20.5"/>
                                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                 <fontDescription key="fontDescription" name="HelveticaNeue-BoldItalic" family="Helvetica Neue" pointSize="17"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="AuH-bM-F8M">
-                                                <rect key="frame" x="16" y="815.5" width="382" height="139.5"/>
+                                                <rect key="frame" x="16" y="850.5" width="382" height="174"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sm3-Mq-qvd">
+                                                <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="sm3-Mq-qvd">
                                                     <size key="itemSize" width="146" height="130"/>
                                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -494,21 +494,42 @@
                                                 </collectionViewFlowLayout>
                                                 <cells>
                                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="teamCell" id="M2F-Vz-6dM" customClass="TeamCell" customModule="SportsApp" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="5" width="146" height="130"/>
+                                                        <rect key="frame" x="0.0" y="22" width="146" height="130"/>
                                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="KOG-J3-nVQ">
                                                             <rect key="frame" x="0.0" y="0.0" width="146" height="130"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <subviews>
-                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="gaf-ft-vwS">
-                                                                    <rect key="frame" x="23" y="15" width="100" height="100"/>
-                                                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="gaf-ft-vwS">
+                                                                    <rect key="frame" x="10" y="5" width="126" height="91"/>
                                                                 </imageView>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zhj-W3-XhB" customClass="MarqueeLabel" customModule="MarqueeLabel">
+                                                                    <rect key="frame" x="10" y="101" width="126" height="20.5"/>
+                                                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
+                                                                    <nil key="textColor"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                    <userDefinedRuntimeAttributes>
+                                                                        <userDefinedRuntimeAttribute type="number" keyPath="scrollRate">
+                                                                            <real key="value" value="0.0"/>
+                                                                        </userDefinedRuntimeAttribute>
+                                                                    </userDefinedRuntimeAttributes>
+                                                                </label>
                                                             </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="gaf-ft-vwS" secondAttribute="trailing" constant="10" id="F77-xK-69F"/>
+                                                                <constraint firstItem="Zhj-W3-XhB" firstAttribute="top" secondItem="gaf-ft-vwS" secondAttribute="bottom" constant="5" id="F7Z-i8-xks"/>
+                                                                <constraint firstItem="gaf-ft-vwS" firstAttribute="height" secondItem="KOG-J3-nVQ" secondAttribute="height" multiplier="0.7" id="GfN-jJ-vHD"/>
+                                                                <constraint firstItem="gaf-ft-vwS" firstAttribute="top" secondItem="KOG-J3-nVQ" secondAttribute="top" constant="5" id="Lpq-D4-nbO"/>
+                                                                <constraint firstItem="Zhj-W3-XhB" firstAttribute="trailing" secondItem="gaf-ft-vwS" secondAttribute="trailing" id="ZT0-l1-T2x"/>
+                                                                <constraint firstItem="gaf-ft-vwS" firstAttribute="leading" secondItem="KOG-J3-nVQ" secondAttribute="leading" constant="10" id="qi4-fA-UYU"/>
+                                                                <constraint firstItem="Zhj-W3-XhB" firstAttribute="leading" secondItem="gaf-ft-vwS" secondAttribute="leading" id="rXm-fy-2Iq"/>
+                                                            </constraints>
                                                         </collectionViewCellContentView>
                                                         <size key="customSize" width="146" height="130"/>
                                                         <connections>
                                                             <outlet property="uiTeamImage" destination="gaf-ft-vwS" id="9AV-Kc-zWt"/>
+                                                            <outlet property="uiTeamName" destination="Zhj-W3-XhB" id="64t-FS-IHE"/>
                                                         </connections>
                                                     </collectionViewCell>
                                                 </cells>
@@ -536,7 +557,7 @@
                                             <constraint firstItem="VaF-Dg-Fut" firstAttribute="height" secondItem="X6t-wi-jf5" secondAttribute="height" multiplier="1:2" id="SgJ-aH-D1x"/>
                                             <constraint firstItem="skS-pf-D8N" firstAttribute="top" secondItem="X6t-wi-jf5" secondAttribute="top" constant="8" id="WEI-f3-gZu"/>
                                             <constraint firstItem="nlC-Ad-GTN" firstAttribute="trailing" secondItem="TNj-bY-KOe" secondAttribute="trailing" id="Xd1-f5-PMS"/>
-                                            <constraint firstItem="AuH-bM-F8M" firstAttribute="height" secondItem="X6t-wi-jf5" secondAttribute="height" multiplier="1:7" id="cVo-Mr-CeB"/>
+                                            <constraint firstItem="AuH-bM-F8M" firstAttribute="height" secondItem="X6t-wi-jf5" secondAttribute="height" multiplier="1:6" id="cVo-Mr-CeB"/>
                                             <constraint firstItem="zHK-CO-Ray" firstAttribute="top" secondItem="VaF-Dg-Fut" secondAttribute="bottom" constant="20" id="fHg-Ba-Xhj"/>
                                             <constraint firstItem="TNj-bY-KOe" firstAttribute="top" secondItem="skS-pf-D8N" secondAttribute="bottom" constant="10" id="jP8-GU-jdY"/>
                                             <constraint firstItem="VaF-Dg-Fut" firstAttribute="top" secondItem="nlC-Ad-GTN" secondAttribute="bottom" constant="10" id="rEG-YR-MBQ"/>
@@ -579,7 +600,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ArD-rU-clj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-443" y="1276"/>
+            <point key="canvasLocation" x="-443.47826086956525" y="1275.6696428571429"/>
         </scene>
         <!--Leagues Table View Controller-->
         <scene sceneID="evz-js-0Cg">
@@ -843,6 +864,9 @@
         </designable>
         <designable name="Sas-ux-Zdn">
             <size key="intrinsicContentSize" width="522" height="30"/>
+        </designable>
+        <designable name="Zhj-W3-XhB">
+            <size key="intrinsicContentSize" width="41.5" height="20.5"/>
         </designable>
     </designables>
     <resources>

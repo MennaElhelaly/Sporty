@@ -229,8 +229,10 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! TeamCell
+            cell.uiTeamName.text = allTeams[indexPath.row].strTeam
             cell.uiTeamImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             cell.uiTeamImage.sd_setImage(with: URL(string: allTeams[indexPath.row].strTeamBadge), completed: nil)
+            print("item \(allTeams[indexPath.row].strTeam)")
             return cell
         }
         
@@ -238,10 +240,9 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == uiUpcomingCollectionView {
-//            return CGSize(width: (view.window?.layer.frame.width)! - 5 , height: (view.window?.layer.frame.height)! / 4)
             return CGSize(width: ((view.window?.layer.frame.width)! * 3/4) , height: (view.window?.layer.frame.height)! / 5)
         }else{
-            return CGSize(width: (view.window?.layer.frame.width)! * 1/10, height: (view.window?.layer.frame.height)! * 1/3.5)
+            return CGSize(width: (view.window?.layer.frame.width)! * 1/4, height: (view.window?.layer.frame.height)! * 1/3.5)
         }
         
     }
