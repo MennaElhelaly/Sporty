@@ -8,6 +8,7 @@
 import UIKit
 import SDWebImage
 import MarqueeLabel
+import ProgressHUD
 class LeaguesDetailsVC: UIViewController {
     
     @IBOutlet weak var uiUpcomingCollectionView: UICollectionView!
@@ -167,6 +168,9 @@ class LeaguesDetailsVC: UIViewController {
         if favouriteState { // league is assigned to be favourite, then we will delete it
             database.deleteItem(leagueId: leagueData.idLeague)
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+            
+            ProgressHUD.showSuccess("\(leagueData.strLeague) deleted from your Favourites")
+
             favouriteState = false
         }else{  // league is not favourite, then we will save it as favourite
             var image:String
@@ -176,6 +180,8 @@ class LeaguesDetailsVC: UIViewController {
                 image = "anonymousLogo"
             }
             database.save(fav: FavouriteData(idLeague: leagueData.idLeague, strLeague: leagueData.strLeague, strYoutube: leagueData.strYoutube, strBadge: image))
+            
+            ProgressHUD.showSuccess("\(leagueData.strLeague) added to your Favourites")
             
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.7450980544, green: 0.1568627506, blue: 0.07450980693, alpha: 1)
             favouriteState = true

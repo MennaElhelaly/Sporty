@@ -758,7 +758,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJX-2X-N90">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lJX-2X-N90" customClass="MarqueeLabel" customModule="MarqueeLabel">
                                                     <rect key="frame" x="149" y="379" width="48" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                                     <nil key="textColor"/>
@@ -879,6 +879,9 @@
         </designable>
         <designable name="Zhj-W3-XhB">
             <size key="intrinsicContentSize" width="41.5" height="20.5"/>
+        </designable>
+        <designable name="lJX-2X-N90">
+            <size key="intrinsicContentSize" width="48" height="24"/>
         </designable>
     </designables>
     <resources>
