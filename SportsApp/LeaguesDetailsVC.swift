@@ -231,7 +231,7 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
             cell.uiTeamOneName.text = upcomingArray[indexPath.row].strHomeTeam
             cell.uiTeamTwoName.text = upcomingArray[indexPath.row].strAwayTeam
             cell.uiEventDate.text = upcomingArray[indexPath.row].dateEvent
-            cell.uiTim.text = upcomingArray[indexPath.row].strTimeLocal
+            cell.uiTim.text = upcomingArray[indexPath.row].strTime
             return cell
         }else{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! TeamCell
@@ -272,7 +272,7 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
         return lastArray.count
     }
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 10
+        return 0.5
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -335,7 +335,7 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return (view.window?.frame.height)! * 1/3.5
+        return (view.window?.frame.height)! * 1/4
     }
     
 }
