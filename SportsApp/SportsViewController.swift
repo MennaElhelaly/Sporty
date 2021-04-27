@@ -19,7 +19,15 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     override func viewDidLoad() {
         super.viewDidLoad()
         navigationItem.title = "ALL SPORTS"
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = false
+        prepareScreenData()
         
+    }
+    
+    func prepareScreenData() {
         if Network.shared.isConnected{
             print("connected")
             viewModel.bindSportsData = {
@@ -34,27 +42,12 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
             viewModel.bindingDataError = {
                 self.handleDataError()
             }
-        }
-        else{
-            print("not connected")
-            collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
-            sportsArr = [Sport]()
-        }
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = false
-        if Network.shared.isConnected{
-            print("connected")
-        }
-        else{
+        }else{
             print("not connected")
             collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
             sportsArr = [Sport]()
             collectionView.reloadData()
-            
         }
-        
     }
     func handleDataError() {
         print("returned data is null")
