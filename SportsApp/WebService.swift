@@ -76,7 +76,7 @@ class WebService {
                 }
             }
     }
-    public func callSportsAPI(compilation: @escaping ([Sport]?)->Void) {
+    public func callSportsAPI(compilation: @escaping ([Sport]? , Error?)->Void) {
         print("allSports+++++++++++++++++++++++++++++++++++++\(URLs.allSports)")
         
         AF.request(URLs.allSports)
@@ -87,12 +87,12 @@ class WebService {
                 case .success( _):
                     print("sucess")
                     guard let arrayOfSports = response.value?.sports else { return }
-                    compilation(arrayOfSports)
+                    compilation(arrayOfSports,nil)
                     
                 case .failure(let error):
                     print("allsports error")
                     print(error.localizedDescription)
-                    compilation(nil)
+                    compilation(nil,error)
                 }
             }
     }
