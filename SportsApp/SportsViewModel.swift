@@ -12,7 +12,7 @@ class SportsViewModel: NSObject {
     
     var sportsService :WebService!
     
-    var SportsData :[Sport]! {
+    var sportsData :[Sport]! {
         didSet{
             self.bindSportsData()
         }
@@ -39,6 +39,7 @@ class SportsViewModel: NSObject {
         self.sportsService = WebService()
         self.fetchSportsData()
     }
+
     func fetchSportsData (){
         sportsService.callSportsAPI(compilation: { (sportsData,error) in
                
@@ -52,7 +53,7 @@ class SportsViewModel: NSObject {
                     return
                 }
                 print("data is not null \(data)")
-                self.SportsData = data
+                self.sportsData = data
             }
         })
     }

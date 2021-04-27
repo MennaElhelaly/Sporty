@@ -11,6 +11,7 @@ import SDWebImage
 class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
     
     
+    @IBOutlet var leaguesTableOutlet: UITableView!
     
     let webService = WebService();
     var array:[LeaguesDataClass] = [LeaguesDataClass]();
@@ -18,59 +19,115 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
     var strSport:String!;
     var isSearching = false
     var searchedArray:[LeaguesDataClass]!
-    var leageArrar:[LeaguesDataClass] = [LeaguesDataClass]();
-    
-    @IBOutlet var leaguesTableOutlet: UITableView!
+
     let searchController = UISearchController()
-    
+    var viewModel:LeaguesViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         //search bar attributes
+        viewModel = LeaguesViewModel()
+        viewModel.fetchAllLeagues()
         
-        self.apiCalling()
+//        self.apiCalling()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        self.tabBarController?.tabBar.isHidden = true
+        print("wie")
+        self.prepareScreenData()
+    }
+
+    func prepareScreenData() {
+        if Network.shared.isConnected{
+            print("connected from prepare")
+            viewModel.bindinLeaguesData = {
+                print("binding")
+                self.getLeagueData()
+            }
+            
+            viewModel.bindingConnectionError = {
+                self.handleConnectionError()
+                print(self.viewModel.connectionError!)
+            }
+            
+            viewModel.bindingDataError = {
+                self.handleDataError()
+            }
+            
+            viewModel.bindingLeagueDetails = {
+                self.arrayLeagues = self.viewModel.leagueDetails
+                self.leaguesTableOutlet.reloadData()
+            }
+            
+        }else{
+            print("not connected")
+            leaguesTableOutlet.backgroundView = UIImageView(image: UIImage(named: "404")!)
+            array = [LeaguesDataClass]()
+            leaguesTableOutlet.reloadData()
+        }
+    }
+    
+    func handleDataError() {
+        print("returned data is null")
+    }
+    func handleConnectionError() {
+        if Network.shared.isConnected{
+            print("url is not correct")
+            print(viewModel.bindingConnectionError)
+        }else{
+            self.present(connectionIssue(), animated: true, completion: nil)
+        }
+    }
+    func getLeagueData() {
+        print("getleagueData")
+        let matched = viewModel.getMatchedLeagues(strSport: strSport)
+        self.array = matched
+        self.leaguesTableOutlet.reloadData()
+        
+        viewModel.fetchLeaguesUrlAndImages(matchedArray: matched)
     }
     
     func apiCalling() {
-        webService.allLeaguesAPI(compilation: { (allLeagues) in
-            if allLeagues.count == 0{
-                print("show alert")
-            }else{
-                                
-                for iteam in allLeagues{
-                    if iteam.strSport.rawValue == self.strSport {
-                        self.array.append(iteam)
-                    }
-                }
-                DispatchQueue.main.async {
-                    self.leaguesTableOutlet.reloadData()
-                }
-                var x = 0
-                for i in self.array{
-                    
-                    self.webService.lookUpLeagueById(id: i.idLeague) { (LeagueById) in
-                        if LeagueById.count == 0{
-                            print("show alert")
-                        }
-                        else{
-                            x = x + 1
-                            print(x)
-                            self.arrayLeagues.append(LeagueById[0] as! LeagueById)
-                            DispatchQueue.main.async {
-                                self.leaguesTableOutlet.reloadData()
-                            }
-                        }
-                        
-                    }
-                }
-                
-
-            }
-        })
-    }
-    override func viewWillAppear(_ animated: Bool) {
-        self.tabBarController?.tabBar.isHidden = true
-
+//        webService.allLeaguesAPI(compilation: { (allLeagues) in
+//            if allLeagues.count == 0{
+//                print("show alert")
+//            }else{
+//                                
+//                for iteam in allLeagues{
+//                    if iteam.strSport.rawValue == self.strSport {
+//                        self.array.append(iteam)
+//                    }
+//                }
+//                DispatchQueue.main.async {
+//                    self.leaguesTableOutlet.reloadData()
+//                }
+//        
+//        
+//        
+//        
+//                var x = 0
+//                for i in self.array{
+//
+//                    self.webService.lookUpLeagueById(id: i.idLeague) { (LeagueById) in
+//                        if LeagueById.count == 0{
+//                            print("show alert")
+//                        }
+//                        else{
+//                            x = x + 1
+//                            print(x)
+//                            self.arrayLeagues.append(LeagueById[0] as! LeagueById)
+//                            DispatchQueue.main.async {
+//                                self.leaguesTableOutlet.reloadData()
+//                            }
+//                        }
+//
+//                    }
+//                }
+//                
+//
+//            }
+//        })
     }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -183,6 +240,7 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
         }
         else{
         for i in arrayLeagues{
+            print("this is i : \(i)")
             if i.idLeague == array[indexPath.row].idLeague{
 
                 let sendData = FavouriteData(idLeague: i.idLeague, strLeague: i.strLeague, strYoutube: i.strYoutube, strBadge: i.strBadge)
@@ -190,7 +248,7 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
                 break
             }
         }
-        self.navigationController?.pushViewController(detailsVc, animated: true)
+            self.navigationController?.pushViewController(detailsVc, animated: true)
         }
     }
     

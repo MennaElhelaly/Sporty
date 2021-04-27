@@ -61,7 +61,7 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         }
     }
     func getDataFromAPI() {
-        sportsArr = viewModel.SportsData
+        sportsArr = viewModel.sportsData
         self.collectionView.reloadData()
     }
     

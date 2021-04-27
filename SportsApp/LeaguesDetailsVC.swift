@@ -70,7 +70,7 @@ class LeaguesDetailsVC: UIViewController {
                 }
                 return
             }
-            
+            print("asdf")
             self.allTeams = validArrayOfTeamse
             DispatchQueue.main.async {
                 self.uiTeamCollectionView.reloadData()
@@ -98,7 +98,7 @@ class LeaguesDetailsVC: UIViewController {
                 }else{
                     self.present(connectionIssue(), animated: true, completion: nil)
                 }
-                
+
                 return
             }
             self.lastArray = validArrayOfEvents
