@@ -14,7 +14,7 @@ class WebService {
     
     
     
-    public func getUpcomingEvents(id:String,strSeason:String,round:String,completion: @escaping ([Event]?)->Void){
+    public func getUpcomingEvents(id:String,strSeason:String,round:String,completion: @escaping ([Event]?,Error?)->Void){
         let url = "\(URLs.upcomingUrl)\(id)&r=\(round)&s=\(strSeason)"
         print("upcoming+++++++++++++++++++++++++++++++++++++\(url)")
         AF.request(url)
@@ -24,18 +24,18 @@ class WebService {
                 
                 case .success( _):
                     print("sucess")
-                    guard let arrayOfUpcomings = response.value?.events else { return }
-                    completion(arrayOfUpcomings)
+//                    guard let arrayOfUpcomings = response.value?.events else { return }
+                    completion(response.value?.events,nil)
                     
                 case .failure(let error):
                     print("upcoming error")
                     print(error.localizedDescription)
-                    completion(nil)
+                    completion(nil,error)
                 }
             }
     }
     
-    public func getAllTeamsInLeagueByLeagueId(id:String,completion: @escaping ([Team]?)->Void){
+    public func getAllTeamsInLeagueByLeagueId(id:String,completion: @escaping ([Team]?,Error?)->Void){
         let url = "\(URLs.allTeamsInLeague)\(id)"
         print("allteams+++++++++++++++++++++++++++++++++++++\(url)")
         
@@ -47,16 +47,16 @@ class WebService {
                 case .success( _):
                     print("sucess")
                     guard let arrayOfTeams = response.value?.teams else { return }
-                    completion(arrayOfTeams)
+                    completion(arrayOfTeams,nil)
                     
                 case .failure(let error):
                     print("allteams error")
                     print(error.localizedDescription)
-                    completion(nil)
+                    completion(nil,error)
                 }
             }
     }
-    public func getLatestInLeagueById(id:String,compilation: @escaping ([Event]?)->Void) {
+    public func getLatestInLeagueById(id:String,compilation: @escaping ([Event]?,Error?)->Void) {
         let url = "\(URLs.eventUrl)\(id)"
         print("latest+++++++++++++++++++++++++++++++++++++\(url)")
         AF.request(url)
@@ -67,12 +67,12 @@ class WebService {
                 case .success( _):
                     print("sucess")
                     guard let arrayOfEvents = response.value?.events else { return }
-                    compilation(arrayOfEvents)
+                    compilation(arrayOfEvents,nil)
                     
                 case .failure(let error):
                     print("latest error")
                     print(error.localizedDescription)
-                    compilation(nil)
+                    compilation(nil,error)
                 }
             }
     }

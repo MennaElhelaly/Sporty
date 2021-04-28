@@ -9,7 +9,8 @@ import UIKit
 import SDWebImage
 import MarqueeLabel
 import ProgressHUD
-class LeaguesDetailsVC: UIViewController {
+
+class LeaguesDetailsVC: UIViewController{
     
     @IBOutlet weak var uiUpcomingCollectionView: UICollectionView!
     @IBOutlet weak var uiTableView: UITableView!
@@ -38,47 +39,171 @@ class LeaguesDetailsVC: UIViewController {
     private var lastArray = [Event]()
     private var allTeams = [Team]()
     
+    private var viewModel:LeagueDetailsViewModel!
+    
+    let screenHeight = UIScreen.main.bounds.height
+    let scrollViewContentHeight = 1200 as CGFloat
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+//        uiScrollView.contentSize = CGSize(width: view.frame.width, height: scrollViewContentHeight)
+//        uiScrollView.bounces = false
+//        uiTableView.bounces = false
+//        uiTableView.isScrollEnabled = false
+//        uiScrollView.alwaysBounceVertical = false
+        
         self.setNavigationItem()
+        self.prepareSwipe()
         database = CoreData.getInstance()
         self.checkFavouriteState()
-        webServiceObj = WebService()
-        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipe))
-        swipeRight.direction = .right
-        self.view.addGestureRecognizer(swipeRight)
-        self.getAllTeams()
-
+        
+        
+        viewModel = LeagueDetailsViewModel()
+        self.prepareBindings()
+        viewModel.getAllTeams(leagueId: leagueData.idLeague)
+        
     }
+    
+    func prepareBindings() {
+        // team and events connection error
+        viewModel.bindingConnectionError = {
+            print("bindingConnectionError")
+            self.showMarqueeOnly()
+            
+        }
+        
+        viewModel.bindingDataError = {
+            print("bindingDataError")
+            if self.viewModel.dataError == true{
+                self.showMarqueeOnly()
+            }else{
+                // MARK:-  no internet connection
+                print("navigate to home screen, connection cut off")
+            }
+        }
+        
+        
+        
+        viewModel.bindingAllTeams = {
+            print("bindingAllTeams")
+            self.receiveAllTeams()
+            self.viewModel.getLatestEvents(leagueId: self.leagueData.idLeague)
+        }
+        
+        viewModel.bindingLatestEvents = { 
+            print("binding latest")
+            
+    
+            self.receiveLatestEvents()
+            self.viewModel.getUpcomingEvents(leagueId: self.leagueData.idLeague, strSeason: self.strSeason, round: self.round)
+        }
+        
+        
+        
+        
+        
+        
+        
+        
+        viewModel.bindingUpcomingConnection = {
+            print("upcoming connection , found nil in error")
+        }
+        viewModel.bindingUpcomingState = {
+            print("binding upcoming state")
+
+            
+            if self.viewModel.upcomingState == true{
+                self.loadingLbl.isHidden = false
+                self.loadingLbl.type = .continuous
+                self.loadingLbl.animationCurve = .easeInOut
+//                self.receiveUpcomintEvents()
+            }else{
+                // MARK:-  no internet connection
+            }
+            
+            
+        }
+                
+        viewModel.bindingUpcomingEvents = {
+            self.receiveUpcomintEvents()
+        }
+        
+    }
+    
+    
+    
+    
+    func receiveAllTeams() {
+        guard let validArrayOfTeams = viewModel.allTeamsData else {
+            print("guard let recieveAllTeams")
+            return
+        }
+        self.allTeams = validArrayOfTeams
+        self.uiTeamCollectionView.reloadData()
+        
+    }
+    
+    func receiveLatestEvents() {
+        guard let validArrayOfEvents = viewModel.latestEvents else {
+            print("guard let recieveAllTeams")
+            return
+        }
+        self.lastArray = validArrayOfEvents
+        self.strSeason = lastArray[0].strSeason
+        self.round = String(Int(self.lastArray[0].intRound)! + 1)
+        self.uiTableView.reloadData()
+    }
+    
+    func receiveUpcomintEvents(){
+        print("receiveUpcomintEvents \(viewModel.upcomingEvents)")
+    
+        guard let events = viewModel.upcomingEvents else {
+            print("guard let recieve upcoming")
+            return
+        }
+        self.upcomingArray = events
+        self.uiUpcomingCollectionView.reloadData()
+    }
+    
+    
+    
+    
     
     @objc func respondToSwipe(){
         dismiss(animated: true, completion: nil)
     }
     
-    func getAllTeams() {
-        
-        webServiceObj.getAllTeamsInLeagueByLeagueId(id: leagueData.idLeague) { (arrayOfTeams) in // load all teams in league
-            
-            guard let validArrayOfTeamse = arrayOfTeams else {
-                if Network.shared.isConnected{
-                    print("response issue , but not inernet all teams")
-                    self.showMarqueeOnly()
-                    
-                }else{
-                    self.present(connectionIssue(), animated: true, completion: nil)
-                }
-                return
-            }
-            print("asdf")
-            self.allTeams = validArrayOfTeamse
-            DispatchQueue.main.async {
-                self.uiTeamCollectionView.reloadData()
-            }
-            
-            self.getLatestEvents()
-        }
+    func prepareSwipe() {
+        let swipeRight = UISwipeGestureRecognizer(target: self, action: #selector(respondToSwipe))
+        swipeRight.direction = .right
+        self.view.addGestureRecognizer(swipeRight)
     }
+    //
+    //    func getAllTeams() {
+    //
+    //        webServiceObj.getAllTeamsInLeagueByLeagueId(id: leagueData.idLeague) { (arrayOfTeams) in // load all teams in league
+    //
+    //            guard let validArrayOfTeamse = arrayOfTeams else {
+    //                if Network.shared.isConnected{
+    //                    print("response issue , but not inernet all teams")
+    //                    self.showMarqueeOnly()
+    //
+    //                }else{
+    //                    self.present(connectionIssue(), animated: true, completion: nil)
+    //                }
+    //                return
+    //            }
+    //            print("asdf")
+    //            self.allTeams = validArrayOfTeamse
+    //            DispatchQueue.main.async {
+    //                self.uiTeamCollectionView.reloadData()
+    //            }
+    //
+    //            self.getLatestEvents()
+    //        }
+    //    }
     
     func showMarqueeOnly()  {
         loadingLbl.isHidden = false
@@ -90,58 +215,58 @@ class LeaguesDetailsVC: UIViewController {
         teamsLbl.isHidden = true
     }
     func getLatestEvents(){
-        self.webServiceObj.getLatestInLeagueById(id:self.leagueData.idLeague) { (arrayOfEvents) in // load previous events (tableview)
-            guard let validArrayOfEvents = arrayOfEvents else {
-                if Network.shared.isConnected{
-                    print("response issue , but not inernet latest events")
-                    self.showMarqueeOnly()
-                }else{
-                    self.present(connectionIssue(), animated: true, completion: nil)
-                }
-
-                return
-            }
-            self.lastArray = validArrayOfEvents
-            self.strSeason = self.lastArray[0].strSeason
-            self.round = String(Int(self.lastArray[0].intRound)! + 1)
-            DispatchQueue.main.async {
-                self.uiTableView.reloadData()
-            }
-            self.getUpcoming()
-        }
+        //        self.webServiceObj.getLatestInLeagueById(id:self.leagueData.idLeague) { (arrayOfEvents) in // load previous events (tableview)
+        //            guard let validArrayOfEvents = arrayOfEvents else {
+        //                if Network.shared.isConnected{
+        //                    print("response issue , but not inernet latest events")
+        //                    self.showMarqueeOnly()
+        //                }else{
+        //                    self.present(connectionIssue(), animated: true, completion: nil)
+        //                }
+        //
+        //                return
+        //            }
+        //            self.lastArray = validArrayOfEvents
+        //            self.strSeason = self.lastArray[0].strSeason
+        //            self.round = String(Int(self.lastArray[0].intRound)! + 1)
+        //            DispatchQueue.main.async {
+        //                self.uiTableView.reloadData()
+        //            }
+        //            self.getUpcoming()
+        //        }
     }
     
-    func getUpcoming(){
-        print("upcoming")
-        webServiceObj.getUpcomingEvents(id: leagueData.idLeague, strSeason: strSeason, round: round) { (arrayOfUpcomings) in
-            guard let upcoming = arrayOfUpcomings else{
-                print("upcoming response")
-                if Network.shared.isConnected{
-                    self.loadingLbl.isHidden = false
-                    self.loadingLbl.type = .continuous
-                    self.loadingLbl.animationCurve = .easeInOut
-                    
-                }else{
-                    self.present(connectionIssue(), animated: true, completion: nil)
-                }
-                
-                return
-            }
-            
-            for item in upcoming {
-                if let _ = item.intHomeScore{
-                    
-                }else{
-                    self.upcomingArray.append(item)
-                }
-            }
-            
-            self.upcomingArray = upcoming
-            DispatchQueue.main.async {
-                self.uiUpcomingCollectionView.reloadData()
-            }
-        }
-    }
+    //    func getUpcoming(){
+    //        print("upcoming")
+    //        webServiceObj.getUpcomingEvents(id: leagueData.idLeague, strSeason: strSeason, round: round) { (arrayOfUpcomings) in
+    //            guard let upcoming = arrayOfUpcomings else{
+    //                print("upcoming response")
+    //                if Network.shared.isConnected{
+//                        self.loadingLbl.isHidden = false
+//                        self.loadingLbl.type = .continuous
+//                        self.loadingLbl.animationCurve = .easeInOut
+    //
+    //                }else{
+    //                    self.present(connectionIssue(), animated: true, completion: nil)
+    //                }
+    //
+    //                return
+    //            }
+    //
+    //            for item in upcoming {
+    //                if let _ = item.intHomeScore{
+    //
+    //                }else{
+    //                    self.upcomingArray.append(item)
+    //                }
+    //            }
+    //
+    //            self.upcomingArray = upcoming
+    //            DispatchQueue.main.async {
+    //                self.uiUpcomingCollectionView.reloadData()
+    //            }
+    //        }
+    //    }
     
     func setNavigationItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "heart"), style: .plain, target: self, action: #selector(addTapped))
@@ -170,7 +295,7 @@ class LeaguesDetailsVC: UIViewController {
             navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
             
             ProgressHUD.showSuccess("\(leagueData.strLeague) deleted from your Favourites")
-
+            
             favouriteState = false
         }else{  // league is not favourite, then we will save it as favourite
             var image:String
@@ -217,13 +342,26 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
             
             for item in allTeams{
                 if item.idTeam == upcomingArray[indexPath.row].idHomeTeam{
-                    cell.uiTeamOneImage.sd_setImage(with: URL(string: item.strTeamBadge)) { (image, error, cache, url) in
-                        cell.uiTeamOneImage.sd_imageIndicator?.stopAnimatingIndicator()
+                    if let validImage = item.strTeamBadge{
+                        cell.uiTeamOneImage.sd_setImage(with: URL(string: validImage)) { (image, error, cache, url) in
+                            cell.uiTeamOneImage.sd_imageIndicator?.stopAnimatingIndicator()
+                        }
+                    }else{
+                        cell.uiTeamOneImage.image = #imageLiteral(resourceName: "anonymousLogo")
+                        cell.self.uiTeamOneImage.sd_imageIndicator?.stopAnimatingIndicator()
                     }
+                    
+                    
                 }else if item.idTeam == upcomingArray[indexPath.row].idAwayTeam{
-                    cell.uiTeamTwoImage.sd_setImage(with: URL(string: item.strTeamBadge), completed: { (image,error,cache,url) in
-                        cell.uiTeamTwoImage.sd_imageIndicator?.stopAnimatingIndicator()
-                    })
+                    if let validImage = item.strTeamBadge{
+                        cell.uiTeamTwoImage.sd_setImage(with: URL(string: validImage), completed: { (image,error,cache,url) in
+                            cell.uiTeamTwoImage.sd_imageIndicator?.stopAnimatingIndicator()
+                        })
+                    }else{
+                        cell.uiTeamTwoImage.image = #imageLiteral(resourceName: "anonymousLogo")
+                        cell.self.uiTeamTwoImage.sd_imageIndicator?.stopAnimatingIndicator()
+                    }
+                    
                 }
             }
             
@@ -237,8 +375,18 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "teamCell", for: indexPath) as! TeamCell
             cell.uiTeamName.text = allTeams[indexPath.row].strTeam
             cell.uiTeamImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            cell.uiTeamImage.sd_setImage(with: URL(string: allTeams[indexPath.row].strTeamBadge), completed: nil)
-            print("item \(allTeams[indexPath.row].strTeam)")
+            
+            if let validImage = allTeams[indexPath.row].strTeamBadge{
+                
+                cell.uiTeamImage.sd_setImage(with: URL(string: validImage)) { (image, error, cache, url) in
+                    cell.uiTeamImage.sd_imageIndicator?.stopAnimatingIndicator()
+                }
+            }else{
+                cell.uiTeamImage.image = #imageLiteral(resourceName: "anonymousLogo")
+                cell.uiTeamImage.sd_imageIndicator?.stopAnimatingIndicator()
+            }
+            
+            
             return cell
         }
         
@@ -253,8 +401,8 @@ extension LeaguesDetailsVC: UICollectionViewDelegate,UICollectionViewDataSource,
         
     }
     
-
-        
+    
+    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == uiTeamCollectionView{
@@ -291,14 +439,26 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
         if(allTeams.count > 0){
             for item in allTeams {
                 if item.idTeam == lastArray[indexPath.section].idHomeTeam{
-                    cell.uiTeamOneImage.sd_setImage(with: URL(string: item.strTeamBadge)) { (image, error, cache, url) in
+                    
+                    if let validImage = item.strTeamBadge{
+                        cell.uiTeamOneImage.sd_setImage(with: URL(string: validImage)) { (image, error, cache, url) in
+                            cell.uiTeamOneImage.sd_imageIndicator?.stopAnimatingIndicator()
+                        }
+                    }else{
+                        cell.uiTeamOneImage.image = #imageLiteral(resourceName: "anonymousLogo")
                         cell.uiTeamOneImage.sd_imageIndicator?.stopAnimatingIndicator()
                     }
+                    
                 }
                 if item.idTeam == lastArray[indexPath.section].idAwayTeam{
-                    cell.uiTeamTwoImage.sd_setImage(with: URL(string: item.strTeamBadge), completed: { (image,error,cache,url) in
+                    if let validImage = item.strTeamBadge {
+                        cell.uiTeamTwoImage.sd_setImage(with: URL(string: validImage), completed: { (image,error,cache,url) in
+                            cell.uiTeamTwoImage.sd_imageIndicator?.stopAnimatingIndicator()
+                        })
+                    }else{
+                        cell.uiTeamTwoImage.image = #imageLiteral(resourceName: "anonymousLogo")
                         cell.uiTeamTwoImage.sd_imageIndicator?.stopAnimatingIndicator()
-                    })
+                    }
                 }
             }
         }
@@ -339,3 +499,23 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     }
     
 }
+
+//extension LeaguesDetailsVC:UIScrollViewDelegate{
+//    func scrollViewDidScroll(_ uiScrollView: UIScrollView) {
+//        print("scrollView")
+//        if uiScrollView.bounds.contains(uiUpcomingCollectionView.frame) {
+//                                print("up")
+//            uiTableView.isScrollEnabled = false
+//
+//        }else{
+//            uiTableView.isScrollEnabled = true
+//        }
+//
+//        if uiScrollView == uiTableView {
+//                                print("down")
+//
+//            self.uiTableView.isScrollEnabled = (uiTableView.contentOffset.y > 0)
+//        }
+//
+//    }
+//}

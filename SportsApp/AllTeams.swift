@@ -22,7 +22,8 @@ struct AllTeams: Codable {
 
 // MARK: - Team
 struct Team: Codable {
-    let idTeam, strTeam, strTeamBadge: String
+    let idTeam, strTeam: String
+    let strTeamBadge:String?
     let strStadium:String
     let  strStadiumThumb:String?  // nullable
     let strLeague: String
