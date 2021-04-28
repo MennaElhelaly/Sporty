@@ -34,7 +34,6 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
     
     override func viewWillAppear(_ animated: Bool) {
         self.tabBarController?.tabBar.isHidden = true
-        print("wie")
         self.prepareScreenData()
     }
 
