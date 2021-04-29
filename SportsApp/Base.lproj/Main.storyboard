@@ -37,6 +37,21 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lub-bf-tNH">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="404" translatesAutoresizingMaskIntoConstraints="NO" id="7Ia-38-trN">
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                    </imageView>
+                                </subviews>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                                <constraints>
+                                    <constraint firstItem="7Ia-38-trN" firstAttribute="leading" secondItem="lub-bf-tNH" secondAttribute="leading" id="ZJR-2R-x0I"/>
+                                    <constraint firstAttribute="bottom" secondItem="7Ia-38-trN" secondAttribute="bottom" id="jnn-bl-LDF"/>
+                                    <constraint firstAttribute="trailing" secondItem="7Ia-38-trN" secondAttribute="trailing" id="kDg-0e-Oug"/>
+                                    <constraint firstItem="7Ia-38-trN" firstAttribute="top" secondItem="lub-bf-tNH" secondAttribute="top" id="wJn-SZ-4Cq"/>
+                                </constraints>
+                            </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c7m-hs-zb9">
                                 <rect key="frame" x="20" y="188" width="374" height="625"/>
                                 <color key="backgroundColor" red="0.25693415213933396" green="0.99510231598984766" blue="0.44806383937181954" alpha="0.0066085188356164387" colorSpace="custom" customColorSpace="sRGB"/>
@@ -100,11 +115,15 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="OlU-76-Cvp" firstAttribute="leading" secondItem="B2W-7t-FfN" secondAttribute="leading" constant="10" id="34I-pw-8AE"/>
+                            <constraint firstItem="lub-bf-tNH" firstAttribute="leading" secondItem="B2W-7t-FfN" secondAttribute="leading" id="3Dr-Wu-J3X"/>
                             <constraint firstItem="B2W-7t-FfN" firstAttribute="trailing" secondItem="c7m-hs-zb9" secondAttribute="trailing" constant="20" id="3OL-rj-Y8n"/>
+                            <constraint firstItem="B2W-7t-FfN" firstAttribute="trailing" secondItem="lub-bf-tNH" secondAttribute="trailing" id="4zX-OE-2zQ"/>
+                            <constraint firstItem="B2W-7t-FfN" firstAttribute="bottom" secondItem="lub-bf-tNH" secondAttribute="bottom" id="BoN-BN-4Qf"/>
                             <constraint firstItem="c7m-hs-zb9" firstAttribute="bottom" secondItem="B2W-7t-FfN" secondAttribute="bottom" id="dSe-SH-bes"/>
                             <constraint firstItem="c7m-hs-zb9" firstAttribute="top" secondItem="B2W-7t-FfN" secondAttribute="top" constant="100" id="eRd-gT-6Y7"/>
                             <constraint firstItem="a0s-rc-LpE" firstAttribute="leading" secondItem="B2W-7t-FfN" secondAttribute="leading" id="fVu-BG-FUh"/>
                             <constraint firstItem="B2W-7t-FfN" firstAttribute="trailing" secondItem="a0s-rc-LpE" secondAttribute="trailing" id="hG9-IS-Vun"/>
+                            <constraint firstItem="lub-bf-tNH" firstAttribute="top" secondItem="DMf-iZ-HEz" secondAttribute="top" id="hao-4t-aB7"/>
                             <constraint firstItem="B2W-7t-FfN" firstAttribute="bottom" secondItem="a0s-rc-LpE" secondAttribute="bottom" constant="550" id="lue-dw-9Uc"/>
                             <constraint firstItem="c7m-hs-zb9" firstAttribute="leading" secondItem="B2W-7t-FfN" secondAttribute="leading" constant="20" id="lzI-o4-Vs4"/>
                             <constraint firstItem="OlU-76-Cvp" firstAttribute="top" secondItem="B2W-7t-FfN" secondAttribute="top" constant="35" id="qH1-gy-HYc"/>
@@ -116,6 +135,8 @@
                     <navigationItem key="navigationItem" id="0So-wS-dIk"/>
                     <connections>
                         <outlet property="collectionView" destination="c7m-hs-zb9" id="Y1P-fj-w1G"/>
+                        <outlet property="titileView" destination="a0s-rc-LpE" id="RmI-9l-VYn"/>
+                        <outlet property="viewOffline" destination="lub-bf-tNH" id="xLB-BP-6Xd"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qB8-5k-zMC" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -954,6 +975,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="404" width="627" height="846"/>
         <image name="all" width="626" height="417"/>
         <image name="facebook" width="75" height="75"/>
         <image name="heart" width="24" height="24"/>

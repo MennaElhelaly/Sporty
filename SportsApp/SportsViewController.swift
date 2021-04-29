@@ -10,8 +10,11 @@ import UIKit
 import SDWebImage
 
 class SportsViewController: UIViewController , UICollectionViewDelegate,UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
+    @IBOutlet weak var titileView: UIView!
     @IBOutlet weak var collectionView: UICollectionView!
     
+    @IBOutlet weak var viewOffline: UIView!
+   
     var sportsArr = [Sport]()
     var viewModel:SportsViewModel = SportsViewModel()
     
@@ -30,6 +33,11 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     func prepareScreenData() {
         if Network.shared.isConnected{
             print("connected")
+            collectionView.isHidden = false
+            titileView.isHidden = false
+            viewOffline.isHidden = true
+            
+
             viewModel.bindSportsData = {
                 self.getDataFromAPI()
             }
@@ -44,9 +52,13 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
             }
         }else{
             print("not connected")
-            collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
-            sportsArr = [Sport]()
-            collectionView.reloadData()
+            viewOffline.isHidden = false
+            collectionView.isHidden = true
+            titileView.isHidden = true
+
+//            collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
+//            sportsArr = [Sport]()
+//            collectionView.reloadData()
         }
     }
     func handleDataError() {
