@@ -52,7 +52,6 @@ class SportsViewModel: NSObject {
                     self.dataError = true
                     return
                 }
-                print("data is not null \(data)")
                 self.sportsData = data
             }
         })

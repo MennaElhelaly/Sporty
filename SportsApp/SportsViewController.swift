@@ -36,7 +36,6 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
             
             viewModel.bindingConnectionError = {
                 self.handleConnectionError()
-                print(self.viewModel.connectionError!)
             }
             
             viewModel.bindingDataError = {
@@ -55,9 +54,8 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     func handleConnectionError() {
         if Network.shared.isConnected{
             print("url is not correct")
-            print(viewModel.bindingConnectionError)
         }else{
-            self.present(connectionIssue(), animated: true, completion: nil)
+            self.navigationController?.popToRootViewController(animated: true)
         }
     }
     func getDataFromAPI() {

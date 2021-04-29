@@ -59,7 +59,6 @@ class LeaguesViewModel: NSObject {
                     self.dataError = true
                     return
                 }
-                print("data is not null \(data)")
                 self.allLeaguesData  = data
                 
             }
@@ -71,7 +70,6 @@ class LeaguesViewModel: NSObject {
         for iteam in allLeaguesData{
             if iteam.strSport.rawValue == strSport {
                 matchedArray.append(iteam)
-                print("if")
             }
         }
         return matchedArray
@@ -86,14 +84,13 @@ class LeaguesViewModel: NSObject {
                  let msg = err.localizedDescription
                  self.connectionError = msg
              }else{  // testing on details view controller
-                 guard let data = LeagueById else{
-                     print("error in data")
-                     self.dataError = true
-                     return
-                 }
-                 print("data is not null \(data)")
-                 self.leagueDetails.append(data[0])
-             }
+                     guard let data = LeagueById else{
+                         print("error in data")
+                         self.dataError = true
+                         return
+                     }
+                     self.leagueDetails.append(data[0])
+                }
             }
         }
     }

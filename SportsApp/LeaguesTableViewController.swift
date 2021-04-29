@@ -39,9 +39,8 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
 
     func prepareScreenData() {
         if Network.shared.isConnected{
-            print("connected from prepare")
+            print("connected from leagues")
             viewModel.bindinLeaguesData = {
-                print("binding")
                 self.getLeagueData()
             }
             
@@ -60,7 +59,7 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
             }
             
         }else{
-            print("not connected")
+            print("not connected from leagues")
             leaguesTableOutlet.backgroundView = UIImageView(image: UIImage(named: "404")!)
             array = [LeaguesDataClass]()
             leaguesTableOutlet.reloadData()
@@ -79,7 +78,6 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
         }
     }
     func getLeagueData() {
-        print("getleagueData")
         let matched = viewModel.getMatchedLeagues(strSport: strSport)
         self.array = matched
         self.leaguesTableOutlet.reloadData()
@@ -87,47 +85,6 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
         viewModel.fetchLeaguesUrlAndImages(matchedArray: matched)
     }
     
-    func apiCalling() {
-//        webService.allLeaguesAPI(compilation: { (allLeagues) in
-//            if allLeagues.count == 0{
-//                print("show alert")
-//            }else{
-//                                
-//                for iteam in allLeagues{
-//                    if iteam.strSport.rawValue == self.strSport {
-//                        self.array.append(iteam)
-//                    }
-//                }
-//                DispatchQueue.main.async {
-//                    self.leaguesTableOutlet.reloadData()
-//                }
-//        
-//        
-//        
-//        
-//                var x = 0
-//                for i in self.array{
-//
-//                    self.webService.lookUpLeagueById(id: i.idLeague) { (LeagueById) in
-//                        if LeagueById.count == 0{
-//                            print("show alert")
-//                        }
-//                        else{
-//                            x = x + 1
-//                            print(x)
-//                            self.arrayLeagues.append(LeagueById[0] as! LeagueById)
-//                            DispatchQueue.main.async {
-//                                self.leaguesTableOutlet.reloadData()
-//                            }
-//                        }
-//
-//                    }
-//                }
-//                
-//
-//            }
-//        })
-    }
     
     override func numberOfSections(in tableView: UITableView) -> Int {
         
@@ -151,7 +108,9 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesTableViewCell;
         
-       
+        cell.leagueTitleImage.layer.cornerRadius = cell.leagueTitleImage.layer.frame.height / 2
+        cell.leagueTitleImage.layer.masksToBounds = true
+        cell.leagueTitleImage.layer.borderWidth = 0.5
         cell.leagueTitleImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.leagueTitleImage.sd_imageIndicator?.startAnimatingIndicator()
         if isSearching{
@@ -239,7 +198,6 @@ class LeaguesTableViewController: UITableViewController,UISearchBarDelegate{
         }
         else{
         for i in arrayLeagues{
-            print("this is i : \(i)")
             if i.idLeague == array[indexPath.row].idLeague{
 
                 let sendData = FavouriteData(idLeague: i.idLeague, strLeague: i.strLeague, strYoutube: i.strYoutube, strBadge: i.strBadge)

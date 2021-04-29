@@ -95,7 +95,7 @@ class WebService {
     
     
     public func allLeaguesAPI(compilation: @escaping ([LeaguesDataClass]? , Error?)->Void) {
-        print("upcoming+++++++++++++++++++++++++++++++++++++\(URLs.allLeaguesurl)")
+        print("allLeagues+++++++++++++++++++++++++++++++++++++\(URLs.allLeaguesurl)")
         
         AF.request(URLs.allLeaguesurl)
             .validate()
@@ -116,7 +116,6 @@ class WebService {
     
     public func lookUpLeagueById(id:String,compilation: @escaping ([LeagueById]? , Error?)->Void) {
         let url = "\(URLs.leagueDetailsById)\(id)"
-        print("lockup+++++++++++++++++++++++++++++++++++++\(url)")
         AF.request(url)
             .validate()
             .responseDecodable(of: LookUpLeague.self) { (response) in
