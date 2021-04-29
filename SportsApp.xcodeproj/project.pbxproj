@@ -28,6 +28,7 @@
 		AD6B664626332146007A0D26 /* CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B664526332146007A0D26 /* CoreData.swift */; };
 		AD6B664826332696007A0D26 /* FavouriteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD6B664726332696007A0D26 /* FavouriteData.swift */; };
 		AD75381A2636151700647BDB /* TeamTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD7538192636151700647BDB /* TeamTableViewController.swift */; };
+		ADA16B8B263A1260005340FC /* WebServiceTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADA16B8A263A125F005340FC /* WebServiceTest.swift */; };
 		ADBF0B3C262F89BA007E7EBF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF0B3B262F89BA007E7EBF /* AppDelegate.swift */; };
 		ADBF0B3E262F89BA007E7EBF /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADBF0B3D262F89BA007E7EBF /* SceneDelegate.swift */; };
 		ADBF0B43262F89BA007E7EBF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADBF0B41262F89BA007E7EBF /* Main.storyboard */; };
@@ -83,6 +84,7 @@
 		AD6B664526332146007A0D26 /* CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreData.swift; sourceTree = "<group>"; };
 		AD6B664726332696007A0D26 /* FavouriteData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavouriteData.swift; sourceTree = "<group>"; };
 		AD7538192636151700647BDB /* TeamTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamTableViewController.swift; sourceTree = "<group>"; };
+		ADA16B8A263A125F005340FC /* WebServiceTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebServiceTest.swift; sourceTree = "<group>"; };
 		ADBF0B38262F89BA007E7EBF /* SportsApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SportsApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		ADBF0B3B262F89BA007E7EBF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ADBF0B3D262F89BA007E7EBF /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -374,6 +376,7 @@
 			children = (
 				ADBF0B55262F89E2007E7EBF /* SportsAppTests.swift */,
 				ADBF0B57262F89E3007E7EBF /* Info.plist */,
+				ADA16B8A263A125F005340FC /* WebServiceTest.swift */,
 			);
 			path = SportsAppTests;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ADA16B8B263A1260005340FC /* WebServiceTest.swift in Sources */,
 				ADBF0B56262F89E2007E7EBF /* SportsAppTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

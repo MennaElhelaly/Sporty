@@ -18,7 +18,7 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.title = "ALL SPORTS"
+       // navigationItem.title = "ALL SPORTS"
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -87,7 +87,7 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         cell.sportImge.sd_setImage(with: url) { (image, error, cache, url) in
             cell.sportImge.sd_imageIndicator?.stopAnimatingIndicator()
         }
-        cell.layer.cornerRadius = 35
+        //cell.layer.cornerRadius = 35
         cell.sportImge.layer.cornerRadius = 35
         
         return cell
