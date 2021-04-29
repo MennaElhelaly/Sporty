@@ -23,8 +23,6 @@ class WebService {
                 switch response.result {
                 
                 case .success( _):
-                    print("sucess")
-//                    guard let arrayOfUpcomings = response.value?.events else { return }
                     completion(response.value?.events,nil)
                     
                 case .failure(let error):
@@ -45,7 +43,6 @@ class WebService {
                 switch response.result {
                 
                 case .success( _):
-                    print("sucess")
                     guard let arrayOfTeams = response.value?.teams else { return }
                     completion(arrayOfTeams,nil)
                     
@@ -65,7 +62,6 @@ class WebService {
                 switch response.result {
                 
                 case .success( _):
-                    print("sucess")
                     guard let arrayOfEvents = response.value?.events else { return }
                     compilation(arrayOfEvents,nil)
                     
@@ -85,7 +81,6 @@ class WebService {
                 switch response.result {
                 
                 case .success( _):
-                    print("sucess")
                     guard let arrayOfSports = response.value?.sports else { return }
                     compilation(arrayOfSports,nil)
                     
@@ -108,7 +103,6 @@ class WebService {
                 switch response.result {
                 
                 case .success( _):
-                    print("sucess")
                     guard let arrayOfSports = response.value?.leagues else { return }
                     compilation(arrayOfSports,nil)
                     
@@ -120,7 +114,6 @@ class WebService {
             }
     }
     
-    
     public func lookUpLeagueById(id:String,compilation: @escaping ([LeagueById]? , Error?)->Void) {
         let url = "\(URLs.leagueDetailsById)\(id)"
         print("lockup+++++++++++++++++++++++++++++++++++++\(url)")
@@ -130,7 +123,6 @@ class WebService {
                 switch response.result {
                 
                 case .success( _):
-                    print("sucess")
                     guard let arrayOfSports = response.value?.leagues else { return }
                     compilation(arrayOfSports,nil)
                     

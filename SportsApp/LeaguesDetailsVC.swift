@@ -349,8 +349,6 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
         
         if let scoreOne = lastArray[indexPath.section].intHomeScore{
             if let scoreTwo = lastArray[indexPath.section].intAwayScore{
-                print("score two\(scoreTwo)")
-                print("score One\(scoreOne)")
                 cell.uiTeamOneScore.text = scoreOne
                 cell.uiTeamTwoScore.text = scoreTwo
             }else{

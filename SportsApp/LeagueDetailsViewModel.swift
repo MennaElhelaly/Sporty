@@ -137,9 +137,7 @@ class LeagueDetailsViewModel: NSObject {
             if let err = error{
                 let msg = err.localizedDescription
                 self.upcomingConnection = msg
-                print("errrrr")
             }else{
-                print("sssss")
                 guard let validArrayOfEvents = arrayOfEvents else {
                     print("nil")
                     if Network.shared.isConnected{
@@ -151,9 +149,7 @@ class LeagueDetailsViewModel: NSObject {
 
                     return
                 }
-                print(validArrayOfEvents.count)
-                print("addddd")
-                
+
                 
                 let arr = self.getValidEvents(array: validArrayOfEvents)
                 
