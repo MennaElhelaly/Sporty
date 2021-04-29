@@ -17,8 +17,6 @@ class LeagueDetailsViewModel: NSObject {
     var strSeason:String!
     var round:String = "0"
     
-    
-    
     var allTeamsData:[Team]!{
         didSet{
             self.bindingAllTeams()
@@ -80,7 +78,9 @@ class LeagueDetailsViewModel: NSObject {
     override init() {
         super.init()
         leagueDetailsService = WebService()
+
         database = CoreData.getInstance()
+
     }
     
     func getAllTeams(leagueId:String) {
@@ -138,6 +138,7 @@ class LeagueDetailsViewModel: NSObject {
                 let msg = err.localizedDescription
                 self.upcomingConnection = msg
             }else{
+
                 guard let validArrayOfEvents = arrayOfEvents else {
                     print("nil")
                     if Network.shared.isConnected{
@@ -149,7 +150,6 @@ class LeagueDetailsViewModel: NSObject {
 
                     return
                 }
-
                 
                 let arr = self.getValidEvents(array: validArrayOfEvents)
                 

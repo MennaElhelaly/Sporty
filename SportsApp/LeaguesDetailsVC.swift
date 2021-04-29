@@ -124,6 +124,7 @@ class LeaguesDetailsVC: UIViewController{
     
     func receiveUpcomintEvents(){
    
+
         guard let events = viewModel.upcomingEvents else {
             print("guard let recieve upcoming")
             return
@@ -145,7 +146,7 @@ class LeaguesDetailsVC: UIViewController{
         swipeRight.direction = .right
         self.view.addGestureRecognizer(swipeRight)
     }
-   
+
     func showMarqueeOnly()  {
         loadingLbl.isHidden = false
         loadingLbl.type = .continuous
@@ -155,7 +156,6 @@ class LeaguesDetailsVC: UIViewController{
         lastLbl.isHidden = true
         teamsLbl.isHidden = true
     }
-
     
     func setNavigationItem() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: UIImage(named: "heart"), style: .plain, target: self, action: #selector(addTapped))
@@ -176,6 +176,7 @@ class LeaguesDetailsVC: UIViewController{
             viewModel.deleteItem(leagueId:leagueData.idLeague)
             ProgressHUD.showSuccess("\(leagueData.strLeague) deleted from your Favourites")
             self.navigationItem.rightBarButtonItem?.tintColor = #colorLiteral(red: 0.01680417731, green: 0.1983509958, blue: 1, alpha: 1)
+
         }else{  // league is not favourite, then we will save it as favourite
             viewModel.addToFavourite(leagueData: leagueData)
             ProgressHUD.showSuccess("\(leagueData.strLeague) added to your Favourites")
@@ -368,3 +369,23 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
     }
     
 }
+
+//extension LeaguesDetailsVC:UIScrollViewDelegate{
+//    func scrollViewDidScroll(_ uiScrollView: UIScrollView) {
+//        print("scrollView")
+//        if uiScrollView.bounds.contains(uiUpcomingCollectionView.frame) {
+//                                print("up")
+//            uiTableView.isScrollEnabled = false
+//
+//        }else{
+//            uiTableView.isScrollEnabled = true
+//        }
+//
+//        if uiScrollView == uiTableView {
+//                                print("down")
+//
+//            self.uiTableView.isScrollEnabled = (uiTableView.contentOffset.y > 0)
+//        }
+//
+//    }
+//}
