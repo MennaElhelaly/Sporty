@@ -11,6 +11,7 @@ import SDWebImage
 
 class TeamTableViewController: UITableViewController {
     
+    @IBOutlet weak var offlineView: UIView!
     @IBOutlet weak var firstImage: UIImageView!
     @IBOutlet weak var secondImage: UIImageView!
     
@@ -29,10 +30,13 @@ class TeamTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         if Network.shared.isConnected{
+            offlineView.isHidden = true
             print("online")
             self.updateUI()
         }else{
             print("offline")
+            offlineView.isHidden = false
+
         }
         
         
