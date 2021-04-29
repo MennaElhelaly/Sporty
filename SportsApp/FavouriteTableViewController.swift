@@ -82,7 +82,7 @@ class FavouriteTableViewController: UITableViewController {
                     cell.youtubeBtn.isEnabled = true
                 }
                 cell.youtubeBtn.isHidden = false
-                let leagesVC = self.storyboard?.instantiateViewController(identifier: "LeaguesTableViewController") as! LeaguesTableViewController
+                let leagesVC = self.storyboard?.instantiateViewController(identifier: "LeaguesTableViewController") as! LeaguesViewController
                 cell.youtubeBtn.addTarget(leagesVC, action: #selector(leagesVC.youtubeTapped), for: .touchUpInside)
                
             }

@@ -92,7 +92,7 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let second :LeaguesTableViewController = (self.storyboard?.instantiateViewController(withIdentifier: "LeaguesTableViewController")) as! LeaguesTableViewController
+        let second :LeaguesViewController = (self.storyboard?.instantiateViewController(withIdentifier: "LeaguesTableViewController")) as! LeaguesViewController
         second.strSport = sportsArr[indexPath.row].strSport
         self.navigationController?.pushViewController(second, animated: true)
     }
