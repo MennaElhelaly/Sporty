@@ -37,7 +37,7 @@ class SportsViewModel: NSObject {
     override init() {
         super .init()
         self.sportsService = WebService()
-        self.fetchSportsData()
+       // self.fetchSportsData()
     }
 
     func fetchSportsData (){

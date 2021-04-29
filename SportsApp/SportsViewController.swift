@@ -33,10 +33,11 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     func prepareScreenData() {
         if Network.shared.isConnected{
             print("connected")
+            viewModel.fetchSportsData()
             viewOffline.isHidden = true
             titileView.isHidden = false
          //   collectionView.isHidden = false
-            collectionView.reloadData()
+           
             
 
             viewModel.bindSportsData = {
@@ -51,7 +52,7 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
                 self.handleDataError()
             }
         }else{
-            print("not connected")
+            print("not connected from home")
             viewOffline.isHidden = false
           //  collectionView.isHidden = true
             titileView.isHidden = true

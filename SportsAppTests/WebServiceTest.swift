@@ -62,47 +62,53 @@ class WebServiceTest: XCTestCase {
    func testgetAllTeams() {
        let expecttionObj = expectation(description: "Wait for response")
 
-    webService.getAllTeamsInLeagueByLeagueId(id: "4329", completion: { (arrayOfTeams) in // load all teams in league
+    webService.getAllTeamsInLeagueByLeagueId(id: "4329", completion: { (arrayOfTeams,error)  in // load all teams in league
            
-           guard let validArrayOfTeamse = arrayOfTeams else {
-                   print("response issue , but not inernet all teams")
-                 XCTFail()
-               return
+          if let err:Error = error {
+               XCTFail()
+           }else{  // testing on details view controller
+               guard let data = arrayOfTeams else{
+                   print("error in data")
+                   return
+               }
+               expecttionObj.fulfill()
+               XCTAssertEqual(arrayOfTeams?.count, 24)
            }
-          
-           expecttionObj.fulfill()
-           XCTAssertEqual(arrayOfTeams?.count, 24)
-            
-         
        })
     waitForExpectations(timeout: 5)
 
    }
     func testGetUpcoming(){
         let expecttionObj = expectation(description: "Wait for response")
-        webService.getUpcomingEvents(id: "4329", strSeason: "2020-2021", round: "38") { (arrayOfUpcomings) in
-            guard let upcoming = arrayOfUpcomings else{
-                print("upcoming response")
-                   XCTFail()
-                
-                return
+        webService.getUpcomingEvents(id: "4329", strSeason: "2020-2021", round: "38") { (arrayOfUpcomings,error) in
+            if let err:Error = error {
+                XCTFail()
+            }else{  // testing on details view controller
+                guard let data = arrayOfUpcomings else{
+                    print("error in data")
+                    return
+                }
+                expecttionObj.fulfill()
+                XCTAssertEqual(arrayOfUpcomings?.count, 12)
             }
-            expecttionObj.fulfill()
-            XCTAssertEqual(arrayOfUpcomings?.count, 12)
         }
         waitForExpectations(timeout: 5)
 
     }
     func testGetLatestEvents(){
         let expecttionObj = expectation(description: "Wait for response")
-        webService.getLatestInLeagueById(id:"4329") { (arrayOfEvents) in // load previous events (tableview)
-            guard let validArrayOfEvents = arrayOfEvents else {
+        webService.getLatestInLeagueById(id:"4329") { (arrayOfEvents,error) in // load previous events (tableview)
+            if let err:Error = error {
                 XCTFail()
-
-                return
+            }else{  // testing on details view controller
+                guard let data = arrayOfEvents else{
+                    print("error in data")
+                    return
+                }
+                expecttionObj.fulfill()
+                XCTAssertEqual(arrayOfEvents?.count, 15)
             }
-            expecttionObj.fulfill()
-            XCTAssertEqual(arrayOfEvents?.count, 15)
+            
         }
         waitForExpectations(timeout: 5)
 
