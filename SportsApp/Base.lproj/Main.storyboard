@@ -736,9 +736,6 @@
                             <searchBar contentMode="redraw" translatesAutoresizingMaskIntoConstraints="NO" id="VCW-N7-S6q">
                                 <rect key="frame" x="0.0" y="44" width="414" height="56"/>
                                 <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="3Ee-dk-HfG" id="JfI-IT-q4c"/>
-                                </connections>
                             </searchBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="rY9-ph-tva">
                                 <rect key="frame" x="0.0" y="105" width="414" height="757"/>
@@ -838,6 +835,7 @@
                     </view>
                     <connections>
                         <outlet property="leaguesTableOutlet" destination="rY9-ph-tva" id="AJg-e3-TwC"/>
+                        <outlet property="uiSearch" destination="VCW-N7-S6q" id="LDB-n3-LZg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="QHU-ed-jre" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

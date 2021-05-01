@@ -9,14 +9,16 @@ import UIKit
 import Alamofire
 import SDWebImage
 import SkeletonView
-
-class LeaguesViewController: UIViewController,UISearchBarDelegate{
+import RxCocoa
+import RxSwift
+class LeaguesViewController: UIViewController{
     
     @IBOutlet private var leaguesTableOutlet: UITableView!
+    @IBOutlet weak var uiSearch: UISearchBar!
     
     
     let webService = WebService();
-    
+    var bag:DisposeBag?
     var strSport:String!;
     var isSearching = false
     var searchedArray:[Leagues]!
@@ -26,9 +28,12 @@ class LeaguesViewController: UIViewController,UISearchBarDelegate{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bag = DisposeBag()
         viewModel = LeaguesViewModel()
         leaguesTableOutlet.showAnimatedGradientSkeleton()
         viewModel.fetchAllLeagues()
+        
+        self.rxSearch()
         
     }
     
@@ -37,6 +42,29 @@ class LeaguesViewController: UIViewController,UISearchBarDelegate{
         self.prepareScreenData()
     }
     
+    func rxSearch() {
+        uiSearch.rx.text.orEmpty.throttle(.seconds(3), scheduler: MainScheduler.instance).distinctUntilChanged().subscribe(onNext: { [weak self] query in
+            print(query)
+            guard let self = self else {return}
+            if self.viewModel.isSearchTextEmpty(text:query){
+                self.isSearching = false
+                self.leaguesTableOutlet.reloadData()
+            }else{
+                self.isSearching = true
+                self.searchedArray = [Leagues]();
+                for iteam in self.viewModel.matchedLeagues {
+                    
+                    if iteam.strLeague.lowercased().contains(query.lowercased()) {
+                        
+                        self.searchedArray.append(iteam)
+                    }
+                    self.leaguesTableOutlet.reloadData()
+                }
+                print(self.searchedArray.count)
+                
+            }
+        }).disposed(by: bag!)
+    }
     func prepareScreenData() {
         if viewModel.isConnectedToNetwork(){
             
@@ -101,27 +129,6 @@ class LeaguesViewController: UIViewController,UISearchBarDelegate{
     @objc func youtubeTapped(sender:UIButton){
         let url = sender.accessibilityValue!        
         viewModel.openYoutube(url: url)
-    }
-    
-    
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if viewModel.isSearchTextEmpty(text:searchText){
-            isSearching = false
-            leaguesTableOutlet.reloadData()
-        }else{
-            isSearching = true
-            searchedArray = [Leagues]();
-            for iteam in viewModel.matchedLeagues {
-                if iteam.strLeague.lowercased().contains(searchText.lowercased()) {
-                    
-                    searchedArray.append(iteam)
-                }
-                leaguesTableOutlet.reloadData()
-            }
-            print(searchedArray.count)
-            
-        }
     }
 }
 

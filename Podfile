@@ -11,5 +11,6 @@ target 'SportsApp' do
   pod 'SDWebImage', '~> 5.0'
   pod 'MarqueeLabel'
   pod 'SkeletonView'
-
+  pod 'RxSwift', '~> 5'
+  pod 'RxCocoa', '~> 5'
 end
