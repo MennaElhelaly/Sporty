@@ -12,15 +12,16 @@ import SkeletonView
 
 class LeaguesViewController: UIViewController,UISearchBarDelegate{
     
-    @IBOutlet var leaguesTableOutlet: UITableView!
+    @IBOutlet private var leaguesTableOutlet: UITableView!
     
     
     let webService = WebService();
-    var array:[LeaguesDataClass] = [LeaguesDataClass]();
-    var arrayLeagues:[LeagueById] = [LeagueById]()
+    var array:[Leagues] = [Leagues]();
+    var arrayLeagues:[LeagueDetails] = [LeagueDetails]()
+    
     var strSport:String!;
     var isSearching = false
-    var searchedArray:[LeaguesDataClass]!
+    var searchedArray:[Leagues]!
     
     let searchController = UISearchController()
     var viewModel:LeaguesViewModel!
@@ -56,11 +57,8 @@ class LeaguesViewController: UIViewController,UISearchBarDelegate{
             
             viewModel.bindingLeagueDetails = {
                 self.arrayLeagues = self.viewModel.leagueDetails
-                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     self.leaguesTableOutlet.hideSkeleton()
                 }
                 self.leaguesTableOutlet.reloadData()
@@ -71,7 +69,7 @@ class LeaguesViewController: UIViewController,UISearchBarDelegate{
         }else{
             print("not connected from leagues")
             leaguesTableOutlet.backgroundView = UIImageView(image: UIImage(named: "404")!)
-            array = [LeaguesDataClass]()
+            array = [Leagues]()
             leaguesTableOutlet.reloadData()
         }
     }
@@ -122,7 +120,7 @@ class LeaguesViewController: UIViewController,UISearchBarDelegate{
             
             
             print(searchText)
-            searchedArray = [LeaguesDataClass]();
+            searchedArray = [Leagues]();
             for iteam in array {
                 if iteam.strLeague.lowercased().contains(searchText.lowercased()) {
                     

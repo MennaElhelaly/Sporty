@@ -12,13 +12,13 @@ class LeaguesViewModel: NSObject {
     
     var leaguesService :WebService!
     
-    var allLeaguesData :[LeaguesDataClass]! {
+    var allLeaguesData :[Leagues]! {
         didSet{
             self.bindinLeaguesData()
         }
     }
     
-    var leagueDetails: [LeagueById]!{
+    var leagueDetails: [LeagueDetails]!{
         didSet{
             self.bindingLeagueDetails()
         }
@@ -48,7 +48,7 @@ class LeaguesViewModel: NSObject {
     }
     
     func fetchAllLeagues() {
-        leaguesService.allLeaguesAPI(compilation: { (sportsData,error) in
+        leaguesService.allLeaguesAPI(completion: { (sportsData,error) in
                
             if let err:Error = error {
                 let msg = err.localizedDescription
@@ -65,8 +65,8 @@ class LeaguesViewModel: NSObject {
         })
     }
     
-    func getMatchedLeagues(strSport:String) -> [LeaguesDataClass] {
-        var matchedArray = [LeaguesDataClass]()
+    func getMatchedLeagues(strSport:String) -> [Leagues] {
+        var matchedArray = [Leagues]()
         for iteam in allLeaguesData{
             if iteam.strSport.rawValue == strSport {
                 matchedArray.append(iteam)
@@ -75,8 +75,8 @@ class LeaguesViewModel: NSObject {
         return matchedArray
     }
     
-    func fetchLeaguesUrlAndImages(matchedArray: [LeaguesDataClass] ){
-        leagueDetails = [LeagueById]()
+    func fetchLeaguesUrlAndImages(matchedArray: [Leagues] ){
+        leagueDetails = [LeagueDetails]()
         
         for i in matchedArray{
             leaguesService.lookUpLeagueById(id: i.idLeague) { (LeagueById,error) in

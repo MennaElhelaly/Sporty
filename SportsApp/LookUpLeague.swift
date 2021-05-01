@@ -8,9 +8,9 @@
 
 import Foundation
 struct LookUpLeague: Codable {
-    let leagues: [LeagueById]
+    let leagues: [LeagueDetails]
 }
-struct LeagueById: Codable {
+struct LeagueDetails: Codable {
     let idLeague:String
     let strSport:String
     let strLeague:String
