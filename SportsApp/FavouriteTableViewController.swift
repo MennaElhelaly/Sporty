@@ -19,7 +19,7 @@ class FavouriteTableViewController: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        indecator = UIActivityIndicatorView(style:.gray)
+        indecator = UIActivityIndicatorView(style:.medium)
         indecator?.center = view.center
         indecator?.startAnimating()
         view.addSubview(indecator!)
