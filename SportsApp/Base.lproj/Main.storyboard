@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="IVT-Dt-9SS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Tf8-Dd-0Se">
     <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
@@ -13,7 +13,7 @@
         <!--Sports View Controller-->
         <scene sceneID="vlL-6z-pF6">
             <objects>
-                <viewController storyboardIdentifier="SportsViewController" id="2YO-dD-uuE" customClass="SportsViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SportsViewController" modalTransitionStyle="partialCurl" id="2YO-dD-uuE" customClass="SportsViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DMf-iZ-HEz">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -148,7 +148,8 @@
         <!--Tab Bar Controller-->
         <scene sceneID="cIP-si-TWe">
             <objects>
-                <tabBarController id="IVT-Dt-9SS" sceneMemberID="viewController">
+                <tabBarController modalPresentationStyle="fullScreen" id="IVT-Dt-9SS" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="jAE-Bi-dwa"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="dpG-V0-JDb">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -401,8 +402,7 @@
                                                                 <constraint firstItem="Gcn-pX-wDJ" firstAttribute="centerY" secondItem="xse-yx-skd" secondAttribute="centerY" id="wWC-qE-5Of"/>
                                                             </constraints>
                                                         </collectionViewCellContentView>
-                                                        <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-
+                                                        <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                         <size key="customSize" width="329" height="190"/>
                                                         <connections>
                                                             <outlet property="collectionViewCell" destination="ePg-3X-wXh" id="mf9-6w-BKE"/>
@@ -448,8 +448,7 @@
                                                                     <rect key="frame" x="140" y="54" width="102" height="31"/>
                                                                     <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                                                     <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <color key="highlightedColor" systemColor="systemBlueColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-
+                                                                    <color key="highlightedColor" systemColor="systemBlueColor"/>
                                                                     <color key="shadowColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="10" translatesAutoresizingMaskIntoConstraints="NO" id="sng-4i-35M" customClass="MarqueeLabel" customModule="MarqueeLabel">
@@ -537,8 +536,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                             </subviews>
-                                                            <color key="backgroundColor" systemColor="systemGray5Color" red="0.8980392157" green="0.8980392157" blue="0.91764705879999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-
+                                                            <color key="backgroundColor" systemColor="systemGray5Color"/>
                                                             <constraints>
                                                                 <constraint firstItem="FdA-vV-nKg" firstAttribute="width" secondItem="cOH-Ux-xD6" secondAttribute="width" multiplier="0.15" id="20z-a2-6J7"/>
                                                                 <constraint firstItem="CF9-Nq-bDh" firstAttribute="leading" secondItem="cOH-Ux-xD6" secondAttribute="leadingMargin" constant="15" id="22V-Zy-M6z"/>
@@ -1042,6 +1040,36 @@
             </objects>
             <point key="canvasLocation" x="1311.5942028985507" y="1275.6696428571429"/>
         </scene>
+        <!--SplashVC-->
+        <scene sceneID="qTp-pl-Cax">
+            <objects>
+                <viewController modalTransitionStyle="partialCurl" id="Tf8-Dd-0Se" customClass="SplashVC" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="bKH-Lq-Za5">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wzn-Kh-fKQ">
+                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="yVd-9V-XM8"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="yVd-9V-XM8" firstAttribute="bottom" secondItem="wzn-Kh-fKQ" secondAttribute="bottom" id="8br-3n-cLX"/>
+                            <constraint firstItem="wzn-Kh-fKQ" firstAttribute="top" secondItem="yVd-9V-XM8" secondAttribute="top" id="khT-42-mhx"/>
+                            <constraint firstItem="wzn-Kh-fKQ" firstAttribute="leading" secondItem="yVd-9V-XM8" secondAttribute="leading" id="uEy-s6-muf"/>
+                            <constraint firstItem="yVd-9V-XM8" firstAttribute="trailing" secondItem="wzn-Kh-fKQ" secondAttribute="trailing" id="w9d-IF-Y9l"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="animationView" destination="wzn-Kh-fKQ" id="4a6-yK-pIk"/>
+                        <segue destination="IVT-Dt-9SS" kind="presentation" identifier="segueToNextScreen" id="efc-Za-ziS"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HSy-2d-zkc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-499" y="-400"/>
+        </scene>
     </scenes>
     <designables>
         <designable name="6Nd-SH-JOy">
@@ -1070,7 +1098,7 @@
         </designable>
     </designables>
     <resources>
-        <image name="404" width="627" height="846"/>
+        <image name="404" width="700" height="1400"/>
         <image name="all" width="626" height="417"/>
         <image name="facebook" width="75" height="75"/>
         <image name="heart" width="24" height="24"/>
@@ -1086,6 +1114,9 @@
         </systemColor>
         <systemColor name="systemBlueColor">
             <color red="0.0" green="0.47843137254901963" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+        <systemColor name="systemGray5Color">
+            <color red="0.89803921568627454" green="0.89803921568627454" blue="0.91764705882352937" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
