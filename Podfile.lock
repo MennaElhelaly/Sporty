@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (5.4.3)
+  - lottie-ios (3.2.2)
   - MarqueeLabel (4.0.5)
   - ProgressHUD (2.70)
   - RxCocoa (5.1.1):
@@ -15,6 +16,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire (~> 5.2)
+  - lottie-ios
   - MarqueeLabel
   - ProgressHUD
   - RxCocoa (~> 5)
@@ -25,6 +27,7 @@ DEPENDENCIES:
 SPEC REPOS:
   trunk:
     - Alamofire
+    - lottie-ios
     - MarqueeLabel
     - ProgressHUD
     - RxCocoa
@@ -35,6 +38,7 @@ SPEC REPOS:
 
 SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
+  lottie-ios: a033bb989eea77d9f99cc4e2bbdd3788229761ad
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   ProgressHUD: e603e8b8622c47d8818b9fb38b3cfe9d3e7ca421
   RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
@@ -43,6 +47,6 @@ SPEC CHECKSUMS:
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SkeletonView: cac18a3ac4f893b09d99e65072d806ef08377aae
 
-PODFILE CHECKSUM: c8532b1ccffddaa1166649a84aa2ec058fe06262
+PODFILE CHECKSUM: affdc966fba87ba6542d6f595f2fda8bdf471829
 
 COCOAPODS: 1.10.1

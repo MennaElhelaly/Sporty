@@ -43,6 +43,8 @@
 		ED70ADE12630C52900D36EA0 /* LeaguesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED70ADE02630C52900D36EA0 /* LeaguesViewController.swift */; };
 		ED70ADE62630C56500D36EA0 /* Leagues.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED70ADE52630C56500D36EA0 /* Leagues.swift */; };
 		ED73E5B126323E77003B4327 /* LookUpLeague.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED73E5B026323E77003B4327 /* LookUpLeague.swift */; };
+		EDA27DF326406BF100C9E305 /* LuanchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA27DF226406BF100C9E305 /* LuanchScreenViewController.swift */; };
+		EDA27DF826406CB500C9E305 /* animation.json in Resources */ = {isa = PBXBuildFile; fileRef = EDA27DF726406CB500C9E305 /* animation.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -107,6 +109,8 @@
 		ED70ADE02630C52900D36EA0 /* LeaguesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeaguesViewController.swift; sourceTree = "<group>"; };
 		ED70ADE52630C56500D36EA0 /* Leagues.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Leagues.swift; sourceTree = "<group>"; };
 		ED73E5B026323E77003B4327 /* LookUpLeague.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LookUpLeague.swift; sourceTree = "<group>"; };
+		EDA27DF226406BF100C9E305 /* LuanchScreenViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LuanchScreenViewController.swift; sourceTree = "<group>"; };
+		EDA27DF726406CB500C9E305 /* animation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = animation.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -218,6 +222,7 @@
 		2796CE82262F9CEF00F42438 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				EDA27DF126406BD000C9E305 /* LuanchScreen */,
 				2748AD6D2635070C00CA8B16 /* HomeScreen */,
 				ED70ADD62630C35800D36EA0 /* LeaguesScreen */,
 				2748AD762635079A00CA8B16 /* FavouriteScreen */,
@@ -417,6 +422,15 @@
 			name = LeaguesScreen;
 			sourceTree = "<group>";
 		};
+		EDA27DF126406BD000C9E305 /* LuanchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				EDA27DF726406CB500C9E305 /* animation.json */,
+				EDA27DF226406BF100C9E305 /* LuanchScreenViewController.swift */,
+			);
+			name = LuanchScreen;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -525,6 +539,7 @@
 			files = (
 				ADBF0B4B262F89E1007E7EBF /* LaunchScreen.storyboard in Resources */,
 				ADBF0B48262F89E1007E7EBF /* Assets.xcassets in Resources */,
+				EDA27DF826406CB500C9E305 /* animation.json in Resources */,
 				ADBF0B43262F89BA007E7EBF /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -606,6 +621,7 @@
 				27ECFE572638A61500F04265 /* SportsViewModel.swift in Sources */,
 				2726DA0C263077330086A0F1 /* Last.swift in Sources */,
 				2770AA372630A3B50015ED83 /* AllSports.swift in Sources */,
+				EDA27DF326406BF100C9E305 /* LuanchScreenViewController.swift in Sources */,
 				ADBF0B3C262F89BA007E7EBF /* AppDelegate.swift in Sources */,
 				ADBF0B46262F89BA007E7EBF /* SportsApp.xcdatamodeld in Sources */,
 				27D72AF32639D74E0008BA25 /* LeagueDetailsViewModel.swift in Sources */,
