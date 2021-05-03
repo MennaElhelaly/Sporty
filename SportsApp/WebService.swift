@@ -94,7 +94,7 @@ class WebService {
     
     
     
-    public func allLeaguesAPI(compilation: @escaping ([LeaguesDataClass]? , Error?)->Void) {
+    public func allLeaguesAPI(completion: @escaping ([Leagues]? , Error?)->Void) {
         print("allLeagues+++++++++++++++++++++++++++++++++++++\(URLs.allLeaguesurl)")
         
         AF.request(URLs.allLeaguesurl)
@@ -104,17 +104,17 @@ class WebService {
                 
                 case .success( _):
                     guard let arrayOfSports = response.value?.leagues else { return }
-                    compilation(arrayOfSports,nil)
+                    completion(arrayOfSports,nil)
                     
                 case .failure(let error):
                     print("allLeagues error")
                     print(error.localizedDescription)
-                    compilation(nil,error)
+                    completion(nil,error)
                 }
             }
     }
     
-    public func lookUpLeagueById(id:String,compilation: @escaping ([LeagueById]? , Error?)->Void) {
+    public func lookUpLeagueById(id:String,compilation: @escaping ([LeagueDetails]? , Error?)->Void) {
         let url = "\(URLs.leagueDetailsById)\(id)"
         AF.request(url)
             .validate()

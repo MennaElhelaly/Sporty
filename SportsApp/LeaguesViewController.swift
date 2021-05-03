@@ -9,27 +9,31 @@ import UIKit
 import Alamofire
 import SDWebImage
 import SkeletonView
-
-class LeaguesViewController: UIViewController,UISearchBarDelegate{
+import RxCocoa
+import RxSwift
+class LeaguesViewController: UIViewController{
     
-    @IBOutlet var leaguesTableOutlet: UITableView!
+    @IBOutlet private var leaguesTableOutlet: UITableView!
+    @IBOutlet weak var uiSearch: UISearchBar!
     
     
     let webService = WebService();
-    var array:[LeaguesDataClass] = [LeaguesDataClass]();
-    var arrayLeagues:[LeagueById] = [LeagueById]()
+    var bag:DisposeBag?
     var strSport:String!;
     var isSearching = false
-    var searchedArray:[LeaguesDataClass]!
+    var searchedArray:[Leagues]!
     
     let searchController = UISearchController()
     var viewModel:LeaguesViewModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        leaguesTableOutlet.showAnimatedGradientSkeleton()
+        bag = DisposeBag()
         viewModel = LeaguesViewModel()
+        leaguesTableOutlet.showAnimatedGradientSkeleton()
         viewModel.fetchAllLeagues()
+        
+        self.rxSearch()
         
     }
     
@@ -38,49 +42,79 @@ class LeaguesViewController: UIViewController,UISearchBarDelegate{
         self.prepareScreenData()
     }
     
+    func rxSearch() {
+        uiSearch.rx.text.orEmpty.throttle(.seconds(3), scheduler: MainScheduler.instance).distinctUntilChanged().subscribe(onNext: { [weak self] query in
+            print(query)
+            guard let self = self else {return}
+            if self.viewModel.isSearchTextEmpty(text:query){
+                self.isSearching = false
+                self.leaguesTableOutlet.reloadData()
+            }else{
+                self.isSearching = true
+                self.searchedArray = [Leagues]();
+                for iteam in self.viewModel.matchedLeagues {
+                    
+                    if iteam.strLeague.lowercased().contains(query.lowercased()) {
+                        
+                        self.searchedArray.append(iteam)
+                    }
+                    self.leaguesTableOutlet.reloadData()
+                }
+                print(self.searchedArray.count)
+                
+            }
+        }).disposed(by: bag!)
+    }
     func prepareScreenData() {
-        if Network.shared.isConnected{
-            print("connected from leagues")
-            viewModel.bindinLeaguesData = {
+        if viewModel.isConnectedToNetwork(){
+            
+            viewModel.bindinLeaguesData = { [weak self] in
+                guard let self = self  else {return}
                 self.getLeagueData()
             }
             
-            viewModel.bindingConnectionError = {
+            viewModel.bindingConnectionError = { [weak self] in
+                guard let self = self  else {return}
                 self.handleConnectionError()
-                print(self.viewModel.connectionError!)
             }
             
-            viewModel.bindingDataError = {
+            viewModel.bindingDataError = { [weak self] in
+                guard let self = self  else {return}
                 self.handleDataError()
             }
             
-            viewModel.bindingLeagueDetails = {
-                self.arrayLeagues = self.viewModel.leagueDetails
-                
-//                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-//                }
-                
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            viewModel.bindingLeagueDetails = { [weak self] in
+                guard let self = self  else {return}
+                DispatchQueue.main.asyncAfter(deadline: .now() + 3) {
                     self.leaguesTableOutlet.hideSkeleton()
                 }
                 self.leaguesTableOutlet.reloadData()
-                
-                
             }
             
+            viewModel.bindingMatchedLeagues = { [weak self] in
+                guard  let self = self else {return}
+                self.viewModel.fetchLeagueDetails(matchedArray: self.viewModel.matchedLeagues)
+                self.leaguesTableOutlet.reloadData()
+            }
         }else{
             print("not connected from leagues")
             leaguesTableOutlet.backgroundView = UIImageView(image: UIImage(named: "404")!)
-            array = [LeaguesDataClass]()
+            viewModel.allLeaguesData = [Leagues]()
             leaguesTableOutlet.reloadData()
+            
         }
+        
+        
     }
     
     func handleDataError() {
-        print("returned data is null")
+        let alert = UIAlertController(title: "dataError", message: "returned data is null", preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "ok", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
     func handleConnectionError() {
-        if Network.shared.isConnected{
+        
+        if viewModel.isConnectedToNetwork(){
             print("url is not correct")
             print(viewModel.bindingConnectionError)
         }else{
@@ -88,55 +122,16 @@ class LeaguesViewController: UIViewController,UISearchBarDelegate{
         }
     }
     func getLeagueData() {
-        let matched = viewModel.getMatchedLeagues(strSport: strSport)
-        self.array = matched
-        self.leaguesTableOutlet.reloadData()
-        
-        viewModel.fetchLeaguesUrlAndImages(matchedArray: matched)
+        viewModel.getMatchedLeagues(strSport: strSport)
     }
     
     
     @objc func youtubeTapped(sender:UIButton){
-        print(sender.accessibilityValue!)
-        let application = UIApplication.shared
-        let url = sender.accessibilityValue!
-        
-        if application.canOpenURL(URL(string: url)!) {
-            application.open(URL(string: url)!)
-        }else {
-            // if Youtube app is not installed, open URL inside Safari
-            application.open(URL(string: "https://\(url)")!)
-        }
+        let url = sender.accessibilityValue!        
+        viewModel.openYoutube(url: url)
     }
-    
-    
-    
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
-        if searchText.isEmpty{
-            isSearching = false
-            leaguesTableOutlet.reloadData()
-        }
-        else{
-            isSearching = true
-            
-            
-            print(searchText)
-            searchedArray = [LeaguesDataClass]();
-            for iteam in array {
-                if iteam.strLeague.lowercased().contains(searchText.lowercased()) {
-                    
-                    searchedArray.append(iteam)
-                }
-                leaguesTableOutlet.reloadData()
-            }
-            print(searchedArray.count)
-            
-        }
-        
-    }
-    
 }
+
 
 
 extension LeaguesViewController : UITableViewDelegate,SkeletonTableViewDataSource{
@@ -149,7 +144,7 @@ extension LeaguesViewController : UITableViewDelegate,SkeletonTableViewDataSourc
             return searchedArray.count
         }
         else{
-            return array.count
+            return viewModel.matchedLeagues.count
         }
     }
     
@@ -158,99 +153,79 @@ extension LeaguesViewController : UITableViewDelegate,SkeletonTableViewDataSourc
     func numSections(in collectionSkeletonView: UITableView) -> Int{
         return 1
     }
-      
+    
     func collectionSkeletonView(_ skeletonView: UITableView, numberOfRowsInSection section: Int) -> Int{
-        return array.count
+        return viewModel.matchedLeagues.count
     }
     func collectionSkeletonView(_ skeletonView: UITableView, cellIdentifierForRowAt indexPath: IndexPath) -> ReusableCellIdentifier{
         return "cell"
     }
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100;
     }
-
-
+    
+    func setLeagueCell(cell: LeaguesTableViewCell,item:LeagueDetails)  {
+        if let validImage = item.strBadge{
+            cell.leagueTitleImage.sd_setImage(with: URL(string: validImage), completed: {(image,error,cach,url)in
+                cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
+            })
+        }else{
+            cell.leagueTitleImage.image = #imageLiteral(resourceName: "anonymousLogo")
+        }
+        
+        cell.youtubeBtn.accessibilityValue = item.strYoutube
+        if item.strYoutube == ""{
+            cell.youtubeBtn.isEnabled = false
+        }else{
+            cell.youtubeBtn.isEnabled = true
+        }
+        cell.youtubeBtn.isHidden = false
+        cell.youtubeBtn.hideSkeleton()
+        
+        cell.youtubeBtn.addTarget(self, action: #selector(self.youtubeTapped), for: .touchUpInside)
+        cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! LeaguesTableViewCell;
-       
+        
         cell.leagueTitleImage.hideSkeleton()
         cell.leageNameOutlet.hideSkeleton()
         cell.leagueTitleImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.leagueTitleImage.sd_imageIndicator?.startAnimatingIndicator()
+        
         if isSearching{
             cell.leageNameOutlet.text = searchedArray[indexPath.row].strLeague
-
-            for item in arrayLeagues {
-                if item.idLeague == searchedArray[indexPath.row].idLeague{
-
-                    if let validImage = item.strBadge{
-                        cell.leagueTitleImage.sd_setImage(with: URL(string: validImage), completed: {(image,error,cach,url)in
-                            cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
-                        })
-                    }else{
-                        cell.leagueTitleImage.image = #imageLiteral(resourceName: "anonymousLogo")
-                    }
-
-                    cell.youtubeBtn.accessibilityValue = item.strYoutube
-                    if item.strYoutube == ""{
-                        cell.youtubeBtn.isEnabled = false
-                    }else{
-                        cell.youtubeBtn.isEnabled = true
-                    }
-                    cell.youtubeBtn.isHidden = false
-                    cell.youtubeBtn.hideSkeleton()
-
-                    cell.youtubeBtn.addTarget(self, action: #selector(self.youtubeTapped), for: .touchUpInside)
-                    cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
-                    break
+            
+            
+            viewModel.searchForLeagueDetails(withId: searchedArray[indexPath.row].idLeague) { [weak self] (item) in
+                guard let self = self else {return}
+                self.setLeagueCell(cell: cell, item: item)
+            }
+            
+            return cell
+        }else{
+            cell.leageNameOutlet.text = viewModel.matchedLeagues[indexPath.row].strLeague
+            if viewModel.leagueDetails.count == viewModel.matchedLeagues.count {
+                
+                viewModel.searchForLeagueDetails(withId: viewModel.matchedLeagues[indexPath.row].idLeague) { [weak self] (item) in
+                    guard let self = self else {return}
+                    self.setLeagueCell(cell: cell, item: item)
                 }
             }
-
-            return cell
         }
-        else{
-            cell.leageNameOutlet.text = array[indexPath.row].strLeague
-            if arrayLeagues.count == array.count {
-
-                for item in arrayLeagues {
-                    if item.idLeague == array[indexPath.row].idLeague{
-
-                        if let validImage = item.strBadge{
-                            cell.leagueTitleImage.sd_setImage(with: URL(string: validImage), completed: {(image,error,cach,url)in
-                                cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
-                            })
-                        }else{
-                            cell.leagueTitleImage.image = #imageLiteral(resourceName: "anonymousLogo")
-                        }
-
-                        cell.youtubeBtn.accessibilityValue = item.strYoutube
-                        if item.strYoutube == ""{
-                            cell.youtubeBtn.isEnabled = false
-                        }else{
-                            cell.youtubeBtn.isEnabled = true
-                        }
-                        cell.youtubeBtn.isHidden = false
-                        cell.youtubeBtn.hideSkeleton()
-
-                        cell.youtubeBtn.addTarget(self, action: #selector(self.youtubeTapped), for: .touchUpInside)
-                        cell.leagueTitleImage.sd_imageIndicator?.stopAnimatingIndicator()
-
-                        break
-                    }
-                }
-            }
-            return cell
-        }
+        return cell
     }
-
+    
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let detailsVc = self.storyboard?.instantiateViewController(identifier: "LeaguesDetailsVC") as! LeaguesDetailsVC
-
+        
         if isSearching{
-            for i in arrayLeagues{
+            for i in viewModel.leagueDetails{
                 if i.idLeague == searchedArray[indexPath.row].idLeague{
-
+                    
                     let sendData = FavouriteData(idLeague: i.idLeague, strLeague: i.strLeague, strYoutube: i.strYoutube, strBadge: i.strBadge)
                     detailsVc.leagueData = sendData
                     break
@@ -259,15 +234,12 @@ extension LeaguesViewController : UITableViewDelegate,SkeletonTableViewDataSourc
             self.navigationController?.pushViewController(detailsVc, animated: true)
         }
         else{
-            for i in arrayLeagues{
-                if i.idLeague == array[indexPath.row].idLeague{
-
-                    let sendData = FavouriteData(idLeague: i.idLeague, strLeague: i.strLeague, strYoutube: i.strYoutube, strBadge: i.strBadge)
-                    detailsVc.leagueData = sendData
-                    break
-                }
+            viewModel.searchForLeagueDetails(withId: viewModel.matchedLeagues[indexPath.row].idLeague) { (item) in
+                let sendData = FavouriteData(idLeague: item.idLeague, strLeague: item.strLeague, strYoutube: item.strYoutube, strBadge: item.strBadge)
+                detailsVc.leagueData = sendData
+                self.navigationController?.pushViewController(detailsVc, animated: true)
             }
-            self.navigationController?.pushViewController(detailsVc, animated: true)
+            
         }
     }
 }

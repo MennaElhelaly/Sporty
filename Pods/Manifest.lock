@@ -2,6 +2,12 @@ PODS:
   - Alamofire (5.4.3)
   - MarqueeLabel (4.0.5)
   - ProgressHUD (2.70)
+  - RxCocoa (5.1.1):
+    - RxRelay (~> 5)
+    - RxSwift (~> 5)
+  - RxRelay (5.1.1):
+    - RxSwift (~> 5)
+  - RxSwift (5.1.2)
   - SDWebImage (5.11.1):
     - SDWebImage/Core (= 5.11.1)
   - SDWebImage/Core (5.11.1)
@@ -11,6 +17,8 @@ DEPENDENCIES:
   - Alamofire (~> 5.2)
   - MarqueeLabel
   - ProgressHUD
+  - RxCocoa (~> 5)
+  - RxSwift (~> 5)
   - SDWebImage (~> 5.0)
   - SkeletonView
 
@@ -19,6 +27,9 @@ SPEC REPOS:
     - Alamofire
     - MarqueeLabel
     - ProgressHUD
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - SDWebImage
     - SkeletonView
 
@@ -26,9 +37,12 @@ SPEC CHECKSUMS:
   Alamofire: e447a2774a40c996748296fa2c55112fdbbc42f9
   MarqueeLabel: 00cc0bcd087111dca575878b3531af980559707d
   ProgressHUD: e603e8b8622c47d8818b9fb38b3cfe9d3e7ca421
+  RxCocoa: 32065309a38d29b5b0db858819b5bf9ef038b601
+  RxRelay: d77f7d771495f43c556cbc43eebd1bb54d01e8e9
+  RxSwift: 1e2e1f9570186967f617e49128ed26ccf1bafc8e
   SDWebImage: a7f831e1a65eb5e285e3fb046a23fcfbf08e696d
   SkeletonView: cac18a3ac4f893b09d99e65072d806ef08377aae
 
-PODFILE CHECKSUM: f1f6b8aa9999c621332d39244f30a982fc0e3e56
+PODFILE CHECKSUM: c8532b1ccffddaa1166649a84aa2ec058fe06262
 
 COCOAPODS: 1.10.1

@@ -29,11 +29,11 @@ import Foundation
 
 // MARK: - Welcome
 struct apiCallData: Codable {
-    let leagues: [LeaguesDataClass]
+    let leagues: [Leagues]
 }
 
 // MARK: - League
-struct LeaguesDataClass: Codable {
+struct Leagues: Codable {
     
     let idLeague, strLeague: String
     let strSport: StrSport

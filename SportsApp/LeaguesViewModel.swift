@@ -7,18 +7,24 @@
 //
 
 import Foundation
+import UIKit
 
 class LeaguesViewModel: NSObject {
     
     var leaguesService :WebService!
     
-    var allLeaguesData :[LeaguesDataClass]! {
+    var allLeaguesData :[Leagues]! {
         didSet{
             self.bindinLeaguesData()
         }
     }
     
-    var leagueDetails: [LeagueById]!{
+    var matchedLeagues: [Leagues]!{
+        didSet{
+            self.bindingMatchedLeagues()
+        }
+    }
+    var leagueDetails: [LeagueDetails]!{
         didSet{
             self.bindingLeagueDetails()
         }
@@ -41,14 +47,16 @@ class LeaguesViewModel: NSObject {
     var bindingLeagueDetails: (()->()) = {}
     var bindingConnectionError : (()->()) = {}
     var bindingDataError : (()->()) = {}
+    var bindingMatchedLeagues: (()->()) = {}
     
     override init() {
         super .init()
         leaguesService = WebService()
+        matchedLeagues = []
     }
     
     func fetchAllLeagues() {
-        leaguesService.allLeaguesAPI(compilation: { (sportsData,error) in
+        leaguesService.allLeaguesAPI(completion: { (sportsData,error) in
                
             if let err:Error = error {
                 let msg = err.localizedDescription
@@ -65,18 +73,18 @@ class LeaguesViewModel: NSObject {
         })
     }
     
-    func getMatchedLeagues(strSport:String) -> [LeaguesDataClass] {
-        var matchedArray = [LeaguesDataClass]()
+    func getMatchedLeagues(strSport:String){
+        var matchedArray = [Leagues]()
         for iteam in allLeaguesData{
             if iteam.strSport.rawValue == strSport {
                 matchedArray.append(iteam)
             }
         }
-        return matchedArray
+        matchedLeagues = matchedArray
     }
     
-    func fetchLeaguesUrlAndImages(matchedArray: [LeaguesDataClass] ){
-        leagueDetails = [LeagueById]()
+    func fetchLeagueDetails(matchedArray: [Leagues] ){
+        leagueDetails = [LeagueDetails]()
         
         for i in matchedArray{
             leaguesService.lookUpLeagueById(id: i.idLeague) { (LeagueById,error) in
@@ -92,6 +100,36 @@ class LeaguesViewModel: NSObject {
                      self.leagueDetails.append(data[0])
                 }
             }
+        }
+    }
+    
+    func isConnectedToNetwork() -> Bool {
+        return (Network.shared.isConnected) ? true : false
+    }
+    
+    func isSearchTextEmpty(text:String) -> Bool {
+        if text.isEmpty{
+            return true
+        }else{
+            return false
+        }
+    }
+    
+    func searchForLeagueDetails(withId id: String,onFound: (LeagueDetails)->Void ){
+        for item in leagueDetails {
+            if item.idLeague == id{
+                onFound(item)
+                break
+            }
+        }
+    }
+    func openYoutube(url:String){
+        let application = UIApplication.shared
+        if application.canOpenURL(URL(string: url)!) {
+            application.open(URL(string: url)!)
+        }else {
+            // if Youtube app is not installed, open URL inside Safari
+            application.open(URL(string: "https://\(url)")!)
         }
     }
 }
