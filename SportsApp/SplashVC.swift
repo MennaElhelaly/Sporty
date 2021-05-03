@@ -28,7 +28,7 @@ class SplashVC: UIViewController {
     }
     
     func endSplash() {
-        DispatchQueue.main.asyncAfter(deadline: .now() + 3.7) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 3.5) { [weak self] in
             guard let self = self else {return}
             self.performSegue(withIdentifier: "segueToNextScreen", sender:self)
         }

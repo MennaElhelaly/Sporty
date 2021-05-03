@@ -15,14 +15,14 @@
             <objects>
                 <viewController storyboardIdentifier="SportsViewController" modalTransitionStyle="partialCurl" id="2YO-dD-uuE" customClass="SportsViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="DMf-iZ-HEz">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a0s-rc-LpE">
-                                <rect key="frame" x="0.0" y="88" width="414" height="175"/>
+                                <rect key="frame" x="0.0" y="56" width="414" height="153"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="all" translatesAutoresizingMaskIntoConstraints="NO" id="E2Z-tb-Zm3">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="175"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="153"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.16518841125387287" green="0.63977236675126903" blue="0.28806973751781922" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -34,13 +34,13 @@
                                 </constraints>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ALL SPORTS" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OlU-76-Cvp">
-                                <rect key="frame" x="10" y="123" width="389" height="36"/>
+                                <rect key="frame" x="10" y="91" width="389" height="36"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="c7m-hs-zb9">
-                                <rect key="frame" x="20" y="188" width="374" height="625"/>
+                                <rect key="frame" x="20" y="156" width="374" height="603"/>
                                 <color key="backgroundColor" red="0.25693415213933396" green="0.99510231598984766" blue="0.44806383937181954" alpha="0.0066085188356164387" colorSpace="custom" customColorSpace="sRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="rIx-cb-YU5">
                                     <size key="itemSize" width="169" height="163"/>
@@ -99,10 +99,10 @@
                                 </connections>
                             </collectionView>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lub-bf-tNH">
-                                <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="404" translatesAutoresizingMaskIntoConstraints="NO" id="7Ia-38-trN">
-                                        <rect key="frame" x="0.0" y="0.0" width="414" height="813"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="414" height="759"/>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -169,7 +169,7 @@
             <objects>
                 <tableViewController storyboardIdentifier="FavouriteTableViewController" id="nzK-YM-HCc" customClass="FavouriteTableViewController" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="o4h-fL-Mq5">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="842"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <prototypes>
@@ -240,7 +240,7 @@
                     <tabBarItem key="tabBarItem" title="Sports" image="house.fill" catalog="system" landscapeImage="house.fill" largeContentSizeImage="house.fill" id="m1Q-eq-8R8"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="WNF-Q0-6YD">
-                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
@@ -1044,6 +1044,7 @@
         <scene sceneID="qTp-pl-Cax">
             <objects>
                 <viewController modalTransitionStyle="partialCurl" id="Tf8-Dd-0Se" customClass="SplashVC" customModule="SportsApp" customModuleProvider="target" sceneMemberID="viewController">
+
                     <view key="view" contentMode="scaleToFill" id="bKH-Lq-Za5">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -1064,6 +1065,7 @@
                     <connections>
                         <outlet property="animationView" destination="wzn-Kh-fKQ" id="4a6-yK-pIk"/>
                         <segue destination="IVT-Dt-9SS" kind="presentation" identifier="segueToNextScreen" id="efc-Za-ziS"/>
+
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HSy-2d-zkc" userLabel="First Responder" sceneMemberID="firstResponder"/>
