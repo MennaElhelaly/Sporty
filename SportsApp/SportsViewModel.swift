@@ -48,7 +48,6 @@ class SportsViewModel: NSObject {
                 self.connectionError = msg
             }else{  // testing on details view controller
                 guard let data = sportsData else{
-                    print("error in data")
                     self.dataError = true
                     return
                 }

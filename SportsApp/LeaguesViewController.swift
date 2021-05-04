@@ -44,7 +44,6 @@ class LeaguesViewController: UIViewController{
     
     func rxSearch() {
         uiSearch.rx.text.orEmpty.throttle(.seconds(3), scheduler: MainScheduler.instance).distinctUntilChanged().subscribe(onNext: { [weak self] query in
-            print(query)
             guard let self = self else {return}
             if self.viewModel.isSearchTextEmpty(text:query){
                 self.isSearching = false
@@ -60,8 +59,7 @@ class LeaguesViewController: UIViewController{
                     }
                     self.leaguesTableOutlet.reloadData()
                 }
-                print(self.searchedArray.count)
-                
+               
             }
         }).disposed(by: bag!)
     }
@@ -97,7 +95,6 @@ class LeaguesViewController: UIViewController{
                 self.leaguesTableOutlet.reloadData()
             }
         }else{
-            print("not connected from leagues")
             leaguesTableOutlet.backgroundView = UIImageView(image: UIImage(named: "404")!)
             viewModel.allLeaguesData = [Leagues]()
             leaguesTableOutlet.reloadData()
@@ -115,8 +112,7 @@ class LeaguesViewController: UIViewController{
     func handleConnectionError() {
         
         if viewModel.isConnectedToNetwork(){
-            print("url is not correct")
-            print(viewModel.bindingConnectionError)
+//            print(viewModel.bindingConnectionError)
         }else{
             self.present(connectionIssue(), animated: true, completion: nil)
         }

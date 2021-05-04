@@ -46,7 +46,6 @@ class LeaguesDetailsVC: UIViewController{
     
     func prepareBindings() {
         viewModel.bindingConnectionError = {
-            print("bindingConnectionError")
             self.showMarqueeOnly()
             
         }
@@ -57,16 +56,14 @@ class LeaguesDetailsVC: UIViewController{
                 self.showMarqueeOnly()
             }else{
                 // MARK:  no internet connection
-                print("navigate to home screen, connection cut off")
                 self.navigationController?.popToRootViewController(animated: true)
             }
         }
         
         viewModel.bindingUpcomingConnection = {
-            print("upcoming connection , found nil in error")
+//            print("upcoming connection , found nil in error")
         }
         viewModel.bindingUpcomingState = {
-            print("binding upcoming state")
 
             if self.viewModel.upcomingState == true{
                 self.loadingLbl.isHidden = false
@@ -80,17 +77,14 @@ class LeaguesDetailsVC: UIViewController{
         
         
         viewModel.bindingAllTeams = {
-            print("bindingAllTeams")
             self.receiveAllTeams()
         }
         
         viewModel.bindingLatestEvents = { 
-            print("binding latest")
             self.receiveLatestEvents()
         }
         
         viewModel.bindingUpcomingEvents = {
-            print("binding upcoming")
             self.receiveUpcomintEvents()
         }
         
@@ -101,7 +95,6 @@ class LeaguesDetailsVC: UIViewController{
     // MARK:-  Receiving bindings
     func receiveAllTeams() {
         guard let validArrayOfTeams = viewModel.allTeamsData else {
-            print("guard let recieveAllTeams")
             return
         }
         self.allTeams = validArrayOfTeams
@@ -112,7 +105,6 @@ class LeaguesDetailsVC: UIViewController{
     
     func receiveLatestEvents() {
         guard let validArrayOfEvents = viewModel.latestEvents else {
-            print("guard let recieveAllTeams")
             return
         }
         self.lastArray = validArrayOfEvents
@@ -126,7 +118,6 @@ class LeaguesDetailsVC: UIViewController{
    
 
         guard let events = viewModel.upcomingEvents else {
-            print("guard let recieve upcoming")
             return
         }
         self.upcomingArray = events

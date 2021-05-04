@@ -32,13 +32,9 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
     
     func prepareScreenData() {
         if Network.shared.isConnected{
-            print("connected")
             viewModel.fetchSportsData()
             viewOffline.isHidden = true
             titileView.isHidden = false
-         //   collectionView.isHidden = false
-           
-            
 
             viewModel.bindSportsData = {
                 self.getDataFromAPI()
@@ -52,22 +48,16 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
                 self.handleDataError()
             }
         }else{
-            print("not connected from home")
             viewOffline.isHidden = false
-          //  collectionView.isHidden = true
             titileView.isHidden = true
 
-//            collectionView.backgroundView = UIImageView(image: UIImage(named: "404")!)
-//            sportsArr = [Sport]()
-//            collectionView.reloadData()
         }
     }
     func handleDataError() {
-        print("returned data is null")
     }
     func handleConnectionError() {
         if Network.shared.isConnected{
-            print("url is not correct")
+//            print("url is not correct")
         }else{
             self.navigationController?.popToRootViewController(animated: true)
         }

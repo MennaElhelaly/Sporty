@@ -33,7 +33,6 @@ final class Network{
             self?.isConnected = path.status != .unsatisfied
             
             self?.getConnectionType(path: path)
-            print(self?.isConnected ?? "N/A")
         }
     }
     public func stopMonitoring(){

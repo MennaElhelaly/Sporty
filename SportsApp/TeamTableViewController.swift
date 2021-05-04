@@ -31,10 +31,8 @@ class TeamTableViewController: UITableViewController {
         super.viewDidLoad()
         if Network.shared.isConnected{
             offlineView.isHidden = true
-            print("online")
             self.updateUI()
         }else{
-            print("offline")
             offlineView.isHidden = false
 
         }
@@ -85,7 +83,6 @@ class TeamTableViewController: UITableViewController {
     }
     
     @objc func anotherScreen(sender:UIButton){
-        print(sender.accessibilityValue!)
         let application = UIApplication.shared
         let url = sender.accessibilityValue!
         

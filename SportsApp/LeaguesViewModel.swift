@@ -63,7 +63,6 @@ class LeaguesViewModel: NSObject {
                 self.connectionError = msg
             }else{  // testing on details view controller
                 guard let data = sportsData else{
-                    print("error in data")
                     self.dataError = true
                     return
                 }
@@ -93,7 +92,6 @@ class LeaguesViewModel: NSObject {
                  self.connectionError = msg
              }else{  // testing on details view controller
                      guard let data = LeagueById else{
-                         print("error in data")
                          self.dataError = true
                          return
                      }

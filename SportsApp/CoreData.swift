@@ -39,8 +39,6 @@ class CoreData {
         newUser.setValue(fav.strBadge , forKey: "leagueImage")
         newUser.setValue(fav.strYoutube , forKey: "youtubeLink")
         try?self.context.save()
-        print("save done ...")
-
     }
     func fetchData() -> [NSManagedObject]?{
         let fetchReq = NSFetchRequest<NSManagedObject>(entityName: "LeaguesCoreData")
@@ -58,9 +56,8 @@ class CoreData {
         if let arr = try? context.fetch(fetchReq) {
             context.delete((arr[id]))
             try?context.save()
-            print("delete done ...")
         }else{
-            print("not deleted ...")
+//            print("not deleted ...")
         }
     }
     func deleteItem(leagueId:String) {
@@ -69,7 +66,6 @@ class CoreData {
                 if item.value(forKey: "leagueID") as! String == leagueId{
                     context.delete(item)
                     try?context.save()
-                    print("deleted")
                 }
             }
         }

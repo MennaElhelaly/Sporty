@@ -16,7 +16,6 @@ class WebService {
     
     public func getUpcomingEvents(id:String,strSeason:String,round:String,completion: @escaping ([Event]?,Error?)->Void){
         let url = "\(URLs.upcomingUrl)\(id)&r=\(round)&s=\(strSeason)"
-        print("upcoming+++++++++++++++++++++++++++++++++++++\(url)")
         AF.request(url)
             .validate()
             .responseDecodable(of: Response.self) { (response) in
@@ -26,8 +25,7 @@ class WebService {
                     completion(response.value?.events,nil)
                     
                 case .failure(let error):
-                    print("upcoming error")
-                    print(error.localizedDescription)
+                   // print(error.localizedDescription)
                     completion(nil,error)
                 }
             }
@@ -35,7 +33,6 @@ class WebService {
     
     public func getAllTeamsInLeagueByLeagueId(id:String,completion: @escaping ([Team]?,Error?)->Void){
         let url = "\(URLs.allTeamsInLeague)\(id)"
-        print("allteams+++++++++++++++++++++++++++++++++++++\(url)")
         
         AF.request(url)
             .validate()
@@ -47,7 +44,6 @@ class WebService {
                     completion(arrayOfTeams,nil)
                     
                 case .failure(let error):
-                    print("allteams error")
                     print(error.localizedDescription)
                     completion(nil,error)
                 }
@@ -55,7 +51,6 @@ class WebService {
     }
     public func getLatestInLeagueById(id:String,compilation: @escaping ([Event]?,Error?)->Void) {
         let url = "\(URLs.eventUrl)\(id)"
-        print("latest+++++++++++++++++++++++++++++++++++++\(url)")
         AF.request(url)
             .validate()
             .responseDecodable(of: Response.self) { (response) in
@@ -66,14 +61,12 @@ class WebService {
                     compilation(arrayOfEvents,nil)
                     
                 case .failure(let error):
-                    print("latest error")
-                    print(error.localizedDescription)
+//                    print(error.localizedDescription)
                     compilation(nil,error)
                 }
             }
     }
     public func callSportsAPI(compilation: @escaping ([Sport]? , Error?)->Void) {
-        print("allSports+++++++++++++++++++++++++++++++++++++\(URLs.allSports)")
         
         AF.request(URLs.allSports)
             .validate()
@@ -85,8 +78,7 @@ class WebService {
                     compilation(arrayOfSports,nil)
                     
                 case .failure(let error):
-                    print("allsports error")
-                    print(error.localizedDescription)
+//                    print(error.localizedDescription)
                     compilation(nil,error)
                 }
             }
@@ -95,7 +87,6 @@ class WebService {
     
     
     public func allLeaguesAPI(completion: @escaping ([Leagues]? , Error?)->Void) {
-        print("allLeagues+++++++++++++++++++++++++++++++++++++\(URLs.allLeaguesurl)")
         
         AF.request(URLs.allLeaguesurl)
             .validate()
@@ -107,8 +98,7 @@ class WebService {
                     completion(arrayOfSports,nil)
                     
                 case .failure(let error):
-                    print("allLeagues error")
-                    print(error.localizedDescription)
+//                    print(error.localizedDescription)
                     completion(nil,error)
                 }
             }
@@ -126,7 +116,7 @@ class WebService {
                     compilation(arrayOfSports,nil)
                     
                 case .failure(let error):
-                    print(error.localizedDescription)
+//                    print(error.localizedDescription)
                     compilation(nil,error)
                 }
             }

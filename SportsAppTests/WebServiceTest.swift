@@ -42,20 +42,20 @@ class WebServiceTest: XCTestCase {
    func testFetchAllLeagues() {
         let expecttionObj = expectation(description: "Wait for response")
 
-       webService.allLeaguesAPI(compilation: { (sportsData,error) in
-              
-           if let err:Error = error {
-               XCTFail()
-           }else{  // testing on details view controller
-               guard let data = sportsData else{
-                   print("error in data")
-                   return
-               }
-              expecttionObj.fulfill()
-              XCTAssertEqual(sportsData?.count, 582)
-               
-           }
-       })
+    webService.allLeaguesAPI { (sportsData, error) in
+        if let err:Error = error {
+            XCTFail()
+        }else{  // testing on details view controller
+            guard let data = sportsData else{
+                print("error in data")
+                return
+            }
+           expecttionObj.fulfill()
+           XCTAssertEqual(sportsData?.count, 582)
+            
+        }
+    }
+
     waitForExpectations(timeout: 5)
 
    }

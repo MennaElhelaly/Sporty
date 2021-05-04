@@ -91,7 +91,6 @@ class LeagueDetailsViewModel: NSObject {
                 self.connectionError = msg
             }else{
                 guard let data = arrayOfAllTeams else {
-                    print("error in data")
                     if Network.shared.isConnected{
                         self.dataError = true // marquee
                     }else{
@@ -116,7 +115,6 @@ class LeagueDetailsViewModel: NSObject {
             }
             guard let validArrayOfEvents = arrayOfEvents else {
                 if Network.shared.isConnected{
-                    print("response issue , but not inernet latest events")
                     self.dataError = true
                 }else{
                     self.dataError = false
@@ -140,9 +138,7 @@ class LeagueDetailsViewModel: NSObject {
             }else{
 
                 guard let validArrayOfEvents = arrayOfEvents else {
-                    print("nil")
                     if Network.shared.isConnected{
-                        print("response issue , but not inernet latest events")
                         self.upcomingState = true
                     }else{
                         self.upcomingState = false
@@ -192,7 +188,6 @@ class LeagueDetailsViewModel: NSObject {
             favouriteState = false
             return false
         }else{
-            print("else in checkFavouriteState")
             favouriteState = false
             return false
         }

@@ -112,11 +112,9 @@ class FavouriteTableViewController: UITableViewController {
         return "Favourite Leagues "
     }
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print((favourieArr[indexPath.row].value(forKey: "leagueName") as! String))
-        
+       
         if Network.shared.isConnected{
-            print("network onlin")
-        
+       
             let idLeague = (favourieArr[indexPath.row].value(forKey: "LeagueID") as! String)
             let strBadge = (favourieArr[indexPath.row].value(forKey: "LeagueImage") as! String)
             let strLeague = (favourieArr[indexPath.row].value(forKey: "LeagueName") as! String)
@@ -130,11 +128,9 @@ class FavouriteTableViewController: UITableViewController {
             }
           
             sendingDetails = FavouriteData(idLeague: idLeague, strLeague:strLeague , strYoutube: strYoutube, strBadge: image)
-            print("didselect")
             performSegue(withIdentifier: "favourite", sender: self)
             
         }else{
-            print("network Offline")
             ProgressHUD.showError("no internet connection, Try again")
         }
        
