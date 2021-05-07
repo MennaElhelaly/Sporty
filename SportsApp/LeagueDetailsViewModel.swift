@@ -195,6 +195,7 @@ class LeagueDetailsViewModel: NSObject {
     
     func deleteItem(leagueId:String){
         database.deleteItem(leagueId: leagueId)
+        favouriteState = false
     }
     
     func addToFavourite(leagueData:FavouriteData)  {
