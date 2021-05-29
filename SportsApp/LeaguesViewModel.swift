@@ -75,7 +75,7 @@ class LeaguesViewModel: NSObject {
     func getMatchedLeagues(strSport:String){
         var matchedArray = [Leagues]()
         for iteam in allLeaguesData{
-            if iteam.strSport.rawValue == strSport {
+            if iteam.strSport == strSport {
                 matchedArray.append(iteam)
             }
         }
