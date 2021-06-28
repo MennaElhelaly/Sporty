@@ -11,13 +11,13 @@ import Foundation
 
 // MARK: - Welcome
 struct apiCallData: Codable {
-    let leagues: [Leagues]
+    let leagues: [Leagues]?
 }
 
 // MARK: - League
 struct Leagues: Codable {
     
-    let idLeague, strLeague: String
-    let strSport: String
+    let idLeague, strLeague: String?
+    let strSport: String?
 //    let strLeagueAlternate: String?
 }

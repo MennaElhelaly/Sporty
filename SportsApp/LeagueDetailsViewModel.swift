@@ -124,7 +124,7 @@ class LeagueDetailsViewModel: NSObject {
             }
             
             self.strSeason = validArrayOfEvents[0].strSeason
-            self.round = String(Int(validArrayOfEvents[0].intRound)! + 1)
+            self.round = String(Int(validArrayOfEvents[0].intRound!)! + 1)
             self.latestEvents = validArrayOfEvents
     
         }

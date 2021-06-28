@@ -53,7 +53,8 @@ class LeaguesViewController: UIViewController{
                 self.searchedArray = [Leagues]();
                 for iteam in self.viewModel.matchedLeagues {
                     
-                    if iteam.strLeague.lowercased().contains(query.lowercased()) {
+                    
+                    if ((iteam.strLeague?.lowercased().contains(query.lowercased())) != nil) {
                         
                         self.searchedArray.append(iteam)
                     }
@@ -194,10 +195,11 @@ extension LeaguesViewController : UITableViewDelegate,SkeletonTableViewDataSourc
         if isSearching{
             cell.leageNameOutlet.text = searchedArray[indexPath.row].strLeague
             
-            
-            viewModel.searchForLeagueDetails(withId: searchedArray[indexPath.row].idLeague) { [weak self] (item) in
-                guard let self = self else {return}
-                self.setLeagueCell(cell: cell, item: item)
+            if let idLeague = searchedArray[indexPath.row].idLeague {
+                viewModel.searchForLeagueDetails(withId: idLeague) { [weak self] (item) in
+                    guard let self = self else {return}
+                    self.setLeagueCell(cell: cell, item: item)
+                }
             }
             
             return cell
@@ -205,9 +207,13 @@ extension LeaguesViewController : UITableViewDelegate,SkeletonTableViewDataSourc
             cell.leageNameOutlet.text = viewModel.matchedLeagues[indexPath.row].strLeague
             if viewModel.leagueDetails.count == viewModel.matchedLeagues.count {
                 
-                viewModel.searchForLeagueDetails(withId: viewModel.matchedLeagues[indexPath.row].idLeague) { [weak self] (item) in
-                    guard let self = self else {return}
-                    self.setLeagueCell(cell: cell, item: item)
+                
+                
+                if let idLeague = viewModel.matchedLeagues[indexPath.row].idLeague {
+                    viewModel.searchForLeagueDetails(withId: idLeague) { [weak self] (item) in
+                        guard let self = self else {return}
+                        self.setLeagueCell(cell: cell, item: item)
+                    }
                 }
             }
         }
@@ -222,7 +228,7 @@ extension LeaguesViewController : UITableViewDelegate,SkeletonTableViewDataSourc
             for i in viewModel.leagueDetails{
                 if i.idLeague == searchedArray[indexPath.row].idLeague{
                     
-                    let sendData = FavouriteData(idLeague: i.idLeague, strLeague: i.strLeague, strYoutube: i.strYoutube, strBadge: i.strBadge)
+                    let sendData = FavouriteData(idLeague: i.idLeague!, strLeague: i.strLeague!, strYoutube: i.strYoutube!, strBadge: i.strBadge!)
                     detailsVc.leagueData = sendData
                     break
                 }
@@ -230,8 +236,8 @@ extension LeaguesViewController : UITableViewDelegate,SkeletonTableViewDataSourc
             self.navigationController?.pushViewController(detailsVc, animated: true)
         }
         else{
-            viewModel.searchForLeagueDetails(withId: viewModel.matchedLeagues[indexPath.row].idLeague) { (item) in
-                let sendData = FavouriteData(idLeague: item.idLeague, strLeague: item.strLeague, strYoutube: item.strYoutube, strBadge: item.strBadge)
+            viewModel.searchForLeagueDetails(withId: viewModel.matchedLeagues[indexPath.row].idLeague!) { (item) in
+                let sendData = FavouriteData(idLeague: item.idLeague!, strLeague: item.strLeague!, strYoutube: item.strYoutube!, strBadge: item.strBadge!)
                 detailsVc.leagueData = sendData
                 self.navigationController?.pushViewController(detailsVc, animated: true)
             }
