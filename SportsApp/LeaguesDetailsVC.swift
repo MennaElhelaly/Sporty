@@ -22,6 +22,7 @@ class LeaguesDetailsVC: UIViewController{
     @IBOutlet weak var upcomingLbl: UILabel!
     @IBOutlet weak var lastLbl: UILabel!
     @IBOutlet weak var teamsLbl: UILabel!
+    @IBOutlet weak var uiTableViewHegith: NSLayoutConstraint!
     
     public var leagueData:FavouriteData!
    
@@ -359,6 +360,30 @@ extension LeaguesDetailsVC: UITableViewDelegate,UITableViewDataSource{
         return (view.window?.frame.height)! * 1/4
     }
     
+}
+
+//MARK: Scrolling
+extension LeaguesDetailsVC{
+    
+    // add observer on the table view in viewWillAppear
+    // remove the observer in viewWillDissappear
+    // turn table view isScrollable = false
+    
+    override func viewWillAppear(_ animated: Bool) {
+        uiTableView.addObserver(self, forKeyPath: "contentSize", options: .new, context: nil)
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        uiTableView.removeObserver(self, forKeyPath: "contentSize")
+    }
+    
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "contentSize"{
+            if let newValue = change?[.newKey] {
+                let newSize = newValue as! CGSize
+                uiTableViewHegith.constant = newSize.height
+            }
+        }
+    }
 }
 
 //extension LeaguesDetailsVC:UIScrollViewDelegate{

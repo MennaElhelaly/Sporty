@@ -53,13 +53,12 @@ class LeaguesViewController: UIViewController{
                 self.searchedArray = [Leagues]();
                 for iteam in self.viewModel.matchedLeagues {
                     
-                    
                     if ((iteam.strLeague?.lowercased().contains(query.lowercased())) != nil) {
                         
                         self.searchedArray.append(iteam)
                     }
-                    self.leaguesTableOutlet.reloadData()
                 }
+                self.leaguesTableOutlet.reloadData()
                
             }
         }).disposed(by: bag!)
