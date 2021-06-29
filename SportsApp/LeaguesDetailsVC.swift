@@ -42,6 +42,8 @@ class LeaguesDetailsVC: UIViewController{
         self.setNavigationItem()
         self.prepareSwipe()
         self.checkFavouriteState()
+        
+        uiTableView.register(UINib(nibName: "LatestCell", bundle: nil), forCellReuseIdentifier: "latestCell")
  
     }
     
