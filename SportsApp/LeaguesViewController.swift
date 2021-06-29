@@ -43,7 +43,7 @@ class LeaguesViewController: UIViewController{
     }
     
     func rxSearch() {
-        uiSearch.rx.text.orEmpty.throttle(.seconds(3), scheduler: MainScheduler.instance).distinctUntilChanged().subscribe(onNext: { [weak self] query in
+        uiSearch.rx.text.orEmpty.throttle(.seconds(1), scheduler: MainScheduler.instance).distinctUntilChanged().subscribe(onNext: { [weak self] query in
             guard let self = self else {return}
             if self.viewModel.isSearchTextEmpty(text:query){
                 self.isSearching = false
@@ -53,13 +53,15 @@ class LeaguesViewController: UIViewController{
                 self.searchedArray = [Leagues]();
                 for iteam in self.viewModel.matchedLeagues {
                     
-                    if ((iteam.strLeague?.lowercased().contains(query.lowercased())) != nil) {
+//                    if ((iteam.strLeague?.lowercased().contains(query.lowercased())) != nil) {/
+                    
+                    if iteam.strLeague!.lowercased().contains(query.lowercased())  {
                         
                         self.searchedArray.append(iteam)
                     }
+                    self.leaguesTableOutlet.reloadData()
+
                 }
-                self.leaguesTableOutlet.reloadData()
-               
             }
         }).disposed(by: bag!)
     }
