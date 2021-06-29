@@ -16,22 +16,22 @@ import Foundation
 
 // MARK: - Welcome
 struct AllTeams: Codable {
-    let teams: [Team]
+    let teams: [Team]?
 
 }
 
 // MARK: - Team
 struct Team: Codable {
-    let idTeam, strTeam: String
+    let idTeam, strTeam: String?
     let strTeamBadge:String?
-    let strStadium:String
+    let strStadium:String?
     let  strStadiumThumb:String?  // nullable
-    let strLeague: String
-    let strTwitter:String
-        let strInstagram:String
+    let strLeague: String?
+    let strTwitter:String?
+        let strInstagram:String?
         let strFacebook:String
         let strDescriptionEN:String?
-        let strCountry: String
+        let strCountry: String?
     
 //    let strTeamFanart1, strTeamFanart2, strTeamFanart3, strTeamFanart4: String
 //    let intFormedYear, strSport, strLeague, idLeague: String
@@ -43,6 +43,6 @@ struct Team: Codable {
 //    let strTeamBadge, strTeamJersey, strTeamLogo: String
 //    let strTeamFanart1, strTeamFanart2, strTeamFanart3, strTeamFanart4: String
 //    let strTeamBanner: String
-    let strYoutube: String
+    let strYoutube: String?
 
 }

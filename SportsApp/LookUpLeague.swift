@@ -8,12 +8,12 @@
 
 import Foundation
 struct LookUpLeague: Codable {
-    let leagues: [LeagueDetails]
+    let leagues: [LeagueDetails]?
 }
 struct LeagueDetails: Codable {
-    let idLeague:String
-    let strSport:String
-    let strLeague:String
-    let strYoutube:String
+    let idLeague:String?
+    let strSport:String?
+    let strLeague:String?
+    let strYoutube:String?
     let strBadge: String?
 }

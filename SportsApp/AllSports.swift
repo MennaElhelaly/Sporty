@@ -15,10 +15,10 @@ struct AllSports: Codable {
 
 // MARK: - Sport
 struct Sport: Codable {
-    let idSport, strSport: String
-    let strFormat: StrFormat
-    let strSportThumb, strSportThumbGreen: String
-    let strSportDescription: String
+    let idSport, strSport: String?
+    let strFormat: StrFormat?
+    let strSportThumb, strSportThumbGreen: String?
+    let strSportDescription: String?
 }
 
 enum StrFormat: String, Codable {

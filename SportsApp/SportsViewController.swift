@@ -85,9 +85,11 @@ class SportsViewController: UIViewController , UICollectionViewDelegate,UICollec
         cell.sportImge.sd_imageIndicator = SDWebImageActivityIndicator.gray
         cell.sportImge.sd_imageIndicator?.startAnimatingIndicator()
         
-        let url = URL(string: sportsArr[indexPath.row].strSportThumb)
-        cell.sportImge.sd_setImage(with: url) { (image, error, cache, url) in
-            cell.sportImge.sd_imageIndicator?.stopAnimatingIndicator()
+        if let strSportThump = sportsArr[indexPath.row].strSportThumb{
+            let url = URL(string: strSportThump)
+            cell.sportImge.sd_setImage(with: url) { (image, error, cache, url) in
+                cell.sportImge.sd_imageIndicator?.stopAnimatingIndicator()
+            }
         }
         //cell.layer.cornerRadius = 35
         cell.sportImge.layer.cornerRadius = 35

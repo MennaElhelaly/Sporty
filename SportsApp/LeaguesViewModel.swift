@@ -86,7 +86,9 @@ class LeaguesViewModel: NSObject {
         leagueDetails = [LeagueDetails]()
         
         for i in matchedArray{
-            leaguesService.lookUpLeagueById(id: i.idLeague) { (LeagueById,error) in
+            guard let id = i.idLeague else { return }
+
+            leaguesService.lookUpLeagueById(id: id) { (LeagueById,error) in
              if let err:Error = error {
                  let msg = err.localizedDescription
                  self.connectionError = msg

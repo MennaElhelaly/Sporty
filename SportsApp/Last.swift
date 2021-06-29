@@ -16,14 +16,14 @@ struct Response: Codable {
 
 // MARK: - Event
 struct Event: Codable {
-    let idEvent: String
-    let idLeague: String
-    let strHomeTeam, strAwayTeam: String
+    let idEvent: String?
+    let idLeague: String?
+    let strHomeTeam, strAwayTeam: String?
     let intHomeScore:String?
     let intAwayScore:String?
-    let dateEvent: String
-    let idHomeTeam, idAwayTeam: String
-    let strSeason:String
-    let intRound:String
-    let strTime:String
+    let dateEvent: String?
+    let idHomeTeam, idAwayTeam: String?
+    let strSeason:String?
+    let intRound:String?
+    let strTime:String?
 }

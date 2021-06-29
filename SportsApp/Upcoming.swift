@@ -18,7 +18,7 @@ class Upcoming: Codable {
 
 // MARK: - Event
 class NewEvent: Codable {
-    let strEvent, strHomeTeam, strAwayTeam, dateEvent: String
-    let dateEventLocal, strVenue, strCountry: String
-    let idAwayTeam , idHomeTeam :String
+    let strEvent, strHomeTeam, strAwayTeam, dateEvent: String?
+    let dateEventLocal, strVenue, strCountry: String?
+    let idAwayTeam , idHomeTeam :String?
 }
