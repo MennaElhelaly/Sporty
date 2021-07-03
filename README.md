@@ -19,6 +19,6 @@ Library Used: -
 •	RxCocoa
 •	lottie-ios
 
-videos Link:
+Demo Link:
 
-https://drive.google.com/file/d/1OTU02o0EtOe4xlinYhFw3K1W7HlBhWlV/view
+https://www.youtube.com/watch?v=sqsjfcz2LJ8
